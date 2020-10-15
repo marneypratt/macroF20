@@ -1,0 +1,117 @@
+"","name","pubCode","description","startDate","endDate"
+"1","aquaticSiteType","lake","lake",2012-01-01,NA
+"2","aquaticSiteType","stream","stream",2012-01-01,NA
+"3","aquaticSiteType","river","river",2012-01-01,NA
+"4","biophysicalCriteria","OK - no known exceptions","Sampling occurred on schedule, no known issues",2012-01-01,NA
+"5","biophysicalCriteria","OK - schedule change but conditions met","Sampling occurred not within defined sampling window but reflects the target biophysical conditions",2012-01-01,NA
+"6","biophysicalCriteria","conditions not met","Sampling does not reflect the target biophysical conditions",2012-01-01,NA
+"7","biophysicalCriteria","other","Other potential sample timing inconsistencies described in the remarks",2012-01-01,NA
+"8","biophysicalCriteria","conditions not met: most plants senesced","Sampling does not reflect the target biophysical conditions, most plants senesced",2012-01-01,NA
+"9","biophysicalCriteria","conditions not met: most plants not yet flowering","Sampling does not reflect the target biophysical conditions, most plants not yet in flower",2012-01-01,NA
+"10","biophysicalCriteria","unknown - logistical","Sampling not possible due to logistical considerations",2012-01-01,NA
+"11","identificationQualifiersExpert","cf. species","cf. species",2012-01-01,NA
+"12","identificationQualifiersExpert","aff. species","aff. species",2012-01-01,NA
+"13","identificationQualifiersExpert","cf. genus","cf. genus",2012-01-01,NA
+"14","identificationQualifiersExpert","aff. genus","aff. genus",2012-01-01,NA
+"15","identificationQualifiersExpert","cf. subspecies","cf. subspecies",2012-01-01,NA
+"16","identificationQualifiersExpert","aff. subspecies","aff. subspecies",2012-01-01,NA
+"17","identificationQualifiersExpert","cf. family","cf. family",2012-01-01,NA
+"18","identificationQualifiersExpert","aff. family","aff. family",2012-01-01,NA
+"19","identificationQualifiersExpert","cf. variety","cf. variety",2012-01-01,NA
+"20","identificationQualifiersExpert","aff. variety","aff. variety",2012-01-01,NA
+"21","identificationQualifiersExpert","sp. nov.","sp. nov.",2012-01-01,NA
+"22","identificationQualifiersExpert","spp. nr.","spp. nr.",2012-01-01,NA
+"23","identificationQualifiersExpert","sp. nr.","sp. nr.",2012-01-01,NA
+"24","inv.archiveLabSampleMedium","slide","permanent glass slide",2012-01-01,NA
+"25","inv.archiveLabSampleMedium","vial, ethanol","95% ethanol in vial",2012-01-01,NA
+"26","inv.databaseName","ITIS","Integrated Taxonomic Information System (itis.gov)",2012-01-01,NA
+"27","inv.databaseName","other (specified in remarks)","other (specified in remarks)",2012-01-01,NA
+"28","inv.habitatType","riffle","Shallow, swift stream habitat with high turbulence, typically with relatively coarse sediment size",2012-01-01,NA
+"29","inv.habitatType","run","Shallow to deep stream habitat with swift to moderate flow, characterized by low turbulence (i.e., smooth water surface)",2012-01-01,NA
+"30","inv.habitatType","pool","Typically the deepest habitats in a stream, pools are characterized by smaller substrate size and relatively slow moving water",2012-01-01,NA
+"31","inv.habitatType","stepPool","In high-gradient streams, a series of pools separated by boulder or cobble steps, causing fast flow over the steps and slow flow in the pools",2012-01-01,NA
+"32","inv.habitatType","littoral","The shallow zone along the shore of a lake or river where light penetration reaches the bottom",2012-01-01,NA
+"33","inv.habitatType","pelagic","The part of the lake or river that is not near shore or close to the bottom",2012-01-01,NA
+"34","inv.habitatType","other","A habitat type other than those listed as options; see remarks",2012-01-01,NA
+"35","inv.invertebrateLifeStage","larva","Larval life stage",2012-01-01,NA
+"36","inv.invertebrateLifeStage","pupa","Pupal life stage",2012-01-01,NA
+"37","inv.invertebrateLifeStage","adult","Adult life stage",2012-01-01,NA
+"38","inv.invertebrateLifeStage","other (specified in remarks)","Other life stage",2012-01-01,NA
+"39","inv.invertebrateLifeStage","none","No life stage",2012-01-01,NA
+"40","inv.primaryMatrix","coarse organic","Sample matrix is primarily coarse organic material",2012-01-01,NA
+"41","inv.primaryMatrix","fine organic","Sample matrix is primarily fine organic material",2012-01-01,NA
+"42","inv.primaryMatrix","filamentous algae","Sample matrix is primarily filamentous algae",2012-01-01,NA
+"43","inv.primaryMatrix","sand","Sample matrix is primarily sand",2012-01-01,NA
+"44","inv.primaryMatrix","wood","Sample matrix is primarily wood",2012-01-01,NA
+"45","inv.primaryMatrix","other (specified in remarks)","other (specified in remarks)",2012-01-01,NA
+"46","inv.sampleCondition","condition OK","condition OK",2012-01-01,NA
+"47","inv.sampleCondition","damaged, affecting taxonomy","damaged, affecting taxonomy",2012-01-01,NA
+"48","inv.sampleCondition","damaged, affecting measurement","damaged, affecting measurement",2012-01-01,NA
+"49","inv.sampleCondition","damaged, affecting taxonomy and measurement","damaged, affecting taxonomy and measurement",2012-01-01,NA
+"50","inv.sampleCondition","sample leakage","sample leakage",2012-01-01,NA
+"51","inv.sampleCondition","damaged, affecting taxonomy","damaged, affecting taxonomy",2012-01-01,NA
+"52","inv.sampleCondition","damaged, affecting measurement","damaged, affecting measurement",2012-01-01,NA
+"53","inv.sampleCondition","damaged, affecting taxonomy and measurement","damaged, affecting taxonomy and measurement",2012-01-01,NA
+"54","inv.sampleCondition","sample leakage","sample leakage",2012-01-01,NA
+"55","inv.sampleCondition","other (specified in remarks)","other (specified in remarks)",2012-01-01,NA
+"56","inv.sampleCondition","damaged, affecting analysis","damaged, affecting analysis",2012-01-01,2018-03-30
+"57","inv.sampleCondition","damaged, affecting taxonomy","damaged, affecting taxonomy",2012-01-01,2018-03-30
+"58","inv.sampleCondition","damaged, affecting measurement","damaged, affecting measurement",2012-01-01,2018-03-30
+"59","inv.sampleCondition","damaged, affecting taxonomy and measurement","damaged, affecting taxonomy and measurement",2012-01-01,2018-03-30
+"60","inv.samplerType","surber","Benthic sampler consisting of a 30 cm by 30 cm frame and 243 micron mesh collection net, used in shallow flowing waters",2012-01-01,NA
+"61","inv.samplerType","core","Benthic sampler used in sand- and silt-bottomed streams, consisting of a 5 cm diameter by 50 cm high stainless steel barrel with a handle on top",2012-01-01,NA
+"62","inv.samplerType","hess","Benthic sampler used in shallow gravel-bottomed streams, consisting of a 33 cm diameter, 40 cm high stainless steel drum fitted with a 243 micron mesh collection net",2012-01-01,NA
+"63","inv.samplerType","modifiedKicknet","Benthic sampler used in deeper, fast-flowing stream habitats, consisting of a 33 cm by 50 cm frame and 243 micron mesh collection net with a handle",2012-01-01,NA
+"64","inv.samplerType","petitePonar","Benthic sampler used in deep soft-sediment habitats, consisting of two steel halves that close when the sampler touches the sediment surface, sampling a 6 in by 6 in area of benthos",2012-01-01,NA
+"65","inv.samplerType","lwd","Using large woody debris (LWD) as a substrate for sample, a 0.5 m x 1 m area is scrubbed into a modified kick net with 243 micron mesh",2012-01-01,NA
+"66","inv.samplerType","snag","Using small woody debris as a substrate for sample, the woody debris is cut, measured, and scrubbed into a D-frame net with 243 micron mesh",2012-01-01,NA
+"67","inv.samplerType","benthicSweep","Benthic littoral sample in lakes and river using a D-frame net with 30 cm wide opening and 243 micron collection net with handle",2012-01-01,NA
+"68","inv.samplerType","floatingSweep","Sample collected in floating vegetation mats in a lake using a 0.5 by 0.5 m sample square and a D-frame net with  30 cm wide opening and 243 micron collection net with handle",2012-01-01,NA
+"69","inv.samplerType","miniSurber","Benthic sampler consisting of a 15 cm by 15 cm frame and 243 micron mesh collection net, used in shallow flowing waters",2012-01-01,NA
+"70","inv.samplerType","grab","Grab sample of rare or unique taxon",2018-07-01,NA
+"71","inv.samplingProtocolVersion","NEON.DOC.000690vB","NEON.DOC.000690vB",2012-01-01,NA
+"72","inv.samplingProtocolVersion","NEON.DOC.000690vC","NEON.DOC.000690vC",2012-01-01,NA
+"73","inv.samplingProtocolVersion","NEON.DOC.000690vD","NEON.DOC.000690vD",2012-01-01,NA
+"74","inv.samplingProtocolVersion","NEON.DOC.000690vE","NEON.DOC.000690vE",2012-01-01,NA
+"75","inv.samplingProtocolVersion","NEON.DOC.001204vA","NEON.DOC.001204vA",2012-01-01,NA
+"76","inv.samplingProtocolVersion","NEON.DOC.001204vB","NEON.DOC.001204vB",2012-01-01,NA
+"77","inv.samplingProtocolVersion","NEON.DOC.001204vC","NEON.DOC.001204vC",2012-01-01,NA
+"78","inv.samplingProtocolVersion","NEON.DOC.001204vD","NEON.DOC.001204vD",2012-01-01,NA
+"79","inv.samplingProtocolVersion","NEON.DOC.003046vA","NEON.DOC.003046vA",2012-01-01,NA
+"80","inv.samplingProtocolVersion","NEON.DOC.003046vB","NEON.DOC.003046vB",2012-01-01,NA
+"81","inv.samplingProtocolVersion","NEON.DOC.003046vC","NEON.DOC.003046vC",2012-01-01,NA
+"82","inv.samplingProtocolVersion","NEON.DOC.003046vD","NEON.DOC.003046vD",2018-11-01,NA
+"83","inv.samplingProtocolVersion","NEON.DOC.003046vE","NEON.DOC.003046vE",2018-11-01,NA
+"84","inv.substratumSizeClass","clay","Grain size 0.001 - 0.004 mm",2012-01-01,NA
+"85","inv.substratumSizeClass","silt","Grain size 0.004 - 0.062 mm",2012-01-01,NA
+"86","inv.substratumSizeClass","sand","Grain size 0.062 - 2.0 mm",2012-01-01,NA
+"87","inv.substratumSizeClass","pebble","Grain size 2.0 - 64.0 mm",2012-01-01,NA
+"88","inv.substratumSizeClass","cobble","Grain size 64.0 - 256.0 mm",2012-01-01,NA
+"89","inv.substratumSizeClass","boulder","Grain size > 256.0 mm",2012-01-01,NA
+"90","inv.substratumSizeClass","bedrock","bedrock",2012-01-01,NA
+"91","inv.substratumSizeClass","large woody debris","large woody debris",2018-07-01,NA
+"92","inv.substratumSizeClass","other","other",2012-01-01,NA
+"93","samplingImpractical","location dry","location dry",2012-01-01,NA
+"94","samplingImpractical","location frozen","location frozen",2012-01-01,NA
+"95","samplingImpractical","location snow covered","location snow covered",2012-01-01,NA
+"96","samplingImpractical","other","Sampling location inaccessible due to other ecological reason described in the remarks",2012-01-01,NA
+"97","samplingImpractical","shallow groundwater","shallow groundwater; depth of groundwater column less than 0.5 m",2012-01-01,NA
+"98","samplingImpractical","low yield groundwater","low yield groundwater well",2012-01-01,NA
+"99","samplingImpractical","high water velocity","high water velocity",2012-01-01,NA
+"100","samplingImpractical","staff gauge disturbed","staff gauge disturbed",2012-01-01,NA
+"101","samplingImpractical","staff gauge not installed","staff gauge not installed",2012-01-01,NA
+"102","samplingImpractical","OK","OK",2012-01-01,NA
+"103","samplingImpractical","coordinates not suitable","Maximum number of attempts made to sample within a subplot were unsuccessful",2012-01-01,NA
+"104","samplingImpractical","location flooded","location flooded",2012-01-01,NA
+"105","samplingImpractical","logistical","logistical",2012-01-01,NA
+"106","samplingImpractical","management","management",2012-01-01,NA
+"107","samplingImpractical","extreme weather","extreme weather",2012-01-01,NA
+"108","samplingImpractical","location burned","location burned",2012-01-01,NA
+"109","samplingImpractical","temperature low","temperature low",2012-01-01,NA
+"110","samplingImpractical","temperature high","temperature high",2012-01-01,NA
+"111","samplingImpractical","disturbance","samples not collected due to disturbance",2012-01-01,NA
+"112","samplingImpractical","too windy","too windy",2012-01-01,NA
+"113","samplingImpractical","horizon not present","horizon not present in the incubated soil sample",2012-01-01,NA
+"114","samplingImpractical","location wet","location too wet due to rain or dew",2012-01-01,NA
+"115","Yes or No choice","Y","Yes",2012-01-01,NA
+"116","Yes or No choice","N","No",2012-01-01,NA
