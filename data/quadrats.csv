@@ -1,0 +1,377 @@
+date,year,season,location,sampleID,labelColor,group,microhabitat,time,quadrat,depth,per_sediment,per_rock,per_organic,num_crayfish_seen,num_crayfish_caught,quadrat_notes
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DM,8:22,1,35,3,95,2,0,0,
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DM,8:30,2,43,35,60,5,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DSR,8:34,1,24.5,0,75,25,0,0,lots of periphyton
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DSR,8:35,1,39,25,50,25,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DSR,8:43,2,22.5,5,80,15,1,0,lots of periphyton
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DSR,8:45,2,46,20,60,20,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DFR,8:55,1,24,8,90,2,1,0,lots of periphyton
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DFR,9:00,1,37,30,50,20,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DFR,9:05,2,22,20,75,5,0,0,lots of periphyton
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DFR,9:05,2,37,20,70,10,0,0,
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DSH,9:15,1,28.5,18,80,2,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DSH,9:19,1,24,25,70,5,0,0,lots of periphyton
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,Denise_David,DSH,9:25,2,25,12,85,3,0,0,1 fish
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DSH,9:26,2,27,20,80,0,0,0,lots of periphyton
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"SC,RH",DSR,9:28,1,21,35,60,5,0,0,many sticks on near shore
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"MCP, LW",DSR,9:28,2,47,4,95,1,0,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"SC, LW",DSR,9:30,1,17.55,60,30,10,0,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"MCP, RH",DSR,9:30,2,20,29,70,1,1,0,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,RH LW,DSR,9:30,1,21,30,60,10,0,1,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,"MCP, SC",DSR,9:30,2,17.5,25,74,1,2,0,1 physa snail from outside quadrat
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DSR,9:30,1,17,10,88,2,1,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DSR,9:30,2,19.5,15,83,2,3,0,odonata in vial/ abudant algae
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,USR,9:36,1,34.2,10,90,0,0,0,algae
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,USR,9:36,2,24.5,20,79,1,1,0,1 crayfish (female with eggs)
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,USR,9:36,1,14,20,75,5,1,1,1 male crayfish
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,USR,9:36,2,22.4,25,73,2,0,0,2 crayfish
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DSR,9:39,1,31,5,90,5,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DSR,9:39,2,18,2,93,5,1,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DSP,9:40,1,16,5,95,0,0,0,"lots of periphyton, sponge present"
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DSR,9:40,1,24,10,89,1,0,0,
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DSR,9:40,2,21,9,90,1,0,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,USR,9:41,1,41.5,10,80,10,0,0,1 crayfish
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,USR,9:41,2,26.5,20,75,5,0,0,
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"SC,RH",DFR,9:45,1,29,15,85,0,0,0,"4 limpets, very little sponge"
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"MCP, LW",DFR,9:45,2,23,5,94,1,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DSP,9:47,2,19,5,95,0,0,0,"lots of periphyton, sponge present"
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,MCP LW,USR,9:50,1,22,20,60,20,1,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,RH SC,USR,9:50,2,23.5,39,60,1,4,0,algae
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"LW, SC",USR,9:53,1,27,30,60,10,4,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"RH, MCP",USR,9:53,2,29,30,65,5,2,0,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,RH LW,DFR,9:54,1,16,30,70,0,1,0,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,"MCP, SC",DFR,9:54,2,11,10,80,10,1,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"SC, LW",DFR,9:56,1,8.5,10,90,0,1,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"MCP, RH",DFR,9:56,2,22.5,25,70,5,1,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DM,9:59,1,37,3,97,0,0,0,lots of periphyton
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,UFR,10:00,1,38.6,15,84,1,0,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,UFR,10:00,2,43.9,13,85,2,5,0,"5 crayfish: 1 female juvinile, 1 large male "
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,UFR,10:02,2,46,5,94,1,0,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DFR,10:05,1,20.5,17,80,3,0,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DFR,10:05,2,25,20,75,5,2,0,
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"SC,RH",DM,10:06,1,29.5,29,70,1,0,0,very little sponge
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"MCP, LW",DM,10:06,2,25,4,95,1,0,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,MCP LW,UM,10:07,1,16,4,95,1,0,0,Found nest of fish eggs
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,RH SC,UM,10:07,2,10,5,95,0,0,0,
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,MCP,DM,10:07,2,37,5,95,0,0,0,lots of periphyton
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,UFR,10:09,1,29.4,5,88,7,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DFR,10:11,1,31.5,15,83,2,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DFR,10:11,2,30,5,94,1,0,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"LW, SC",UM,10:12,1,33,10,90,0,0,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"RH, MCP",UM,10:12,2,28.5,5,95,0,0,0,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,RH LW,DM,10:13,1,11,15,85,0,0,0,some sponge
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,"MCP, SC",DM,10:13,2,19,30,69,1,2,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,UFR,10:14,1,36.2,20,78,2,0,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,UFR,10:14,2,40.1,15,84,1,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"RH, LW",USR,10:15,1,29,40,45,15,2,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"MCP, SC",USR,10:15,2,22,14,85,1,3,0,"leaf matter, little bit of algae"
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DFR,10:19,1,23.6,5,94,1,0,0,
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DFR,10:19,2,21.4,5,94,1,0,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"SC, LW",DM,10:21,1,19,50,50,0,1,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"MCP, RH",DM,10:21,2,16.5,39,60,1,1,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,MCP LW,UFR,10:23,1,27,10,70,20,2,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,RH SC,UFR,10:23,2,16.5,2,98,0,3,0,
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"SC,RH",DSH,10:24,1,25.5,10,90,0,0,0,
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"MCP, LW",DSH,10:24,2,22.5,2,98,0,1,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,UM,10:24,1,47.8,24,75,1,0,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,UM,10:24,2,38,18,80,2,0,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"LW, SC",UFR,10:25,1,23,2,97,1,1,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"RH, MCP",UFR,10:25,2,30,18,80,2,1,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DM,10:27,1,18.5,10,90,0,0,0,sponge
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DM,10:27,2,30,20,73,2,0,0,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,RH LW,DSH,10:34,1,15,20,80,0,0,1,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,"MCP, SC",DSH,10:34,2,14.5,25,73,2,2,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"RH, LW",UM,10:38,1,25,0,100,0,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"MCP, SC",UM,10:38,2,22.5,5,95,0,1,0,algae
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,UM,10:40,1,32,14,85,1,0,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,UM,10:40,2,27.5,40,60,0,0,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"SC, LW",DSH,10:42,1,15,10,90,0,0,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"MCP, RH",DSH,10:42,2,17,25,75,0,0,0,
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"SC,RH",DSP,10:45,1,24.5,10,90,0,0,0,
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,"MCP, LW",DSP,10:45,2,24,4,95,1,0,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"LW, SC",USH,10:45,1,27,15,85,0,0,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"RH, MCP",USH,10:45,2,17,5,95,0,0,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,MCP LW,USH,10:45,1,23.5,13,85,2,0,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,RH SC,USH,10:45,2,23.5,40,60,0,0,0,
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,UM,10:48,1,24,10,88,2,0,0,
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,UM,10:48,2,25.2,4,95,1,0,0,
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,RH LW,DSP,10:55,1,9,15,85,0,0,0,sponge - 30% rock coverage
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,"MCP, SC",DSP,10:55,2,20,40,60,0,0,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DSH,10:56,1,19,10,86,4,1,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DSH,10:56,2,18.5,20,75,5,0,0,stonefly in vial
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"RH, LW",UFR,10:57,1,31,30,60,10,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"MCP, SC",UFR,10:57,2,24.5,13,80,7,4,0,fish and salamander
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"LW, SC",USU,10:57,1,23,7,93,0,0,0,
+6/6/2018,2018,Summer,Upstream,02URSU18,White,"RH, MCP",USU,10:57,2,16,5,93,2,0,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,USH,10:57,1,17.4,25,79,2,0,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,USH,10:57,2,31.9,10,90,0,0,0,algae
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,MCP LW,USU,10:58,1,16.5,20,78,2,1,0,
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,RH SC,USU,10:58,2,25,40,60,0,0,0,
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DSH,11:05,1,17,20,75,5,0,0,
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DSH,11:05,2,21.5,15,83,2,0,0,Many limpets
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DSH,11:05,1,21.5,20,79,1,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DSH,11:05,2,21.5,14,85,1,0,0,
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"SC, LW",DSP,11:09,1,18,15,85,0,0,0,Lots of sponge
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,"MCP, RH",DSP,11:09,2,14.5,5,95,0,0,0,some sponge on the rocks
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,USH,11:17,1,31.6,20,79,1,0,0,
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,USH,11:17,2,26.5,10,90,0,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"RH, LW",USH,11:20,1,48,30,70,0,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"MCP, SC",USH,11:20,2,22.5,25,75,0,1,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,USH,11:20,1,53.5,16,84,0,0,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,USH,11:20,2,32,25,75,0,0,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,USU,11:20,1,12.8,5,95,0,0,0,
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,,USU,11:20,2,25,10,90,0,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DSP,11:32,1,19,30,70,0,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DSP,11:32,2,25,10,90,0,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"RH, LW",USU,11:35,1,23,35,65,0,0,0,
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,"MCP, SC",USU,11:35,2,12.5,5,95,0,0,0,rocks look clean no obvious algae
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DSP,11:36,1,11,5,95,0,0,0,Algae present
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DSP,11:36,2,22.5,10,87,3,0,0,
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,USU,11:37,1,27.6,20,77,3,0,0,
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,,USU,11:37,2,22.8,10,89,1,0,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,USU,11:45,1,25.3,10,88,2,0,0,
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,,USU,11:45,2,23,10,90,0,0,0,
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DM,12:08,1,25,15,83,2,0,0,
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavender,,DM,12:08,2,20.5,25,73,2,0,0,
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,LaurenMcGue_IsabelleBrisson,DSH,13:04,1,11,15,85,,,,"algae, vertebrates"
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,Amanda_Sarah_Elena,,13:20,1,18,10,90,,,3,algae
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,Kira_Clare_Grace,,13:33,1,28,20,80,,4,,fish
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,MargaretHewitt_GuinevereVanHorne_Helena,,13:34,1,11.5,10,90,,2,,"algae, leaves, sticks"
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.1,DSH,13:34,1,19,10,50,40,1,1,"small-medium sized rocks, really slimy, dirt/debri and algae, not much sand, organic material on rocks, under beech trees and 1 oak. saw a brick; multiple crayfish around quadrat"
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,GraceP-M_Megan_Melissa,DSP,13:35,1,14.5,20,80,,,,sponges
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.5,DFR,13:35,1,11.5,20,70,10,1,1,"quite a bit of woody debris, water moving at moderate velocity, shady"
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.3,DSR,13:35,1,19,38,60,2,2,0,rocks covered in algae
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Bri_Lexie_Lorena,USR,13:36,1,19,20,80,,,,fish
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.2,DSP,13:36,1,4.5,30,60,10,0,0,fresh water sponge
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Bri_Lexie_Lorena,USR,13:43,2,15,25,75,,,,"algae, debris covering most rocks, leaves"
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,Katherine_Jessie_Kayleigh,DFR,13:44,1,18.5,20,80,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Lorena_Lexie,DSR,13:45,1,30,30,70,,,,mostly pebbles
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,HazelAtwill_MarinSmith_DeborahK,DSR,13:45,1,17.5,50,50,,2,,leaf debris
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,Kira_Clare_Grace,,13:45,2,33,25,75,,2,,fish
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.1_Clare_Ciara_Alida,USR,13:45,1,38,5,95,0,0,0,
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.5_Shea_Elsbeth_Rebecca,USU,13:45,1,35,20,80,0,0,0,rainy
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,MakenaWagner_ChaimaraRiad_TamaraThomas,DM,13:46,1,24,25,75,,1,,
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,GraceP-M_Megan_Melissa,DSP,13:46,2,18,30,70,,,,sponges
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.4_Eli_Christian,DM,13:46,1,18.5,5,80,15,2,0,"lota od moss around small rock fragments, large sticks, caddisflies"
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.5_Kelly_Desi_Maya,DSH,13:46,1,20.5,15,84,1,0,0,"algae present, shady space"
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.1_Annika_Carina,USR,13:46,1,24.5,10,90,0,1,0,"fish ( a couple inches long), forgot to shuffle"
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.1_Annika_Carina,DSP,13:47,1,16,15,85,0,0,0,"green sponge, full sun, smeels weird, fast flow"
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.2_Syl_Avery_Neeva,UFR,13:48,1,10,1,98,1,0,0,"mostly rocks, hard to see, some leaf matter"
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.2,DSR,13:48,1,18,25,50,25,5,0,"shady, not a lot of moving water, crawfish!"
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.1,DSH,13:48,2,22,20,65,15,1,0,"much less organic material, smaller rocks, slimer feel"
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,MargaretHewitt_GuinevereVanHorne_Helena,,13:49,2,15,20,80,,2,,algae
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.3,DM,13:49,1,22.5,5,95,0,3,0,fast moving water
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.5,DSH,13:49,1,17,15,80,5,2,0,
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Amanda_Sarah_Elena,UFR,13:50,1,34,1,99,,4,,
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.2_Jaylene_Kylee,DFR,13:50,1,15.5,10,85,5,4,2,"woody debris, leaf matter"
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.3_Jess_Jody_Gina,DSR,13:50,1,30,15,80,5,4,1,"one leaf, many fish"
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.2_Jaylene_Kylee,UFR,13:50,1,34,5,75,20,3,0,"woody debris, leaf matter"
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.3_Jess_Jody_Gina,UM,13:50,1,24,25,75,0,0,0,found a stick
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.5_Kelly_Desi_Maya,USU,13:50,1,30,17,80,3,0,0,"algae on rocks, fast flow"
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.3_Eleanor_Jenny_Anastasia,UM,13:50,1,50,25,70,5,0,0,
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.4_Ellie_Phoebe,USH,13:50,1,35,5,95,0,0,0,some periphyton
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.1,DSP,13:50,1,12,3,94,3,3,0,"leaf matter, sponges, lots of crayfish"
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.5,DFR,13:50,2,17.7,25,65,10,1,3,high velocity; there were 4 crayfish; algae on some rocks; shady; woody debris/seeds
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.5,USH,13:50,1,42,10,80,10,0,0,
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,Katherine_Jessie_Kayleigh,DFR,13:52,2,15.5,10,90,,1,,
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.4_Eli_Christian,USH,13:52,1,31.5,30,65,5,0,0,"very few organisms overall, only ver small organisms, a few leaves found"
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.3,DSR,13:52,2,17.5,33,65,2,3,0,minnows
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.3,USU,13:52,1,32,30,65,5,2,0,"less light, quicker flow, bigger rocks, crayfish, noticably less invertebrates"
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,Kira_Clare_Grace,,13:53,3,23,23,80,,,1,"leaves, fish"
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,SimranSahni_JuliaSilver,UM,13:53,1,18,30,70,,,,algae
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.2,DSP,13:53,2,3.5,10,65,15,0,0,"fresh water sponge, quick moving water"
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,GraceP-M_Megan_Melissa,DSP,13:55,3,20,35,65,,,,sponges - most rocks covered
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Bri_Lexie_Lorena,USR,13:55,3,20,40,60,,1,,"leaf derib, fish"
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.2,USH,13:55,1,50,10,70,20,0,0,"little algae, lots of leaves, seeds, larger fish"
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.4,USR,13:55,1,18.5,60,30,10,0,0,really murky
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.3,UM,13:55,1,25,25,70,5,0,0,"mostly large rocks, lots of minnows, only organic matter was two big leaves"
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.1,USR,13:55,1,31,5,30,15,0,0,"no visible plants, sponges, vertebrates, ~15% leaf cover"
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.2,USU,13:55,1,13,45,45,10,0,0,lots of woody debris compared with downstream
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,MargaretHewitt_GuinevereVanHorne_Helena,,13:56,3,15,25,75,,2,,algae
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,LaurenMcGue_IsabelleBrisson,DSH,13:57,2,10,30,70,,,,"algae, eggs"
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,HazelAtwill_MarinSmith_DeborahK,DSR,13:57,2,13.5,25,75,,2,,
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.1_Clare_Ciara_Alida,USR,13:57,2,45,10,85,5,0,0,small fish present
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.5,UM,13:57,1,19,20,80,0,0,0,crayfish outside quadrat
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.4,UFR,13:57,1,29,10,85,5,0,2,"some woody debris, leaf material"
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,GraceP-M_Megan_Melissa,,13:59,1,13,25,75,,,,"algae, fish"
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,SimranSahni_JuliaSilver,DFR,14:00,1,11,75,20,,1,,
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Amanda_Sarah_Elena,USH,14:00,2,16.5,30,70,,2,,"fish, algae"
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Grace_Clare,,14:00,1,35.5,20,80,,2,,
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,MargaretHewitt_GuinevereVanHorne,,14:00,1,13,25,75,,,,"fish, algae"
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,MakenaWagner_ChaimaraRiad_TamaraThomas,DM,14:00,2,15.5,10,90,,1,,
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.2_Jaylene_Kylee,UFR,14:00,2,32,3,92,5,2,0,woody debris
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.3_Jess_Jody_Gina,UM,14:00,2,32.5,35,65,0,0,0,found a stick
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.5_Kelly_Desi_Maya,USU,14:00,2,28.5,22,75,3,0,0,"algae on rocks, fast flow but slower than quadrat 1"
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.5_Shea_Elsbeth_Rebecca,USU,14:00,2,26,90,8,2,0,0,rainy
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.4,DFR,14:00,1,19,60,35,5,2,0,"algae, crayfish skeleton"
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.1,UFR,14:00,1,37,30,68,2,5,0,"acorns falling, more large rocks"
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,LaurenMcGue_IsabelleBrisson,DSH,14:01,3,17.5,35,65,,1,,faster water
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.5,USH,14:01,2,44.5,20,75,15,0,0,
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Colleen_Helena_Kira,,14:02,1,17,35,65,,,4,
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,SimranSahni_JuliaSilver,UM,14:02,2,22,70,30,,,,small fish
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Sunnie_Alice_Jodi,USH,14:03,1,17,20,80,,,,fish
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.1_Annika_Carina,USR,14:03,2,31,25,75,0,0,0,
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.4_Ellie_Phoebe,USH,14:03,2,29,0,100,0,0,0,
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,Katherine_Jessie_Kayleigh,DFR,14:04,3,13,60,40,,,,
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,HazelAtwill_MarinSmith_DeborahK,DSR,14:04,3,20,25,75,,1,,fish
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.4,USR,14:04,1,22.5,30,60,10,3,0,some brown algae
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.5,DFR,14:04,1,14,20,75,5,1,0,
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.4,DM,14:04,1,11,20,70,10,1,0,sponges
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.3,DSH,14:04,1,11,30,65,5,0,0,"couple of leaves, mostly rocks, no organisms"
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,ArianaBanks_Liz,DSP,14:05,1,18,15,85,,,,"relatively quick water flow, sunny spot, lots of sponge/algae"
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Liz_Deborah_Ariana,USH,14:05,1,20.5,40,60,,,,fish
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.4_Eli_Christian,DM,14:05,2,20.5,20,75,5,0,0,"lots of vary large rocks, less ""moss"" on rocks"
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.5_Kelly_Desi_Maya,DSH,14:05,2,38.5,24,75,1,3,1,"shady place, further upstream than previous quadrat"
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Suzie_Nahla,USH,14:05,1,24,65,30,5,0,0,a few dead leaves from nearby trees
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.3,UFR,14:05,1,25,33,65,5,3,0,lots of minnows
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.5,UM,14:05,1,21.5,5,93,2,0,0,"leaf matter present, moss on rocks, high water movement"
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.3,UM,14:05,2,26,15,75,10,0,0,"more leaves than quadrat 1, one rock took up 25% area"
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.1,USR,14:05,2,27,15,80,5,0,0,"leaf material, nothing else visible"
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,SimranSahni_JuliaSilver,UM,14:06,3,22,80,20,,1,,
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.2,DSR,14:06,1,19,5,93,2,2,0,"lots of leaves, rocks"
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,MakenaWagner_ChaimaraRiad_TamaraThomas,DM,14:07,3,16,10,90,,1,,
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.4,USR,14:07,2,15,10,85,5,2,0,less murky
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Lorena_Lexie,DSR,14:08,2,23,20,80,,,,mostly pebbles
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.1,DSP,14:08,1,17,15,80,5,1,0,"sponge, 10 chunks"
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.1_Annika_Carina,DSP,14:09,2,9,20,80,0,0,0,"lots of large rocks, less sponge than quadrat 1"
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.2,DSR,14:09,2,21.5,35,60,5,6,0,"a little sunnier, slow water, lots of penny bugs!"
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Grace_Clare,,14:10,2,16.5,0,100,,0,,algae
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.2_Jaylene_Kylee,DFR,14:10,2,14,25,70,5,4,0,"woody debris, leaf matter"
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,1.3_Jess_Jody_Gina,DSR,14:10,2,32,7,85,8,3,1,"many small fish, acorns"
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.3_Eleanor_Jenny_Anastasia,UM,14:10,2,37,30,60,10,0,0,
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.1,USH,14:10,1,43.5,40,50,10,0,1,"woody deris - small sticks, tadpole, algae present"
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.3,USU,14:10,2,20,30,60,10,0,0,"more invertebrates, more sunlight, most sediment, shallow, slower moving, warmer"
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,MargaretHewitt_GuinevereVanHorne,,14:11,2,13,5,95,,,,algae
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,2.2_Syl_Avery_Neeva,UFR,14:11,2,27,10,90,0,0,0,"leaf matter, partly silty, slime covering rocks"
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.4,UFR,14:11,2,23,20,75,5,0,0,sponges present
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,SimranSahni_JuliaSilver,DFR,14:12,2,12,50,40,,,,algae on rocks
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Colleen_Helena_Kira,,14:12,2,15,0,100,,,,fish
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,GraceP-M_Megan_Melissa,,14:12,2,33,15,85,,1,,
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Liz_Deborah_Ariana,USH,14:12,2,22.5,30,70,,,,fish
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.5,UM,14:12,2,10,10,10,75,0,1,crayfish family nearby
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.2,USH,14:12,2,44,15,75,10,1,0,"less leaf matter, no algae, lots of fish"
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,SimranSahni_JuliaSilver,UM,14:13,4,20,90,10,,,,algae
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Sunnie_Alice_Jodi,USH,14:14,2,20,5,95,,,,fish
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,1.4_Eli_Christian,USH,14:14,2,12.5,45,50,5,0,0,"very few macroivertebrates, mostly rocks and leaf matter"
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.2,USU,14:14,1,11,33,66,3,0,0,lots of small fish swimming
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.5,DFR,14:14,2,20,25,65,10,0,0,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,ArianaBanks_Liz,DSP,14:15,2,29,10,90,,,,
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Suzie_Nahla,USH,14:15,2,26.5,10,85,5,0,0,baby mussel?
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Claire_Isobel,USU,14:15,1,46,65,30,5,0,0,
+10/3/2019,2019,Fall,Upstream,03URFA19,White,3.2,USU,14:15,2,11,60,30,10,2,0,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,SimranSahni_JuliaSilver,DFR,14:17,3,12,50,50,,1,,lots of algae
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.4,USR,14:19,2,15,20,15,5,0,0,some brown algae
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Lorena_Lexie,DSR,14:20,3,50,50,50,,,,mostly pebbles
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,Grace_Clare,,14:20,3,16.5,10,90,,8,,
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.4,DFR,14:20,2,15,35,55,10,1,0,
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,2.1,UFR,14:21,2,20,10,85,5,3,0,
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.3,DSH,14:24,2,18,15,80,5,0,0,"mostly rocks, large rocks"
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,ArianaBanks_Liz,DSP,14:25,3,19,20,80,,,,
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.4,DM,14:27,2,11,30,70,0,0,0,
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.1,DSP,14:27,2,12.5,30,70,0,0,0,"sponge, small chunks in 2 corners"
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Ella_Madison,UM,14:28,1,41.5,25,75,0,0,0,
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Claire_Isobel,USU,14:28,2,51.5,40,60,0,0,0,
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.1,USH,14:29,2,47,15,65,20,1,3,"woody derbis - large branch, little sediment, algae on rocks"
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.5,UM,14:30,2,10,7,90,3,0,0,direction of water is weird. kind of oriented towards opposite side of ri[v]er trail
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.3,DM,14:30,2,18,10,87,3,0,0,"faster moving water, shadier, shallower, smaller rocks, more sediment"
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.5,DSH,14:31,2,13.5,30,70,0,0,1,
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,2.1,DSP,14:31,2,16.5,30,69,1,2,0,"sponges, lots of crayfish"
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Katie_DL,USR,14:34,1,39,0,100,0,0,0,
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.2,USU,14:34,2,7,10,85,5,0,1,crayfish outside quadrat
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,3.2,DSR,14:37,2,12,30,70,0,1,0,"lots of leaves, rocks"
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Katie_DL,USR,14:38,2,40,0,100,0,0,0,
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Katie_DL,USR,14:45,3,63,40,60,0,2,0,
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,1.3,UFR,14:50,2,43,15,80,5,5,0,lots of minnows
+6/1/2017,2017,Summer,Downstream,01DRSU17,Lavender,SC_LC_LW,,,1,42.5,15,85,,,,"small & medium rocks, some algae"
+6/1/2017,2017,Summer,Downstream,01DRSU17,Lavender,SC_LC_LW,,,2,59,10,90,,,,"large and medium rocks, some sponge"
+6/1/2017,2017,Summer,Downstream,01DRSU17,Lavender,SC_LC_LW,,,3,29,0,100,,,,
+6/1/2017,2017,Summer,Downstream,01DRSU17,Lavender,SC_LC_LW,,,4,27,0,100,,,,"large and medium rocks, next to bank"
+6/1/2017,2017,Summer,Downstream,01DRSU17,Lavender,SC_LC_LW,,,5,43.5,10,90,,,,"medium rocks, some sponge"
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,1,53.5,5,95,,,,
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,2,49.5,15,85,,,,algae present
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,3,41,25,75,,,,"algae present, caddisfly"
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,4,37,5,95,,,,"algae present, eggs?"
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,5,34,0,100,,,,"behind huge rock, flow is slow, algae present"
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,6,42,0,100,,,,algae present
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,7,53,0,100,,,,algae present
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,LW_LM,,,8,60,25,75,,,,
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,MP_SC_SQC,,,1,43.5,10,90,,,,"1 stick, medium rocks"
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,MP_SC_SQC,,,2,44,40,60,,,,lots of algae on rocks
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,MP_SC_SQC,,,3,43.4,10,90,,,,"small rocks, algae on rocks"
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,SC_SQC,,,1,20.5,40,60,,,,"close to bank, near large log"
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,SC_SQC,,,2,50.5,15,85,,,,"sponge, lots of caddisflies, center of river"
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,SC_SQC,,,3,21,20,80,,,,"near far bank, algae"
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,SC_SQC,,,4,27,0,100,,,,very close to far bank
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,LM_LW,,,1,10.5,20,80,,,,"small rocks, by river bank"
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,LM_LW,,,2,54,0,100,,,,small and medium rocks
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,LM_LW,,,3,40,5,95,,,,medium rocks
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,LM_LW,,,4,46,10,90,,,,medium and large rocks
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,LM_LW,,,5,57,5,95,,,,large rocks
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,LM_LW,,,6,38,20,80,,,,"small rocks, some algae"
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,1,46.5,5,95,,,,medium rocks
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,2,26,5,95,,,,medium rocks
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,3,33,15,85,,,,medium rocks
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,4,33,25,75,,,,some algae
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,5,50,15,85,,,,
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,6,41.5,20,80,,,,"behind rock, slow flow, some algae"
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,LW_LC_SC,,,7,29,5,95,,,,some algae
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,MP_SC,,,1,44,20,80,,,,1 crayfish swam away
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,MP_SC,,,2,35.5,5,95,,,,"medium large rocks, 2 crayfish got away"
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,MP_SC,,,3,29,0,100,,,,
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,SC_LW,,,1,26,10,90,,,,
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,SC_LW,,,2,19,0,100,,,,"shallow, far bank, fast flow"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,SC_LW,,,3,15.5,0,100,,,,"1 large rock, fast flow, sponge"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,SC_LW,,,4,29,5,95,,,,"sponge, 1 escaped crayfish"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,SC_LW,,,5,22,10,90,,,,"near close bank, tons of sponge"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,MP_LW,,,1,15.5,5,95,,,,"medium rocks, far bank"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,MP_LW,,,2,27.5,10,90,,,,"medium rocks, far bank"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,MP_LW,,,3,37,5,95,,,,"small rocks, algae, 1 crayfish caught"
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,MP_LW,,,4,40,10,90,,,,"small rocks, algae, "
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,MP_LW,,,5,28,25,75,,,,"mostly small rocks, weird orange rock and dirt, near bank, lots of caddisflies"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,MP_LM,,,1,31.5,0,100,,,,"near edge, slow flow, large rocks, 5 crayfish total but only 2 caught"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,MP_LM,,,2,47,30,70,,,,"smaller rocks, middle of river, some algae on rocks"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,MP_LM,,,3,32,15,85,,,,"large & small rocks, far egde"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,MP_LM,,,4,31.5,10,90,,,,"small rocks, far edge, behind large rock"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,MP_LM,,,5,32,20,80,,,,"near bank, medium rocks"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,SC_LW,,,1,29,30,70,,,,
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,SC_LW,,,2,41,65,35,,,,close to sand bar
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,SC_LW,,,3,45.5,0,100,,,,"lost 1 crayfish, algae, sponge"
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,SC_LW,,,4,45,5,95,,,,sponges
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,SC_LW,,,5,44,0,100,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Chase_Megan_Bri,DM,,1,14,,,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Chase_Megan_Bri,DM,,2,32,,,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Chase_Megan_Bri,DM,,3,41,,,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Grace_Tidwell_Emma,DSH,,1,9,50,50,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Grace_Tidwell_Emma,DSH,,2,15,30,70,,,,
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,Grace_Tidwell_Emma,DSH,,3,15,50,50,,,,
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,Bea_Shannon_Emma,DSP,,1,12,20,80,,1,,sponges
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,Bea_Shannon_Emma,DSP,,2,18,75,25,,,,"algae, sponges"
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,Bea_Shannon_Emma,DSP,,3,16,10,90,,,,sponges
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,Amanda_Sarah_Elena,,,2,22,25,75,,2,,fish
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,Amanda_Sarah_Elena,,,3,15,2,98,,,2,algae
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,UFR,,3,16.5,0,100,,1,1,lots of leaves
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,UFR,,4,18,35,65,,1,1,1 medium stick
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,DL_SC,UFR,,3,32.5,50,50,,1,0,"10% organic material,"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,UM,,1,17,15,85,,0,0,
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,UM,,2,12.5,5,95,,0,0,"leaf litter clump, algae on rocks"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,UM,,5,11,1,99,,0,0,"leaf litter clumps, algae on rocks"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,USH,,6,16.5,10,90,,2,0,"leaf litter clumps,"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,MP_NH,USH,,7,19.5,35,65,,1,1,
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,DL_SC,USH,,5,21,10,90,,2,0,"40% organic, fish"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,DL_SC,USR,,1,12,60,40,,1,0,"25% leaf litter, 1 small fish,"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,DL_SC,USR,,2,12.5,30,70,,2,0,"10% leaf, fish"
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,DL_SC,USR,,4,14,45,55,,0,0,5% organic debris
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Grace_Emma,UFR,,1,44,75,25,,,,3 fish
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Grace_Emma,UFR,,2,50,50,50,,,,
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Grace_Emma,UFR,,3,53.5,85,15,,,,
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Grace_Emma,UFR,,4,57,80,20,,,,
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,Chase_Megan_Kate,USH,,1,62,20,80,,,,
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Renee_Chase,UFR,,1,,,,,,,
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Renee_Chase,UFR,,2,,,,,,,
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,Ella_Madison,UM,,2,34.5,20,80,0,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DM,,1,32,10,90,0,0,0,
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,,DM,,2,25,5,95,0,0,0,A little bit of sponge
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DSP,,1,14,2,98,0,0,0,
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,,DSP,,2,21.2,20,80,0,0,0,
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.4,DM,,1,17.5,10,88,2,1,0,
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,1.4,DM,,2,14,8,90,2,0,0,

@@ -1,0 +1,68 @@
+date,year,season,location,sampleID,labelColor,labSection,timeOfDay,sky,USGSdischarge,lamontDischarge,lamontStage,lamontTurbSS,lamontTurbBS,lamontAtemp,lamontWtemp,UpWatertemp,UpTurbSS,UpTurbBS,barPressure,otherOrgs,notes,numGroups,quadsTaken,quadSize
+10/27/2015,2015,Fall,Downstream,01DRFA15,Orange,TUE,1:30-2:30pm,partly cloudy,27.1,34,0.82,0.44,0,11.2,8.6,,,,,,,5,48,0.15
+11/4/2015,2015,Fall,Upstream,01URFA15,Blue,WED,1:30-2:30pm,sunny,46,52,0.93,0.851,0,19.7,10.1,,,,,,,3,23,0.15
+4/5/2016,2016,Spring,Upstream,01URSP16,Orange,Tuesday,1:30-2:30pm,Sunny,90.5,91,1.14,0.669,0,1.5,2.5,,,,,2 fish,"Big storm the day before, 4 groups",4,45,0.15
+4/6/2016,2016,Spring,Upstream,02URSP16,Blue,Wednesday,1:30-2:30pm,Cloudy,83.8,84,1.1,0.705,0,5.1,3.7,,,,,"3 fish, 1 salamander",clean rocks,5,57,0.15
+4/7/2016,2016,Spring,Upstream,03URSP16,Yellow,Thursday,1:30-2:30pm,Rainy/Cloudy,97.5,104,1.18,0.967,0,12.8,5.5,,,,,"5 fish, 2 salamanders",rainy and hard to see well enough to catch crayfish,7,63,0.15
+4/12/2016,2016,Spring,Downstream,01DRSP16,Orange,Tuesday,1:30-2:30pm,Cloudy,166,174,1.42,3.697,0,8.9,7.5,,,,,,Sampled upstream of the bend but marginally dangerous because current strong and depth was deep along closer side of the river.  Rocks looked fairly clean,4,44,0.15
+4/13/2016,2016,Spring,Downstream,02DRSP16,Blue,Wednesday,1:30-2:30pm,Sunny,129,45,0.89,1.869,0,11,7.9,,,,,,"clean rocks, Partial draw down of pond to remove a log and replace flashing",5,54,0.15
+4/14/2016,2016,Spring,Downstream,03DRSP16,Yellow,Thursday,1:30-2:30pm,Sunny,109,116,1.21,0.982,2.27,12.7,9,,,,,,"Sampled downstream of the bend, rainy and hard to see well enough to catch crayfish",7,44,0.15
+6/2/2016,2016,Summer,Downstream,01DRSU16,Orange,NA,10-10:40 am,Sunny,32.7,34,0.81,23.9,2.2,,20.7,,,,,,,1,17,0.15
+6/3/2016,2016,Summer,Upstream,01URSU16,Orange,NA,10-10:30 am,Cloudy,36.6,32,0.8,17.8,2.8,,20.5,,,,,,,1,12,0.15
+6/6/2016,2016,Summer,Downstream,02DRSU16,Blue,NA,1:30-2:00pm,Sunny,182,175,1.4,27.9,5.3,,19.2,,,,,,,1,5,0.15
+6/7/2016,2016,Summer,Upstream,02URSU16,Blue,NA,1:30-2pm,Partly Sunny,77.4,70,1,28.4,2.3,,21,,,,,,,1,10,0.15
+6/8/2016,2016,Summer,Upstream,03URSU16,Yellow,NA,1:30-1:50pm,Cloudy,55.8,52,0.9,18.8,1.7,,19.4,,,,,,,1,10,0.15
+6/10/2016,2016,Summer,Downstream,03DRSU16,Yellow,NA,1:30-1:50 pm,Mostly Sunny,39.9,35,0.8,20.9,1,,18.4,,,,,,,1,5,0.15
+10/3/2016,2016,Fall,Downstream,01DRFA16,Lavender,MON,1:30-2:20pm,mixed sun & clouds,9.39,10,0.57,4.865,2,20.5,17.3,,,,,,Tons of crayfish!,,29,0.15
+10/4/2016,2016,Fall,Downstream,02DRFA16,Green,TUE,1:20-2:30pm,cloudy,9.04,9,0.56,3.688,2,15.5,16.5,,,,,,"Tons of crayfish, but we didn't go as out of the way to catch them",,25,0.15
+10/6/2016,2016,Fall,Downstream,04DRFA16,Orange,THU,1:40-2:40,clear,7.72,8,0.54,4.457,2,22,17.5,,,,,,lots of algae and sponge; lots of crayfish and fish,,,
+10/12/2016,2016,Fall,Downstream,03DRFA16,Yellow,WED,1:45-2:35,clear,6.81,8,0.6,4.263,2,18.3,13.7,,,,,,lots of algae and sponge; lots of crayfish and fish (38 rock rubs),,29,0.15
+10/17/2016,2016,Fall,Upstream,01URFA16,Lavender,MON,1:30-2:20pm,cloudy,5.97,8,0.53,4.167,1.1,21.9,14.3,,,,,,"lots of algae on rocks, lots of limpets, 1 mussel found near the bank where we entered the river",,44,0.15
+10/18/2016,2016,Fall,Upstream,02URFA16,Green,TUE,1:20-2:20pm,Sunny,6.52,8,0.55,4.062,1.6,22.9,16.5,,,,,,"More algae on the rocks, lots of small juvenile fish",,22,0.15
+10/19/2016,2016,Fall,Upstream,03URFA16,Yellow,WED,1:45-2:40,clear,15.2,18,0.54,4.226,2,23.9,16,,,,,,"lots of limpets, (27 rock rubs)",,35,0.15
+10/20/2016,2016,Fall,Upstream,04URFA16,Orange,THU,1:30-2:30,overcast,16.1,23,0.72,3.675,2,19.4,16.1,,,,,,"several dragonfly larvae on everhanging tree-trunk on bank, (10 rock rubs)",,23,0.15
+4/5/2017,2017,Spring,Downstream,01URSP17,Orange,Wednesday,1:30-2:30pm,cloudy,505,489,2.26,6.123,0,11.1,5.1,,,,,,"Big storm the day before, 4 groups",4,,
+4/9/2017,2017,Spring,Upstream,02URSP17,Green,NA,3-4pm,sunny,240,233,1.63,2.717,0,16.1,11.3,,,,,,Sampled upstream of the bend but marginally dangerous because current strong and depth was deep along closer side of the river.  Rocks looked fairly clean,2,11,0.25
+4/11/2017,2017,Spring,Downstream,03URSP17,Lavender,Tuesday,1:30-2:30pm,sunny,198,202,1.54,3.077,0,29.4,16.1,,,,,,clean rocks,2,18,0.25
+4/11/2017,2017,Spring,Upstream,01DRSP17,Lavender,Tuesday,1:30-2:30pm,sunny,198,202,1.54,3.077,0,29.4,14.3,,,,,,clean rocks,3,19,0.25
+4/12/2017,2017,Spring,Downstream,02DRSP17,Green,Wednesday,1:30-2:30pm,cloudy/rainy,169,182,1.47,10.29,4,15.6,14.5,,,,,,rainy and hard to see well enough to catch crayfish,3,11,0.25
+4/12/2017,2017,Spring,Upstream,03DRSP17,Orange,Wednesday,1:30-2:30pm,coudy/rainy,169,182,1.47,10.29,4,15.6,12.8,,,,,,"Sampled downstream of the bend, rainy and hard to see well enough to catch crayfish",3,23,0.25
+6/1/2017,2017,Summer,Downstream,01DRSU17,Lavender,NA,2:15-3:20PM,partly cloudy,186,181,1.47,23.1,2.4,5.1,15.4,15.5,2.5,0,1011,,"A vial full of limpets and water pennies was broken and those organisms were lost, but we estimated that there were 6 limpets and 3 water pennies in the vial. Like upstream, there were LOTS of really small flathead mayflies and other mayflies… too time consuming to sort well so I put all the mayflies in one vial",1,5,0.25
+6/1/2017,2017,Summer,Upstream,01URSU17,Lavender,NA,9:15-11am,sunny,206,202,1.54,21.9,5.2,9.2,13.5,13.5,6.8,0.5,1013.1,,"Lots of sand at this site, but we tried to sample where there were rocks.  There were lots of very small flathead mayflies and other mayflies
+Not as many Hydropsychidae (but maybe some of the cases are pupal stages?  There were tons of nymphs in the spring, so it would make sense if there were a lot of pupae now).  All quadrats were done downstream of the bend).  Found a molting mayfly",2,11,0.25
+6/2/2017,2017,Summer,Downstream,02DRSU17,Green,NA,9:30-10:40am,partly sunny,122,127,1.27,17.9,1.3,3.8,14.4,14.1,1.4,0,1014,,"lots of sponge in the middle, shallow, closer to the bridge",2,10,0.25
+6/2/2017,2017,Summer,Upstream,02URSU17,Green,NA,2:15-3:40pm,partly cloudy,116,121,1.25,19.6,1.4,4,14.8,14.8,2,0,1012.5,,"All quadrats taken downstream of the bend, 3 crayfish were in quadrats but escaped. Vial UR16 contained only empty caddisfly casings.",2,10,0.25
+6/5/2017,2017,Summer,Downstream,03DRSU17,Orange,NA,2:30-3:40pm,cloudy,122,126,1.27,15.5,1.7,4.3,14.5,14.5,1.8,0,1009.8,,"5 crayfish caught (3 females [one had eggs], 2 males), 1 crayfish escaped",2,10,0.25
+6/5/2017,2017,Summer,Upstream,03URSU17,Orange,NA,9:30-10:30am,"cloudy, a few raindrops",106,113,1.22,14.5,2.7,5.6,14.3,14.3,4.1,0,1010,"We also saw two large hellgrammites - Corydalus sp. - crawling along the path that goes along the river.  We collected them and preserved them, but they were not in the river so should not be counted. also caught and released a small fish","All quadrats taken downstream of the bend, Saw at least 6 crayfish in the large rocks along the near bank.  Caught only 2 of them.  One was a large female with eggs, the other was a smaller male without claws.
+
+",2,10,0.25
+9/21/2017,2017,Fall,Downstream,01DRFA17,Orange,THU,1:30-2:40pm,overcast,9.75,7,0.62,5.2,1.6,25.6,21.1,21.3,6.7,0.2,1010.6,,,5,15,0.25
+9/25/2017,2017,Fall,Upstream,01URFA17,Lavender,MON,1:30-2:30,sunny,8.04,2,0.57,5,3.6,31,24.8,22.1,11.8,4.6,1016.6,,,6,13,0.25
+9/26/2017,2017,Fall,Downstream,02DRFA17,Yellow,TUE,1:10-2:30 pm,high clouds,7.72,2,0.57,4.8,3,31.7,24.3,22,7.8,3.6,1014.4,,,5,15,0.25
+10/2/2017,2017,Fall,Downstream,03DRFA17,Lavender,MON,1:20-2:15 pm,sunny,9.39,7,0.62,4.3,1.5,19.1,16.9,13.6,2.6,0,1030.2,,,5,12,0.25
+10/3/2017,2017,Fall,Upstream,02URFA17,Yellow,TUE,12:15-1:40pm,sunny,8.7,5,0.6,4.2,1.2,20.1,15.5,13.7,7.7,0,1036.3,,,2,12,0.25
+10/5/2017,2017,Fall,Upstream,03URFA17,Orange,THU,1:30-2:40pm,partly cloudy,9.04,4,0.59,3.8,3.8,24.4,17.6,22.4,11.3,4.1,1008,,,5,14,0.25
+5/29/2018,2018,Summer,Downstream,01DRSU18,Lavendar,NA,9:22-11:30am,sunny,41.6,45,0.89,3,0.91,28,17.86,16.76,4.328,0,1015.24,,,2,10,0.25
+5/31/2018,2018,Summer,Upstream,01URSU18,Yellow,NA,10:14-11:30am,sunny,31.3,32,0.81,3,0.54,25.5,19.59,18.4,9.68,0.338,1017.4,,,2,10,0.25
+6/5/2018,2018,Summer,Downstream,02DRSU18,Blue,NA,9:24-11:30am,part clouds,79.9,79,1.07,3,0,16.8,15.14,15.17,5.283,1.813,1004.201,,,2,10,0.25
+6/6/2018,2018,Summer,Upstream,02URSU18,White,NA,9:47-11:30am,sunny (few clouds),52.7,54,0.936,3,0,19.4,14.29,15.28,4.41,0,1010.914,,,2,10,0.25
+6/7/2018,2018,Summer,Downstream,03DRSU18,Orange,NA,9:28-11:30am,cloudy,40.7,41,0.87,3,0,17.6,16.15,15.36,7.578149,2.30974,1020.158,,,2,10,0.25
+6/8/2018,2018,Summer,Upstream,03URSU18,Green,NA,9:45-11:30,sunny wispy clouds,36.6,36,0.84,3,0,22.2,16.57,22.18,2.96,0,1608.23,,,2,10,0.25
+9/17/2018,2018,Fall,Downstream,01DRFA18,Lavendar,MON,1:45-2:30 pm,mostly sunny,67.3,66,1,3,1,25.3,21.7,21.3,34,13,1017.73,1 Corydalus caught is DM but not preserved (it was HUGE),,5,10,0.25
+9/24/2018,2018,Fall,Upstream,01URFA18,Blue,MON,1:45-2:30pm,cloudy,96.6,102,1.17,2.314,2.955,13.19,14.15,14.38,4.129,0,1035.474,"1 worm that disappeared into a caddisfly tube, 1 snail caught but gone before identified or preserved",,5,10,0.25
+9/25/2018,2018,Fall,Downstream,02DRFA18,Green,TUE,8:30-10:15 am,raining,92.5,110,1.2,4.394,2.947,10.2,13.46,13.52,4.21,0,1031.768,,,1,10,0.25
+10/2/2018,2018,Fall,Upstream,02URFA18,Yellow,TUE,1:45-2:15pm,raining,208,220,1.59,6.733,64.1,14.11,14.59,14.69,6.405,0.213,1019.237,,Measured DO and water temp in lab because it was raining during sampling,5,10,0.25
+10/4/2018,2018,Fall,Upstream,03URFA18,Pink,THU,2-3pm,cloudy?,209,210,1.12,5.696,3.788,15.2,17.55,22.1,8,2.31,1008.23,,,5,11,0.25
+10/11/2018,2018,Fall,Downstream,03DRFA18,Orange,THU,8:20-9:30am,raining,106,110,0.32,5.696,3.488,15.2,18,21.64,7.578,2.31,1008.23,,,1,8,0.25
+5/28/2019,2019,Summer,Downstream,01DRSU19,Lavendar,NA,9:30am-12:30pm,cloudy/rainy,64.4,70,1.04,1.56,0,13.62,16.93,16.76,7.161,0,1013.213,,,2,10,0.25
+5/30/2019,2019,Summer,Upstream,01URSU19,Orange,NA,9:30am-12:30pm,cloudy,85.1,92,1.13,0.775,0,15.92,14.05,14.05,4.394,0,1009.296,,,2,10,0.25
+5/31/2019,2019,Summer,Upstream,02URSU19,Blue,NA,9:30am-12:00pm,mixed sun/cloudy,86.4,94,1.14,1.056,0,21.8,16.27,15.96,5.241,0,1007.889,,,2,10,0.25
+6/3/2019,2019,Summer,Downstream,02DRSU19,Green,NA,9:40am-12:00pm,Sunny,76.1,81,1.09,1.06,0,19.35,16.92,16.78,5.53,0,1010.487,,,2,10,0.25
+6/4/2019,2019,Summer,Downstream,03DRSU19,Yellow,NA,9:30am-12:00pm,sunny/cloudy,56.8,59,1,1.495,0,18.66,15.57,15.17,4.77,0,1018.092,,,2,10,0.25
+6/5/2019,2019,Summer,Upstream,03URSU19,Pink,NA,9:30am-12:00pm,sunny/cloudy,50.8,51,0.97,1.677,0,27.53,16.77,16.77,4.215,0,1009.761,,,2,10,0.25
+9/16/2019,2019,Fall,Upstream,01URFA19,Lavender,Monday,2-3pm,mostly sunny,9.31,,0.641,6.044,2.241,21.96,20.45,19.33,18.3,7.86,1016.204,,,5,10,0.25
+9/17/2019,2019,Fall,Downstream,01DRFA19,Pink,Tuesday,1:50-2:50pm,sunny,8.27,,0.63,5.965,2.798,21.16,20.02,19.05,14.59,4.397,1020,,,5,10,0.25
+9/23/2019,2019,Fall,Downstream,02DRFA19,Orange,Monday,1:30-2:10pm,mostly sunny,6.64,,0.597,5.067,2.157,31.07,20.45,18.24,0,5.709,1011.999,,,5,10,0.25
+9/24/2019,2019,Fall,Upstream,02URFA19,Green,Tuesday,1:50-2:30pm,mostly cloudy,7.53,,0.591,4.632,2.32,21.05,21.2,20.28,9.43,2.984,1006.915,,,5,10,0.25
+9/26/2019,2019,Fall,Downstream,03DRFA19,Blue,Thursday,1:40-3pm,cloudy/rainy,7.19,,0.619,2.588,5.531,21,18.42,17.14,18.74,11.538,1007.636,,,5,10,0.25
+10/3/2019,2019,Fall,Upstream,03URFA19,White,Thursday,1:55-2:30pm,cloudy,7.41,,0.614,6.275,2.492,11.4,16.135,16.56,11.295,6.1445,1021.87,,,5,10,0.25

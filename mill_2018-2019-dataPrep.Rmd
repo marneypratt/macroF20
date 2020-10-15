@@ -1,0 +1,548 @@
+---
+title: "Macro_Analysis_Bio131"
+author: "Marney Pratt"
+date: "10/14/2020"
+output: html_document
+---
+## Load required packages
+
+```{r load packages, echo=TRUE, message=FALSE, warning=FALSE}
+
+library(tidyverse) ## for readr, dplyr, ggplot
+library(lubridate) ## for dealing with dates and times
+library(rnoaa) ## For downloading data from NOAA)
+library(dataRetrieval) ## download USGS data
+library(zoo) ## for dealing with time series
+
+
+```
+
+## Background Data Preparation and Import
+
+The raw data were all entered into a shared Google Sheet as macroinvertebrates were collected and identified by various Smith College students and Dr. Marney Pratt, then a spreadsheet file was downloaded and quality checked by Marney Pratt. 
+
+See the metadata file "macro_metadata" (https://docs.google.com/document/d/e/2PACX-1vTgT_48p23wqN40yft9WeKVEI8Eh4IjyB94KdsY2IPQgIjAuL0WaC4WR2zbX9D6TZCbXx3X7eghPbbz/pub) for more details on sampling and definitions of all variables in all datasets
+
+### Import Sampling Data
+This file contains information from each sample date including weather, river conditions, and other sampling details
+
+```{r import sampling data}
+
+#import data file
+sampling <- read_csv("data/sampling.csv", 
+    col_types = cols(date = col_date(format = "%m/%d/%Y"), 
+        season = col_factor(levels = c("Spring", "Summer", "Fall")),
+        location = col_factor(levels = c("Downstream","Upstream")),
+        year = col_factor()))
+
+#calculate the total area sampled (q.area)
+sampling <- sampling %>% 
+  mutate(q.area = quadsTaken*quadSize)
+
+#Remove spring sampling
+sampling <- sampling %>% 
+  filter(season != "Spring")
+
+
+```
+
+
+### Import Quadrat Data
+This file contains information taken for each quadrat during sampling including 
+
+```{r import quadrat data}
+
+##Import the quadrat data file
+quadrats <- read_csv("data/quadrats.csv", 
+    col_types = cols(date = col_date(format = "%m/%d/%Y"), 
+        season = col_factor(levels = c("Spring", "Summer", "Fall")),
+        location = col_factor(levels = c("Downstream", "Upstream")),
+        year = col_factor(),
+        time = col_time(format = "%H:%M"),
+        microhabitat = col_factor(levels = 
+                    c("DSR", "DFR", "DM", "DSH", "DSP", 
+                      "USR", "UFR", "UM", "USH", "USU"))))
+
+
+```
+
+### Import Water Quality Data
+Thie file contains water quality information taken during sampling (Sampling = macros) as well as on separate days when just water quality was measured in both the Upstream and Downsream locations on the same day (Sampling = water)
+
+```{r import water quality data}
+
+#import the water quality data file
+waterQ <- read_csv("data/waterQ.csv",
+  col_types = cols(date = col_date(format = "%m/%d/%Y"), 
+                   location = col_factor(levels = c("Downstream","Upstream")), 
+                   season = col_factor(levels = c("Summer","Fall")), 
+                   year = col_factor(),
+                   microhabitat = col_factor(levels = 
+                    c("DSR", "DFR", "DM", "DSH", "DSP", 
+                      "USR", "UFR", "UM", "USH", "USU"))))
+
+```
+
+### Import Macroinvertebrate Data
+
+
+```{r Import raw macro data}
+
+#import updated raw.macro-updated.csv file
+raw.macro.updated <- read_csv("data/rawMacro.csv",
+          col_types = cols(date = col_date(format = "%m/%d/%Y"),sampleTime = 
+          col_factor(levels=c("Fall 2015",
+                              "Spring 2016", "Summer 2016", "Fall 2016",
+                              "Spring 2017", "Summer 2017", "Fall 2017", 
+                              "Summer 2018", "Fall 2018",
+                              "Summer 2019", "Fall 2019")),
+        location = col_factor(levels = c("Downstream","Upstream")), 
+        season = col_factor(levels = c("Spring", "Summer", "Fall")), 
+        year = col_factor(),
+        sampleID = col_factor(),
+        microhabitat = col_factor(levels = c("DSR", "DFR", "DM", "DSH", "DSP",
+                       "USR", "UFR", "UM", "USH", "USU")),
+        subfamily = col_character(),
+        tribe = col_character(),
+        notes = col_character()))
+
+###Remove crayfish
+macro.data <- raw.macro.updated %>% filter(organism_aggr!="crayfish")
+
+###Remove Spring data
+macro.data <- macro.data %>% 
+  filter(season !="Spring") 
+
+###Remove Piercers
+macro.data <- macro.data %>% 
+  filter(FFG != "prc")
+
+
+```
+
+
+
+
+```{r join macro waterQ and quadrat summer 2018}
+
+#filter waterQ
+waterQ.S18 <- waterQ %>% 
+  filter(year == "2018", sampling == "macros", season == "Summer") %>% 
+  dplyr::select(1:9, 16:18)
+
+
+#select certain columns of quadrat data
+quad.S18 <- quadrats %>% 
+  filter(year == "2018", season == "Summer") %>% 
+  dplyr::select(date, sampleID, microhabitat, time, quadrat, depth, 
+         per_sediment, per_rock, per_organic) %>% 
+  
+  group_by(sampleID, microhabitat) %>% 
+  dplyr::summarise(num_quads = n(), 
+            depth = mean(depth, na.rm = TRUE), 
+            per_sediment = mean(per_sediment, na.rm = TRUE),
+            per_rock = mean(per_rock, na.rm = TRUE), 
+            per_organic = mean(per_organic, na.rm = TRUE)) 
+
+abiotic.S18 <- left_join (quad.S18, waterQ.S18)
+  
+
+##Join macro data and waterQ
+macro.abio.S18 <- macro.data %>% 
+  filter(year == "2018", season == "Summer") %>% 
+  left_join(., abiotic.S18) 
+  
+```
+
+
+```{r join macro waterQ and quadrat fall 2018}
+
+#filter waterQ
+waterQ.F18 <- waterQ %>% 
+  filter(year == "2018", sampling == "macros", season == "Fall") %>% 
+  dplyr::select(1:10, 16:18, 21:22) %>% 
+  group_by(date, sampleID, sampling, sky, startTime, endTime) %>% 
+  dplyr::summarise(num_w = n(), 
+            pH = mean(pH, na.rm = TRUE),
+            wTemp = mean(wTemp, na.rm = TRUE), 
+            DO = mean(DO, na.rm = TRUE),
+            turb = mean(turb, na.rm = TRUE),
+            cond = mean(cond, na.rm = TRUE),
+            ) 
+
+#select certain columns of quadrat data
+quad.F18 <- quadrats %>% 
+  filter(year == "2018", season == "Fall") %>% 
+  dplyr::select(date, sampleID, microhabitat, time, quadrat, depth, 
+         per_sediment, per_rock, per_organic) %>% 
+  
+  group_by(date, sampleID) %>% 
+  dplyr::summarise(num_quads = n(), 
+            depth = mean(depth, na.rm = TRUE), 
+            per_sediment = mean(per_sediment, na.rm = TRUE),
+            per_rock = mean(per_rock, na.rm = TRUE), 
+            per_organic = mean(per_organic, na.rm = TRUE)) 
+
+abiotic.F18 <- left_join (quad.F18, waterQ.F18) 
+
+  
+
+##Join macro data and waterQ
+macro.abio.F18 <- macro.data %>% 
+  filter(year == "2018", season == "Fall") %>% 
+  left_join(., abiotic.F18) 
+  
+```
+
+
+```{r join macro waterQ and quadrat summer 2019}
+
+#filter waterQ
+waterQ.S19 <- waterQ %>% 
+  filter(year == "2019", sampling == "macros", season == "Summer") 
+
+
+#select certain columns of quadrat data
+quad.S19 <- quadrats %>% 
+  filter(year == "2019", season == "Summer") %>% 
+  dplyr::select(date, sampleID, microhabitat, time, quadrat, depth, 
+         per_sediment, per_rock, per_organic) 
+
+abiotic.S19 <- left_join (quad.S19, waterQ.S19) %>% 
+  dplyr::select(-notes)
+  
+
+##Join macro data and waterQ
+macro.abio.S19 <- macro.data %>% 
+  filter(year == "2019", season == "Summer") %>% 
+  left_join(., abiotic.S19) 
+  
+```
+
+
+```{r join macro waterQ and quadrat fall 2019}
+
+#filter waterQ
+waterQ.F19 <- waterQ %>% 
+  filter(year == "2019", sampling == "macros", season == "Fall") %>% 
+  dplyr::select(-depth, -light, -flow, -notes) %>% 
+  group_by(date, sampleID, sampling, sky, startTime, endTime, microhabitat) %>% 
+  dplyr::summarise(num_w = n(), 
+            lat = mean(lat, na.rm = TRUE),  
+            long = mean(long, na.rm = TRUE),  
+            alt = mean(alt, na.rm = TRUE),  
+            pH = mean(pH, na.rm = TRUE),
+            wTemp = mean(wTemp, na.rm = TRUE), 
+            DO = mean(DO, na.rm = TRUE),
+            turb = mean(turb, na.rm = TRUE),
+            cond = mean(cond, na.rm = TRUE),
+            aTemp = mean(aTemp, na.rm = TRUE)  
+            ) 
+
+
+#select certain columns of quadrat data
+quad.F19 <- quadrats %>% 
+  filter(year == "2019", season == "Fall") %>% 
+  dplyr::select(date, sampleID, microhabitat, time, quadrat, depth, 
+         per_sediment, per_rock, per_organic) %>% 
+  
+  group_by(sampleID, microhabitat) %>% 
+  dplyr::summarise(num_quads = n(), 
+            depth = mean(depth, na.rm = TRUE), 
+            per_sediment = mean(per_sediment, na.rm = TRUE),
+            per_rock = mean(per_rock, na.rm = TRUE), 
+            per_organic = mean(per_organic, na.rm = TRUE)) 
+
+abiotic.F19 <- left_join (quad.F19, waterQ.F19)
+  
+
+##Join macro data and waterQ
+macro.abio.F19 <- macro.data %>% 
+  filter(year == "2019", season == "Fall") %>% 
+  left_join(., abiotic.F19) 
+  
+```
+
+
+
+```{r bind all data together}
+
+
+macro.abio <- bind_rows(macro.abio.S19, macro.abio.F19,
+                        macro.abio.F18, macro.abio.S18) %>% 
+  dplyr::select(-BvA, -sampling, -aTemp, -num_quads, -num_w)
+
+
+```
+
+
+# Import Weather Data for Amherst NOAA station
+
+See this webpage for more information and to cite the data source:
+[Global Historical Climatology Network (GHCN)]
+(https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets/global-historical-climatology-network-ghcn)
+
+
+
+```{r Download Daily Values Amherst, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+##I used AMHERST: USC00190120
+## this imports all the data for the station specified
+daily.weather.a <- ghcnd(stationid = "USC00190120", refresh = TRUE)
+
+
+##this imports the specificed data for the specific date range
+daily.weather.tidy.a <- meteo_tidy_ghcnd(stationid = "USC00190120", keep_flags=FALSE, 
+                                       var = c("PRCP", "TMAX", "TMIN"),
+                                       date_min = "2018-01-01", 
+                                       date_max = "2019-12-31")
+
+
+daily.weather.tidy.a <- daily.weather.tidy.a %>%
+  mutate(month = month(date), 
+         year = year(date),
+         yday = yday(date)) %>%   
+  mutate (prcp.mm = prcp/10, 
+          tmax.C = tmax/10, 
+          tmin.C = tmin/10, 
+          tavg.C = ((tmin.C+tmax.C)/2))
+
+write.csv(daily.weather.tidy.a, "preppedData/daily.weather.csv", row.names = FALSE)
+
+
+
+```
+
+
+```{r import daily Amherst weather data made above}
+
+daily <- read_csv("preppedData/daily.weather.csv",
+                  col_types = cols(date = col_date(format = "%Y-%m-%d"))) %>% 
+  dplyr::select(-prcp, -tmax, -tmin)
+
+```
+
+
+```{r calculate total precipitation for 30 days before}
+
+sample.dates <- macro.abio %>% 
+  dplyr::select(date) %>% 
+  distinct() %>% 
+  mutate(month = month(date), 
+         year = year(date),
+         yday = yday(date)) 
+
+
+
+precip <- daily  %>%
+  group_by(year) %>% 
+  arrange(year, yday) %>% 
+  mutate(mon.precip = rollapply(data = prcp.mm,
+                                width = 30,
+                                FUN = sum,
+                                align = "right",
+                                fill = NA,
+                                na.rm = TRUE))
+
+precip.r <- precip %>% 
+  dplyr::select(year, yday, mon.precip)
+  
+
+sample.dates <- left_join(sample.dates, precip.r, by=c("year", "yday"))
+
+
+```
+
+
+```{r calculate ADD for 30 days before}
+
+
+ADD <- daily %>%
+  group_by(year) %>% 
+  arrange(year, yday) %>% 
+  mutate(mon.ADD = rollapply(data = tavg.C,
+                                width = 30,
+                                FUN = sum,
+                                align = "right",
+                                fill = NA,
+                                na.rm = TRUE)) 
+
+
+ADD.r <- ADD %>% 
+  dplyr::select(year, yday, mon.ADD)
+
+sample.weather <- left_join(sample.dates, ADD.r, by=c("year", "yday"))
+
+```
+
+```{r join macro and weather data}
+
+
+weather <- sample.weather %>% 
+  dplyr::select(date, mon.precip, mon.ADD)
+
+macro.abio <- left_join(macro.abio, weather, by="date") 
+
+```
+
+
+##Import USGS Discharge Data
+
+```{r USGS discharge data}
+
+#Use the dataRetrieval package to download USGS data
+
+#parameter codes
+  #00010 = "Wtemp", #water temp in C
+  #00045 = "Precip", #precipitation in inches
+  #00060 = "Flow", #discharge in cfs
+  #00065 = "GH", #gage height in feet
+  #00095 = "SpecCond",
+  #00300 = "DO",
+  #00400 = "pH",
+  #62611 = "GWL",
+  #63680 = "Turb",
+  #72019 = "WLBLS"
+
+#stat codes
+  #00001 = max
+  #00002 = min
+  #00003 = mean
+  #00006 = sum
+  #00007 = mode
+  #00008 = median
+
+
+#USGS 01171500 MILL RIVER AT NORTHAMPTON, MA
+avail.data <- whatNWISdata(siteNumber = '01171500')
+
+
+
+#check the information about the parameter
+parameterINFO <- readNWISpCode("00060")
+colnames(parameterINFO)
+parameterINFO$parameter_nm
+
+
+#Raw daily data:
+daily.disch <- readNWISdv(siteNumber = "01171500",
+                           parameterCd = "00060", 
+                           startDate = "2018-01-01", 
+                           endDate = "2019-12-31",
+                           statCd = "00003")
+
+attr(daily.disch, "siteInfo")
+
+
+
+daily.disch.df <- daily.disch %>% 
+  dplyr::select(Date, discharge = X_00060_00003) %>% 
+  mutate(year = year(Date),
+         month = month(Date),
+         yday = yday(Date))
+
+
+
+#Raw instantaneous data:
+raw.disch <- readNWISdata(sites = "01171500",
+                            service = "iv",
+                           parameterCd = "00060", 
+                           startDate = "2018-01-01", 
+                           endDate = "2019-12-31")
+
+
+daily.disch2 <- raw.disch %>% 
+  dplyr::select(dateTime, discharge = X_00060_00000) %>% 
+  mutate(date = date(dateTime),
+          year = year(dateTime),
+         month = month(dateTime),
+         yday = yday(dateTime)) %>% 
+  group_by(date, year, yday) %>% 
+  dplyr::summarize(mean.discharge = mean(discharge, na.rm = TRUE),
+                   median.discharge = median(discharge, na.rm = TRUE))
+
+
+```
+
+
+```{r USGS gage height data}
+
+#Use the dataRetrieval package to download USGS data
+
+#parameter codes
+  #00010 = "Wtemp", #water temp in C
+  #00045 = "Precip", #precipitation in inches
+  #00060 = "Flow", #discharge in cfs
+  #00065 = "GH", #gage height in feet
+  #00095 = "SpecCond",
+  #00300 = "DO",
+  #00400 = "pH",
+  #62611 = "GWL",
+  #63680 = "Turb",
+  #72019 = "WLBLS"
+
+
+
+#check the information about the parameter
+parameterINFO <- readNWISpCode("00065")
+colnames(parameterINFO)
+parameterINFO$parameter_nm
+
+#Raw instantaneous data:
+raw.gh <- readNWISdata(sites = "01171500",
+                            service = "iv",
+                           parameterCd = "00065", 
+                           startDate = "2018-01-01", 
+                           endDate = "2019-12-31")
+
+
+daily.gh <- raw.gh %>% 
+  dplyr::select(dateTime, gh = X_00065_00000) %>% 
+  mutate(date = date(dateTime),
+          year = year(dateTime),
+         month = month(dateTime),
+         yday = yday(dateTime)) %>% 
+  group_by(date, year, yday) %>% 
+  dplyr::summarize(mean.gh = mean(gh, na.rm = TRUE),
+                   median.gh = median(gh, na.rm = TRUE))
+
+
+
+```
+
+
+```{r join discharge and gage height data}
+
+#note discharge is in cfs and gage height is in feet
+
+usgs.df <- daily.disch2 %>% 
+  dplyr::select(date, mean.discharge, median.discharge) %>% 
+  left_join(., daily.gh %>% 
+              dplyr::select(date, mean.gh, median.gh)) 
+            
+
+write.csv(usgs.df, "preppedData/mill.usgs.csv", 
+          row.names = FALSE)
+
+
+```
+
+```{r join macro and USGS data}
+
+#make year a factor so that the data frames will join
+usgs.df$year <- as.factor(usgs.df$year)
+
+#join the macro and USGS data together
+macro.abio <- left_join(macro.abio, usgs.df)
+
+
+# save the fully merged and prepared data file
+# For the metadata describing everything in the mill.macro.csv file see mill_macro_metadata.txt text file included in the Project folder 
+
+write.csv(macro.abio, "preppedData/mill.macro.csv", 
+          row.names = FALSE)
+
+```
+
