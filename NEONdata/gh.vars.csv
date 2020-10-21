@@ -1,0 +1,40 @@
+"table","fieldName","description","dataType","units","downloadPkg","pubFormat","primaryKey","categoricalCodeName"
+"gag_fieldData","uid","Unique ID within NEON database; an identifier for the record","string",NA,"basic",NA,NA,NA
+"gag_fieldData","domainID","Unique identifier of the NEON domain","string",NA,"basic",NA,NA,NA
+"gag_fieldData","siteID","NEON site code","string",NA,"basic",NA,NA,NA
+"gag_fieldData","locationID","Identifier for location where sample was collected","string",NA,"basic",NA,NA,NA
+"gag_fieldData","decimalLatitude","The geographic latitude (in decimal degrees, WGS84) of the geographic center of the reference area","real","decimalDegree","basic",NA,NA,NA
+"gag_fieldData","decimalLongitude","The geographic longitude (in decimal degrees, WGS84) of the geographic center of the reference area","real","decimalDegree","basic",NA,NA,NA
+"gag_fieldData","geodeticDatum","Model used to measure horizontal position on the earth","string",NA,"basic",NA,NA,NA
+"gag_fieldData","coordinateUncertainty","The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Zero is not a valid value for this term","real","meter","basic",NA,NA,NA
+"gag_fieldData","elevation","Elevation (in meters) above sea level","real","meter","basic",NA,NA,NA
+"gag_fieldData","elevationUncertainty","Uncertainty in elevation values (in meters)","real","meter","basic",NA,NA,NA
+"gag_fieldData","collectDate","Date of the collection event","dateTime",NA,"basic",NA,NA,NA
+"gag_fieldData","eventID","An identifier for the set of information associated with the event, which includes information about the place and time of the event","string",NA,"basic",NA,NA,NA
+"gag_fieldData","initialStageHeight","Initial stage (m)","real","meter","basic",NA,NA,NA
+"gag_fieldData","endStageHeight","End stage (m)","real","meter","basic",NA,NA,NA
+"gag_fieldData","samplingImpractical","Samples and/or measurements were not collected due to the indicated circumstance","string",NA,"basic",NA,NA,NA
+"gag_fieldData","gaugeTempHydroCond","Type of temporary hydrologic condition present at the staff gauge","string",NA,"basic",NA,NA,NA
+"gag_fieldData","gaugeTempHydroCondLoc","Location of the temporary hydrologic condition present at the staff gauge","string",NA,"basic",NA,NA,NA
+"gag_fieldData","dscTempHydroCond","Type of temporary hydrologic condition present at the discharge transect","string",NA,"basic",NA,NA,NA
+"gag_fieldData","dscTempHydroCondLoc","Location of the temporary hydrologic condition present at the discharge transect","string",NA,"basic",NA,NA,NA
+"gag_fieldData","icePresent","Indication of the presence of ice","string",NA,"basic",NA,NA,NA
+"gag_fieldData","beaufortScaleWind","Qualitative description of wind conditions based on the beaufort scale","string",NA,"basic",NA,NA,NA
+"gag_fieldData","nominalCloudCover","Sky Condition, estimate of cloud cover percent","string",NA,"basic",NA,NA,NA
+"gag_fieldData","precipDescrip","Qualitative description of precipitation levels","string",NA,"basic",NA,NA,NA
+"gag_fieldData","previousRain","Previous Rain event within 48 hours (Yes/No)","string",NA,"basic",NA,NA,NA
+"gag_fieldData","waterClarityDescrip","Qualitative description of water clarity","string",NA,"basic",NA,NA,NA
+"gag_fieldData","waterColorDescrip","Qualitative description of water color and clarity","string",NA,"basic",NA,NA,NA
+"gag_fieldData","riparianPhenologyDescrip","Qualitative description of riparian phenology status","string",NA,"basic",NA,NA,NA
+"gag_fieldData","algaePresence","Presence of algae","string",NA,"basic",NA,NA,NA
+"gag_fieldData","macrophytePresence","Presence of macrophytes","string",NA,"basic",NA,NA,NA
+"gag_fieldData","leafLitterPresence","Presence of leaf litter","string",NA,"basic",NA,NA,NA
+"gag_fieldData","pollenPresence","Presence of pollen as film, foam, or deposit","string",NA,"basic",NA,NA,NA
+"gag_fieldData","woodyDebrisPresence","Presence of woody debris","string",NA,"basic",NA,NA,NA
+"gag_fieldData","oilsPresence","Presence of oils","string",NA,"basic",NA,NA,NA
+"gag_fieldData","trashPresent","Presence of trash","string",NA,"basic",NA,NA,NA
+"gag_fieldData","remarks","Technician notes; free text comments accompanying the record","string",NA,"basic",NA,NA,NA
+"gag_fieldData","collectedBy","An identifier for the technician who collected the sample or specimen","string",NA,"basic",NA,NA,NA
+"gag_fieldData","recordedBy","An identifier for the technician who recorded the data","string",NA,"basic",NA,NA,NA
+"gag_fieldData","dataQF","Data quality flag","string",NA,"basic",NA,NA,NA
+"gag_fieldData","publicationDate","Date of data publication on the NEON data portal","dateTime",NA,"appended by stackByTable",NA,"N",NA
