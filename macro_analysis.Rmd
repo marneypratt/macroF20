@@ -1,0 +1,61 @@
+---
+title: "Macroinvertebrate Data Analysis"
+author: "Your Name Here"
+date: "10/21/2020"
+output: html_document
+---
+
+# Load packages
+
+
+```{r load packages, echo=TRUE, message=FALSE, warning=FALSE}
+
+library(tidyverse) ## for readr, dplyr, ggplot
+
+```
+
+
+# Import Prepared Data
+
+There are several files in the "preppedData" folder.  Below is the code to import each file.  Delete any code chunks you don't need (only import the data you actually need)
+
+
+## Mill River Data only
+
+```{r Mill only}
+
+# this chunk will import the data for the Mill River only
+# this file includes all the Mill River data including all water quality and weather data
+# see the file called mill_macro_metadata.txt for details about all these variables and methods
+
+mill.macro <- read_csv("preppedData/mill.macro.csv",
+          col_types = cols(date = col_date(format = "%m/%d/%Y"),
+                           sampleTime = col_factor(levels=c("Summer 2018", 
+                                                            "Fall 2018",
+                                                            "Summer 2019", 
+                                                            "Fall 2019")),
+                          location = col_factor(levels = c("Downstream",
+                                                           "Upstream")), 
+                          season = col_factor(levels = c("Summer", 
+                                                         "Fall")), 
+                          year = col_factor(),
+                          microhabitat = col_factor(levels = c("DSR", 
+                                                               "DFR", 
+                                                               "DM", 
+                                                               "DSH", 
+                                                               "DSP",
+                                                               "USR", 
+                                                               "UFR", 
+                                                               "UM", 
+                                                               "USH", 
+                                                               "USU"))))
+
+
+
+
+```
+
+
+
+
+
