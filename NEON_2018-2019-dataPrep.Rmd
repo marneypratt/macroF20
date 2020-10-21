@@ -5,15 +5,20 @@ date: "10/15/2020"
 output: html_notebook
 ---
 
+# Load Packages
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 
 # load libraries 
-library(tidyverse)
-library(neonUtilities)
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(lubridate) #for dealing with dates and times
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+library(zoo) ## for dealing with time series
 
 ```
 
+# Downloading NEON Macroinvertebrate Data
 
 ```{r download all NEON macroinvertebrate data, eval=FALSE, include=FALSE}
 
@@ -86,7 +91,9 @@ write.csv(NEON_fieldData, "NEONdata/NEON_fieldData.csv")
 
 
 
-```{r  save the macroinvertebrate data for 2018-2019}
+```{r  save the macroinvertebrate data for 2018-2019, eval=FALSE, include=FALSE}
+
+#Run this code to save the wadeable stream macro data for 2018-2019, then change the options above so this code chunk isn't run again
 
 
 # Make the observation table.
@@ -142,5 +149,589 @@ write.csv(NEON_fieldData, "NEONdata/neon.macro.csv",
 ```
 
 
+## Import all NEON Macroinvertebrate Data for all Wadeable Streams
 
+```{r Import prepped neon.macro.csv file}
+
+
+neon.macro <- read_csv("NEONdata/neon.macro.csv")
+
+```
+
+
+
+
+# Download Aquatic Instrument Data
+
+This webpage is helpful for downloading Aquatic Instrument System Data:
+[Download and work with NEON Aquatic Instrument Data](https://www.neonscience.org/explore-neon-ais-data)
+
+
+### product IDs
+  water quality: DP1.20288.001
+  air temperature: DP1.00002.001
+  relative humidity: DP1.00098.001
+  PAR at water surface:  DP1.20042.001
+  Precipitation: DP1.00006.001
+  Gage height: DP1.20267.001
+
+```{r download NEON water quality data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Water quality Data Product ID
+my_dpid <- 'DP1.20288.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+waq <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = "HOPB",
+  startdate = "2018-01",
+  enddate = "2019-12",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+waq %>% list2env(.GlobalEnv)
+
+write.csv(variables_20288, "NEONdata/waq.vars.csv", 
+          row.names = FALSE)
+
+write.csv(readme_20288, "NEONdata/waq.readme.csv", 
+          row.names = FALSE)
+
+
+waq_sum <- waq_instantaneous %>%
+                dplyr::select(1:6,
+                              specificConductance,
+                              dissolvedOxygen,
+                              dissolvedOxygenSaturation,
+                              pH,
+                              chlorophyll,
+                              turbidity,
+                              fDOM) %>%
+                dplyr::mutate(date = date(startDateTime)) %>%
+                group_by(domainID, siteID, horizontalPosition, date) %>%
+                dplyr::summarize(
+                      mean.SpCond = mean(specificConductance, na.rm = TRUE),
+                      median.SpCond = median(specificConductance, na.rm = TRUE),
+                      mean.DO = mean(dissolvedOxygen, na.rm = TRUE),
+                      median.DO = median(dissolvedOxygen, na.rm = TRUE),
+                      mean.DOsat = mean(dissolvedOxygenSaturation, na.rm = TRUE),
+                      median.DOsat = median(dissolvedOxygenSaturation, na.rm = TRUE),
+                      mean.pH = mean(pH, na.rm = TRUE),
+                      median.pH = median(pH, na.rm = TRUE),
+                      mean.chl = mean(chlorophyll, na.rm = TRUE),
+                      median.chl = median(chlorophyll, na.rm = TRUE),
+                      mean.turb = mean(turbidity, na.rm = TRUE),
+                      median.turb = median(turbidity, na.rm = TRUE),
+                      mean.fDOM = mean(fDOM, na.rm = TRUE),
+                      median.fDOM = median(fDOM, na.rm = TRUE)
+                                  )
+
+
+write.csv(waq_sum, "NEONdata/HOPB/HOPB.waq.csv", 
+          row.names = FALSE)
+
+```
+
+
+
+```{r download NEON precipitation data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+
+# Precipitation Data Product ID
+my_dpid <- 'DP1.00006.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+precip <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  # many aquatic sites don't have precipitation sensors,
+  # pick the nearest terrestrial site
+  site = "HARV",
+  startdate = "2018-01",
+  enddate = "2019-12",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+precip %>% list2env(.GlobalEnv)
+
+
+write.csv(variables_00006, "NEONdata/precip.vars.csv",
+row.names = FALSE)
+
+write.csv(readme_00006, "NEONdata/precip.readme.csv",
+row.names = FALSE)
+
+
+
+
+
+write.csv(PRIPRE_30min, "NEONdata/HOPB/HOPB.precip.csv",
+row.names = FALSE)
+
+
+```
+
+```{r download NEON air temperature data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+
+# Air Temp Data Product ID
+my_dpid <- 'DP1.00002.001'
+
+# get all tables for these sites from the NEON API
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+aTemp <- neonUtilities::loadByProduct(
+          dpID = my_dpid,
+          site = "HOPB",
+          startdate = "2018-01",
+          enddate = "2019-12",
+          package = 'expanded',
+          check.size = FALSE,
+          token=Sys.getenv("NEON_TOKEN"))
+
+
+# extract items from list and put in R env.
+aTemp %>% list2env(.GlobalEnv)
+
+
+write.csv(variables_00002, "NEONdata/aTemp.vars.csv",
+row.names = FALSE)
+
+write.csv(readme_00002, "NEONdata/aTemp.readme.csv",
+row.names = FALSE)
+
+
+
+#calculate the average air temp for each date
+aTemp_daily <- SAAT_1min %>%
+                dplyr::select(1:6,
+                    tempSingleMean) %>%
+                    dplyr::mutate(date = date(startDateTime),
+                    year = year(startDateTime),
+                    yday = yday(startDateTime)) %>%
+                    group_by(domainID, siteID, horizontalPosition, date, year, yday) %>%
+                    dplyr::summarize(
+                    mean.aTemp = mean(tempSingleMean, na.rm = TRUE)
+                    )
+
+# calculate the aggregated degree days (ADD)
+# by summing the ave temp for 30 days before each date
+ADD <- aTemp_daily %>%
+                group_by(year) %>%
+                arrange(year, yday) %>%
+                mutate(mon.ADD = rollapply(data = mean.aTemp,
+                width = 30,
+                FUN = sum,
+                align = "right",
+                fill = NA,
+                na.rm = TRUE))
+
+
+```
+
+
+```{r}
+
+
+write.csv(PRIPRE_30min, "NEONdata/HOPB/HOPB.precip.csv",
+row.names = FALSE)
+write.csv(variables_00006, "NEONdata/precip.vars.csv",
+row.names = FALSE)
+write.csv(readme_00006, "NEONdata/precip.readme.csv",
+row.names = FALSE)
+my_dpid <- 'DP1.20267.001'
+# get all tables for these sites from the NEON API
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+gh <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+# many aquatic sites don't have precipitation sensors,
+# pick the nearest terrestrial site
+site = "HOPB",
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+gh %>% list2env(.GlobalEnv)
+View(gh)
+View(validation_20267)
+View(gh)
+View(variables_20267)
+View(gag_fieldData)
+write.csv(gag_fieldData, "NEONdata/HOPB/HOPB.gh.csv",
+row.names = FALSE)
+write.csv(variables_20267, "NEONdata/gh.vars.csv",
+row.names = FALSE)
+write.csv(readme_20267, "NEONdata/gh.readme.csv",
+row.names = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+# load libraries
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+###I ran this code once and saved the output, then I turned off running this chunk
+# Macroinvert Data Product ID
+my_dpid <- 'DP1.20120.001'
+# get all tables for these sites from the NEON API
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+all_tabs_inv <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+site = 'all',
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+# extract items from list and put in R env.
+all_tabs_inv %>% list2env(.GlobalEnv)
+#save readme tibble as csv file
+write.csv(readme_20120, "NEONdata/NEON_metadata.csv")
+#save file with code definitions
+write.csv(categoricalCodes_20120, "NEONdata/categoricalCodes.csv")
+#Run this code to find the wadeable stream sites for 2018-2019, then change the options above so this code chunk isn't run again
+# extract year from date, add it as a new column
+# filter for streams in 2018-2019
+inv_fieldData <- inv_fieldData %>%
+mutate(
+year = collectDate %>%
+lubridate::as_date() %>%
+lubridate::year(),
+month = collectDate %>%
+lubridate::as_date() %>%
+lubridate::month()) %>%
+dplyr::filter(aquaticSiteType == "stream",
+year == 2018 |
+year == 2019)
+# extract location data into a separate table
+NEON_fieldData <- inv_fieldData %>%
+# keep only the columns listed below
+select(siteID,
+domainID,
+namedLocation,
+decimalLatitude,
+decimalLongitude,
+elevation) %>%
+# keep rows with unique combinations of values,
+# i.e., no duplicate records
+distinct()
+#Save this data file
+write.csv(NEON_fieldData, "NEONdata/NEON_fieldData.csv", row.names = FALSE)
+# Make the observation table.
+# start with inv_taxonomyProcessed
+neon.macro <- inv_taxonomyProcessed %>%
+# select a subset of columns from
+# inv_taxonomyProcessed
+select(sampleID,
+domainID,
+siteID,
+collectDate,
+estimatedTotalCount,
+acceptedTaxonID,
+phylum, subphylum, class, subclass, order, family, subfamily, tribe, genus,
+scientificName,
+taxonRank) %>%
+# Join the columns selected above with two
+# columns from inv_fieldData (the two columns
+# are sampleID and benthicArea)
+left_join(inv_fieldData %>%
+select(sampleID, eventID, year,
+habitatType, samplerType,
+benthicArea)) %>%
+# some new columns called 'variable_name',
+# 'value', and 'unit', and assign values for
+# all rows in the table.
+# variable_name and unit are both assigned the
+# same text strint for all rows.
+mutate(inv_dens = estimatedTotalCount / benthicArea,
+inv_dens_unit = 'count per square meter') %>%
+#filter for years
+dplyr::filter(year == 2018 | year == 2019)
+#import master taxa list with tolerance values and FFGs
+neon.mill.taxa <- read_csv("data/neon.mill.taxa.csv")
+#merge NEON macro data with master taxa data
+neon.mill.taxa2 <- neon.mill.taxa %>%
+dplyr::select(acceptedTaxonID, organism_aggr, tolerance, FFG, FFG2)
+neon.macro <- left_join(neon.macro, neon.mill.taxa2, by="acceptedTaxonID")
+write.csv(neon.macro, "NEONdata/neon.macro.csv",
+row.names = FALSE)
+neon.macro <- readr("NEONdata/neon.macro.csv")
+knitr::opts_chunk$set(echo = TRUE)
+# load libraries
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+neon.macro <- read_csv("NEONdata/neon.macro.csv")
+View(neon.macro)
+sample.dates <- neon.macro %>%
+filter(siteID == "HOPB") %>%
+dplyr::select(collectDate) %>%
+distinct()
+View(sample.dates)
+View(gag_fieldData)
+#determine sample dates for a particular site of interest
+sample.dates.all <- neon.macro %>%
+dplyr::select(siteID, collectDate) %>%
+distinct()
+View(sample.dates.all)
+knitr::opts_chunk$set(echo = TRUE)
+# load libraries
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+knitr::opts_chunk$set(echo = TRUE)
+# load libraries
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+neon.macro <- read_csv("NEONdata/neon.macro.csv")
+HOPB.waq <- read_csv("NEONdata/HOPB/HOPB.waq.csv")
+i
+HOPB.waq <- read_csv("NEONdata/HOPB/HOPB.waq.csv")
+View(HOPB.waq)
+my_dpid <- 'DP1.20288.001'
+# get all tables for these sites from the NEON API
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+waq <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+site = "HOPB",
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+# extract items from list and put in R env.
+waq %>% list2env(.GlobalEnv)
+# save list of variables
+write.csv(variables_20288, "NEONdata/waq.vars.csv",
+row.names = FALSE)
+# save readme file
+write.csv(readme_20288, "NEONdata/waq.readme.csv",
+row.names = FALSE)
+View(waq_instantaneous)
+View(variables_20288)
+waq_instantaneous <- waq_instantaneous %>%
+dplyr::select(1:6,
+specificConductance, specificConductanceExpUncert,
+dissolvedOxygen, dissolvedOxygenExpUncert,
+dissolvedOxygenSaturation, dissolvedOxygenSaturationExpUncert,
+pH, pHExpUncert,
+chlorophyll, chlorophyllExpUncert,
+turbidity, turbidityExpUncert,
+fDOM, rawCalibratedfDOM, fDOMExpUncert) %>%
+mutate(date = date(startDateTime),
+month = month(startDateTime),
+year = year(startDateTime),
+yday = yday(startDateTime))
+waq_instantaneous <- waq_instantaneous %>%
+dplyr::select(1:6,
+specificConductance, specificConductanceExpUncert,
+dissolvedOxygen, dissolvedOxygenExpUncert,
+dissolvedOxygenSaturation, dissolvedOxygenSatExpUncert,
+pH, pHExpUncert,
+chlorophyll, chlorophyllExpUncert,
+turbidity, turbidityExpUncert,
+fDOM, rawCalibratedfDOM, fDOMExpUncert) %>%
+mutate(date = date(startDateTime),
+month = month(startDateTime),
+year = year(startDateTime),
+yday = yday(startDateTime))
+waq_instantaneous <- waq_instantaneous %>%
+dplyr::select(1:6,
+specificConductance, specificConductanceExpUncert,
+dissolvedOxygen, dissolvedOxygenExpUncert,
+dissolvedOxygenSaturation, dissolvedOxygenSatExpUncert,
+pH, pHExpUncert,
+chlorophyll, chlorophyllExpUncert,
+turbidity, turbidityExpUncert,
+fDOM, rawCalibratedfDOM, fDOMExpUncert) %>%
+dplyr::mutate(date = ymd(startDateTime),
+month = month(startDateTime),
+year = year(startDateTime),
+yday = yday(startDateTime))
+knitr::opts_chunk$set(echo = TRUE)
+# load libraries
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(lubridate) #for dealing with dates and times
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+waq_instantaneous <- waq_instantaneous %>%
+dplyr::select(1:6,
+specificConductance, specificConductanceExpUncert,
+dissolvedOxygen, dissolvedOxygenExpUncert,
+dissolvedOxygenSaturation, dissolvedOxygenSatExpUncert,
+pH, pHExpUncert,
+chlorophyll, chlorophyllExpUncert,
+turbidity, turbidityExpUncert,
+fDOM, rawCalibratedfDOM, fDOMExpUncert) %>%
+dplyr::mutate(date = date(startDateTime),
+month = month(startDateTime),
+year = year(startDateTime),
+yday = yday(startDateTime))
+View(waq_instantaneous)
+waq <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+site = "HOPB",
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+# extract items from list and put in R env.
+waq %>% list2env(.GlobalEnv)
+waq_sum <- waq_instantaneous %>%
+dplyr::select(1:6,
+specificConductance,
+dissolvedOxygen,
+dissolvedOxygenSaturation,
+pH,
+chlorophyll,
+turbidity,
+fDOM) %>%
+dplyr::mutate(date = date(startDateTime)) %>%
+group_by(domainID, siteID, horizontalPosition, date) %>%
+dplyr::summarize(
+mean.SpCond = mean(specificConductance, na.rm = TRUE),
+median.SpCond = median(specificConductance, na.rm = TRUE),
+mean.DO = mean(dissolvedOxygen, na.rm = TRUE),
+median.DO = median(dissolvedOxygen, na.rm = TRUE),
+mean.DOsat = mean(dissolvedOxygenSaturation, na.rm = TRUE),
+median.DOsat = median(dissolvedOxygenSaturation, na.rm = TRUE),
+mean.pH = mean(pH, na.rm = TRUE),
+median.pH = median(pH, na.rm = TRUE),
+mean.chl = mean(chlorophyll, na.rm = TRUE),
+median.chl = median(chlorophyll, na.rm = TRUE),
+mean.turb = mean(turbidity, na.rm = TRUE),
+median.turb = median(turbidity, na.rm = TRUE),
+mean.fDOM = mean(fDOM, na.rm = TRUE),
+median.fDOM = median(fDOM, na.rm = TRUE)
+)
+View(waq_sum)
+write.csv(waq_sum, "NEONdata/HOPB/HOPB.waq.csv",
+row.names = FALSE)
+wTemp <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+site = "HOPB",
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+# extract items from list and put in R env.
+wTemp %>% list2env(.GlobalEnv)
+my_dpid <- 'DP1.00002.001'
+# get all tables for these sites from the NEON API
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+wTemp <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+site = "HOPB",
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+# extract items from list and put in R env.
+wTemp %>% list2env(.GlobalEnv)
+View(SAAT_30min)
+SAAT_sum <- SAAT_30min %>%
+dplyr::select(1:6,
+tempSingleMean) %>%
+dplyr::mutate(date = date(startDateTime)) %>%
+group_by(domainID, siteID, horizontalPosition, date) %>%
+dplyr::summarize(
+mean.wTemp = mean(tempSingleMean, na.rm = TRUE),
+median.wTemp = median(tempSingleMean, na.rm = TRUE)
+)
+View(SAAT_sum)
+###I ran this code once and saved the output, then I turned off running this chunk
+# product IDs
+# water quality: DP1.20288.001
+# air temperature: DP1.00002.001
+# relative humidity: DP1.00098.001
+# PAR at water surface:  DP1.20042.001
+# Precipitation: DP1.00006.001
+# Gage height: DP1.20267.001
+# Macroinvert Data Product ID
+my_dpid <- 'DP1.00002.001'
+# get all tables for these sites from the NEON API
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+aTemp <- neonUtilities::loadByProduct(
+dpID = my_dpid,
+site = "HOPB",
+startdate = "2018-01",
+enddate = "2019-12",
+package = 'expanded',
+check.size = FALSE,
+token=Sys.getenv("NEON_TOKEN"))
+# extract items from list and put in R env.
+aTemp %>% list2env(.GlobalEnv)
+write.csv(variables_00002, "NEONdata/aTemp.vars.csv",
+row.names = FALSE)
+write.csv(readme_00002, "NEONdata/aTemp.readme.csv",
+row.names = FALSE)
+aTemp_daily <- SAAT_1min %>%
+dplyr::select(1:6,
+tempSingleMean) %>%
+dplyr::mutate(date = date(startDateTime),
+year = year(startDateTime),
+yday = yday(startDateTime)) %>%
+group_by(domainID, siteID, horizontalPosition, date, year, yday) %>%
+dplyr::summarize(
+mean.aTemp = mean(tempSingleMean, na.rm = TRUE)
+)
+ADD <- aTemp_daily %>%
+group_by(year) %>%
+arrange(year, yday) %>%
+mutate(mon.ADD = rollapply(data = mean.aTemp,
+width = 30,
+FUN = sum,
+align = "right",
+fill = NA,
+na.rm = TRUE))
+knitr::opts_chunk$set(echo = TRUE)
+# load libraries
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(lubridate) #for dealing with dates and times
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+library(zoo) ## for dealing with time series
+View(aTemp_daily)
+aTemp_daily <- SAAT_1min %>%
+dplyr::select(1:6,
+tempSingleMean) %>%
+dplyr::mutate(date = date(startDateTime),
+year = year(startDateTime),
+yday = yday(startDateTime)) %>%
+group_by(domainID, siteID, date, year, yday) %>%
+dplyr::summarize(
+mean.aTemp = mean(tempSingleMean, na.rm = TRUE)
+)
+View(aTemp_daily)
+ADD <- aTemp_daily %>%
+group_by(year) %>%
+arrange(year, yday) %>%
+mutate(mon.ADD = rollapply(data = mean.aTemp,
+width = 30,
+FUN = sum,
+align = "right",
+fill = NA,
+na.rm = TRUE))
+View(ADD)
+write.csv(ADD, "NEONdata/HOPB/HOPB.ADD.csv",
+row.names = FALSE)
+
+
+
+```
 
