@@ -247,6 +247,55 @@ write.csv(waq_sum, "NEONdata/HOPB/HOPB.waq.csv",
 ```
 
 
+## Download Temperature (PRT) in Surface Water Data Product  
+
+See the NEON website for more information on the [Temperature (PRT) in Surface Water Data Product](https://data.neonscience.org/data-products/DP1.20053.001)  
+
+
+```{r download NEON water temp data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Water temperature Data Product ID
+my_dpid <- 'DP1.20053.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+wTemp <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = "HOPB",
+  startdate = "2018-01",
+  enddate = "2019-12",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+wTemp %>% list2env(.GlobalEnv)
+
+write.csv(variables_20053, "NEONdata/wTemp.vars.csv", 
+          row.names = FALSE)
+
+write.csv(readme_20053, "NEONdata/wTemp.readme.csv", 
+          row.names = FALSE)
+
+
+wTemp_sum <- TSW_5min %>%
+                dplyr::select(1:7) %>%
+                dplyr::mutate(date = date(startDateTime)) %>%
+                group_by(domainID, siteID, horizontalPosition, date) %>%
+                dplyr::summarize(
+                      mean.wTemp = mean(surfWaterTempMean, na.rm = TRUE),
+                      median.wTemp = median(surfWaterTempMean, na.rm = TRUE),
+                                  )
+
+write.csv(wTemp_sum, "NEONdata/HOPB/HOPB.wTemp.csv", 
+          row.names = FALSE)
+
+```
+
+
 ## Download the Precipitation Data Product  
 
 See the NEON website for more information on the [Precipitation Data Product](https://data.neonscience.org/data-products/DP1.00006.001)  
@@ -286,9 +335,36 @@ row.names = FALSE)
 
 
 
+#calculate the average air temp for each date
+precip_daily <- PRIPRE_30min %>%
+                dplyr::select(1:6,
+                    priPrecipBulk) %>%
+                    dplyr::mutate(date = date(startDateTime),
+                    year = year(startDateTime),
+                    yday = yday(startDateTime)) %>%
+                    group_by(domainID, siteID, date, year, yday) %>%
+                    dplyr::summarize(
+                    daily.precip = sum(priPrecipBulk, na.rm = TRUE)
+                    )
+
+# calculate the total monthly precipitation 
+# by summing the daily precipitation for 30 days before each date
+# note that I relabeled the siteID from HARV to HOPB
+# the HARV site was the closest site where precipitation was measured
+precip <- precip_daily %>%
+                group_by(year) %>%
+                arrange(year, yday) %>%
+                mutate(mon.precip = rollapply(data = daily.precip,
+                width = 30,
+                FUN = sum,
+                align = "right",
+                fill = NA,
+                na.rm = TRUE)) %>% 
+          mutate(siteID = "HOPB")
 
 
-write.csv(PRIPRE_30min, "NEONdata/HOPB/HOPB.precip.csv",
+
+write.csv(precip, "NEONdata/HOPB/HOPB.precip.csv",
 row.names = FALSE)
 
 
@@ -338,26 +414,29 @@ row.names = FALSE)
 aTemp_daily <- SAAT_1min %>%
                 dplyr::select(1:6,
                     tempSingleMean) %>%
-                    dplyr::mutate(date = date(startDateTime),
+                dplyr::mutate(date = date(startDateTime),
                     year = year(startDateTime),
                     yday = yday(startDateTime)) %>%
-                    group_by(domainID, siteID, horizontalPosition, date, year, yday) %>%
-                    dplyr::summarize(
-                    mean.aTemp = mean(tempSingleMean, na.rm = TRUE)
-                    )
+                    group_by(domainID, siteID, date, year, yday) %>%
+                dplyr::summarize(mean.aTemp = mean(tempSingleMean, na.rm = TRUE)) %>% 
+                mutate(pos.aTemp = replace(mean.aTemp, which(mean.aTemp<0), 0))
+                
 
 # calculate the aggregated degree days (ADD)
 # by summing the ave temp for 30 days before each date
 ADD <- aTemp_daily %>%
                 group_by(year) %>%
                 arrange(year, yday) %>%
-                mutate(mon.ADD = rollapply(data = mean.aTemp,
+                mutate(mon.ADD = rollapply(data = pos.aTemp,
                 width = 30,
                 FUN = sum,
                 align = "right",
                 fill = NA,
-                na.rm = TRUE))
+                na.rm = FALSE))
 
+
+write.csv(ADD, "NEONdata/HOPB/HOPB.ADD.csv",
+row.names = FALSE)
 
 ```
 
@@ -367,12 +446,59 @@ ADD <- aTemp_daily %>%
 
 After running the above chunks once to download all the environmental variables, then just import all the resulting data files running the code below  
 
-```{r import environmental variables}
+```{r import and join environmental variables}
 
 #import water quality data
 HOPB.waq <- read_csv("NEONdata/HOPB/HOPB.waq.csv")
 
 
+#import surface water temperature data
+HOPB.wTemp <- read_csv("NEONdata/HOPB/HOPB.wTemp.csv")
+
+
+#import precipitation data
+HOPB.precip<- read_csv("NEONdata/HOPB/HOPB.precip.csv")
+
+
+#import aggregated degree days (ADD) data
+HOPB.ADD<- read_csv("NEONdata/HOPB/HOPB.ADD.csv")
+
+
+
+```
+
+
+## Join NEON Macroinvertebrate Data and Environmental Variables
+
+```{r join NEON macros and environmental vars for HOPB}
+
+
+# filter NEON data for one site
+HOPB.macro <- neon.macro %>% 
+                dplyr::filter(siteID == "HOPB") %>% 
+                dplyr::mutate(date = date(collectDate))
+
+# select columns needed
+HOPB.ADD.r <- HOPB.ADD %>% dplyr::select(date, mon.ADD)
+
+HOPB.precip.r <- HOPB.precip %>% dplyr::select(date, mon.precip)
+
+# join precip and ADD to macro data
+HOPB.macro <- left_join(HOPB.macro, HOPB.ADD.r) %>% 
+              left_join( ., HOPB.precip.r)
+
+
+
+#join water quality and water temperature data
+HOPB.waq2 <- left_join(HOPB.waq, HOPB.wTemp)
+
+#filter for upstream sensor sets (note - no fDOM)
+HOPB.waq.up <- HOPB.waq2 %>% 
+                dplyr::filter(horizontalPosition == 101 | horizontalPosition == 111)
+
+#filter for downstream sensor sets 
+HOPB.waq.down <- HOPB.waq2 %>% 
+                dplyr::filter(horizontalPosition == 102 | horizontalPosition == 112)
 
 
 ```
