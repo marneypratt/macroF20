@@ -31,3 +31,18 @@ This series of instructions will copy all the files you need from here on GitHub
 5. When asked "Shall we delete the ZIP file" select the number for the option that says "Definitely"
 
 A new session of RStudio will open with the unzipped folder containing all the files you need ready for you.
+
+## Download this repository from GitHub as a ZIP file
+
+If the above method does not work, then just download the repository as a zip file.  
+
+1. In the GitHub repository, gor to the green "Code" button and "select Download ZIP"
+
+2. Save the zipped file somewhere on your computer where it will be easy to find again
+
+3a. If you are using the desktop version of R and RStudio, extract all the files from the ZIP file somewhere on your computer where you are keeping all your R files.  
+
+3b. If you are using a cloud-based version of RStudio, then import the ZIP file directly into RStudio using the Import function under the Files tab in the lower right window of RStudio.
+
+4. Browse to the folder with all the unzipped files using the Files tab in the lower right window of RStudio. Click on the "macroF20.Rproj" project file to open the project and begin working.
+

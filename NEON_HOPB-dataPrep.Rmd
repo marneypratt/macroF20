@@ -513,15 +513,23 @@ HOPB.waq.down <- HOPB.waq2 %>%
 
 # join upstream sensor set data to macro data
 HOPB.macro.up <- left_join(HOPB.macro, HOPB.waq.up)
+
+# save the fully merged and prepared data file
+# For the metadata describing everything in the file see _____ text file included in the Project folder 
+
+write.csv(HOPB.macro.up, "preppedData/HOPB.macro.up.csv", 
+          row.names = FALSE)
   
 
 # join downstream sensor set data to macro data
 HOPB.macro.down <- left_join(HOPB.macro, HOPB.waq.down) 
 
-temp <- HOPB.macro.down %>% 
-  group_by(date) %>% 
-  select(date, habitatType, 31:47) %>% 
-  distinct()
+
+# save the fully merged and prepared data file
+# For the metadata describing everything in the file see _____ text file included in the Project folder 
+
+write.csv(HOPB.macro.down, "preppedData/HOPB.macro.down.csv", 
+          row.names = FALSE)
 
 
 ```
