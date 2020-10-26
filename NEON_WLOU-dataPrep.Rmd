@@ -1,0 +1,278 @@
+---
+title: "NEON WLOU Data"
+author: "Marney Pratt"
+date: "10/25/2020"
+output: html_notebook
+---
+
+# Load Packages  
+
+```{r setup, include=FALSE}
+
+# load libraries 
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(lubridate) #for dealing with dates and times
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+library(zoo) ## for dealing with time series
+
+```
+
+# Downloading NEON Macroinvertebrate Data  
+
+```{r download all NEON macroinvertebrate data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Macroinvert Data Product ID
+my_dpid <- 'DP1.20120.001'
+
+
+# get all tables for these sites from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+all_tabs_inv <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = 'WLOU',
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+all_tabs_inv %>% list2env(.GlobalEnv)
+
+
+#save readme tibble as csv file
+write.csv(readme_20120, "NEONinfo/NEON_metadata.csv")
+
+#save file with code definitions
+write.csv(categoricalCodes_20120, "NEONinfo/categoricalCodes.csv")
+
+
+# extract location data into a separate table
+WLOU_fieldData <- inv_fieldData %>%
+  
+# extract year and date from collectDate, add as new column
+  mutate(
+    year = year(collectDate), 
+    date = date(collectDate)) %>% 
+  
+  # keep only the columns listed below
+  select(siteID, 
+         domainID,
+         namedLocation, 
+         decimalLatitude, 
+         decimalLongitude, 
+         elevation,
+         sampleID, 
+         eventID, 
+         date,
+         year, 
+         habitatType, 
+         samplerType,
+         benthicArea) %>%
+  
+  # keep rows with unique combinations of values, 
+  # i.e., no duplicate records
+  distinct()
+
+#Save this data file
+write.csv(WLOU_fieldData, "NEONdata/WLOU/WLOU_fieldData.csv")
+
+
+# Make the observation table.
+# start with inv_taxonomyProcessed
+WLOU.macro <- inv_taxonomyProcessed %>% 
+  
+  # select a subset of columns from
+  # inv_taxonomyProcessed
+  select(sampleID,
+         domainID,
+         siteID,
+         collectDate,
+         estimatedTotalCount,
+         acceptedTaxonID,
+         phylum, subphylum, class, subclass, order, family, subfamily, tribe, genus, 
+         scientificName,
+         taxonRank) %>%
+  
+  # Join the columns selected above with two 
+  # columns from inv_fieldData (the two columns 
+  # are sampleID and benthicArea)
+  left_join(WLOU_fieldData %>% 
+              select(sampleID, eventID, date, year, 
+                     habitatType, samplerType,
+                     benthicArea)) %>%
+
+  # some new columns called 'variable_name', 
+  # 'value', and 'unit', and assign values for 
+  # all rows in the table.
+  # variable_name and unit are both assigned the 
+  # same text string for all rows. 
+  mutate(inv_dens = estimatedTotalCount / benthicArea,
+         inv_dens_unit = 'count per square meter') 
+
+
+#import master taxa list with tolerance values and FFGs 
+neon.mill.taxa <- read_csv("data/neon.mill.taxa.csv")
+
+#select needed variables
+neon.mill.taxa2 <- neon.mill.taxa %>%  
+  dplyr::select(acceptedTaxonID, organism_aggr, tolerance, FFG, FFG2)
+
+#merge NEON macro data with master taxa data
+WLOU.macro <- left_join(WLOU.macro, neon.mill.taxa2, by="acceptedTaxonID")
+
+
+# save macro data file for this site
+write.csv(WLOU.macro, "NEONdata/WLOU/WLOU.macro.csv", 
+          row.names = FALSE)
+
+
+
+```
+
+
+
+
+## Import NEON Macroinvertebrate Data for WLOU Site
+
+```{r Import prepped neon.macro.csv file, include=FALSE}
+
+# this file is the result of the above chunk
+# run the chuk above once to create this file
+# then after that, don't run the above chunk and only run this one 
+# this will import the NEON macro data for this one site
+WLOU.macro <- read_csv("NEONdata/WLOU/WLOU.macro.csv")
+
+```
+
+
+
+
+# Download Aquatic Instrument Data  
+
+This webpage is helpful for downloading Aquatic Instrument System Data:
+[Download and work with NEON Aquatic Instrument Data](https://www.neonscience.org/explore-neon-ais-data)
+
+
+### product IDs
+  water quality: DP1.20288.001
+  air temperature: DP1.00002.001
+  relative humidity: DP1.00098.001
+  PAR at water surface:  DP1.20042.001
+  Precipitation: DP1.00006.001
+  Gage height: DP1.20267.001  
+  
+  
+## Download the Precipitation Data Product  
+
+See the NEON website for more information on the [Precipitation Data Product](https://data.neonscience.org/data-products/DP1.00006.001)  
+
+
+```{r download NEON precipitation data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+
+# Precipitation Data Product ID
+my_dpid <- 'DP1.00006.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+precip <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  # many aquatic sites don't have precipitation sensors,
+  # pick the nearest terrestrial site
+  site = "WLOU",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+precip %>% list2env(.GlobalEnv)
+
+
+write.csv(variables_00006, "NEONinfo/precip.vars.csv",
+row.names = FALSE)
+
+write.csv(readme_00006, "NEONinfo/precip.readme.csv",
+row.names = FALSE)
+
+
+
+#calculate the total precipitation for each date
+precip_daily <- SECPRE_30min %>%
+                dplyr::select(1:6,
+                    secPrecipBulk) %>%
+                    dplyr::mutate(date = date(startDateTime),
+                    year = year(startDateTime),
+                    yday = yday(startDateTime)) %>%
+                    group_by(domainID, siteID, date, year, yday) %>%
+                    dplyr::summarize(
+                    daily.precip = sum(secPrecipBulk, na.rm = TRUE)
+                    )
+
+# calculate the total monthly precipitation 
+# by summing the daily precipitation for 30 days before each date
+
+precip <- precip_daily %>%
+                group_by(year) %>%
+                arrange(year, yday) %>%
+                mutate(mon.precip = rollapply(data = daily.precip,
+                width = 30,
+                FUN = sum,
+                align = "right",
+                fill = NA,
+                na.rm = TRUE))
+
+
+
+write.csv(precip, "NEONdata/WLOU/WLOU.precip.csv",
+row.names = FALSE)
+
+
+```
+
+
+
+
+## Import Environmental Variables  
+
+After running the above chunks once to download all the environmental variables, then just import all the resulting data files running the code below  
+
+```{r import and join environmental variables, include=FALSE}
+
+
+#import precipitation data
+WLOU.precip<- read_csv("NEONdata/WLOU/WLOU.precip.csv")
+
+
+
+```
+
+
+## Join NEON Macroinvertebrate Data and Environmental Variables
+
+```{r join NEON macros and environmental vars for WLOU}
+
+
+# select columns needed
+WLOU.precip.r <- WLOU.precip %>% dplyr::select(date, mon.precip)
+
+# join precip to macro data
+WLOU.macro.precip <- left_join(WLOU.macro, WLOU.precip.r, by = "date") 
+
+
+
+# save the fully merged and prepared data file
+# For the metadata describing everything in the file see _____ text file included in the Project folder 
+
+write.csv(WLOU.macro.precip, "preppedData/WLOU.macro.precip.csv", 
+          row.names = FALSE)
+
+
+```
+
+
+

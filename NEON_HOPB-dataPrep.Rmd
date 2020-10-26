@@ -315,7 +315,7 @@ row.names = FALSE)
 
 
 
-#calculate the average air temp for each date
+#calculate the total precipitation for each date
 precip_daily <- PRIPRE_30min %>%
                 dplyr::select(1:6,
                     priPrecipBulk) %>%
