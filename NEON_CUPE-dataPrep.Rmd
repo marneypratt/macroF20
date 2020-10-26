@@ -1,5 +1,5 @@
 ---
-title: "NEON HOPB Data"
+title: "NEON CUPE Data"
 author: "Marney Pratt"
 date: "10/15/2020"
 output: html_notebook
@@ -32,7 +32,7 @@ my_dpid <- 'DP1.20120.001'
 # Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
 all_tabs_inv <- neonUtilities::loadByProduct(
   dpID = my_dpid,
-  site = 'HOPB',
+  site = 'CUPE',
   package = 'expanded',
   check.size = FALSE,
   token=Sys.getenv("NEON_TOKEN"))
@@ -49,7 +49,7 @@ write.csv(categoricalCodes_20120, "NEONinfo/categoricalCodes.csv")
 
 
 # extract location data into a separate table
-HOPB_fieldData <- inv_fieldData %>%
+CUPE_fieldData <- inv_fieldData %>%
   
 # extract year and date from collectDate, add as new column
   mutate(
@@ -76,12 +76,12 @@ HOPB_fieldData <- inv_fieldData %>%
   distinct()
 
 #Save this data file
-write.csv(HOPB_fieldData, "NEONdata/HOPB/HOPB_fieldData.csv")
+write.csv(CUPE_fieldData, "NEONdata/CUPE/CUPE_fieldData.csv")
 
 
 # Make the observation table.
 # start with inv_taxonomyProcessed
-HOPB.macro <- inv_taxonomyProcessed %>% 
+CUPE.macro <- inv_taxonomyProcessed %>% 
   
   # select a subset of columns from
   # inv_taxonomyProcessed
@@ -98,7 +98,7 @@ HOPB.macro <- inv_taxonomyProcessed %>%
   # Join the columns selected above with two 
   # columns from inv_fieldData (the two columns 
   # are sampleID and benthicArea)
-  left_join(HOPB_fieldData %>% 
+  left_join(CUPE_fieldData %>% 
               select(sampleID, eventID, date, year, 
                      habitatType, samplerType,
                      benthicArea)) %>%
@@ -120,11 +120,11 @@ neon.mill.taxa2 <- neon.mill.taxa %>%
   dplyr::select(acceptedTaxonID, organism_aggr, tolerance, FFG, FFG2)
 
 #merge NEON macro data with master taxa data
-HOPB.macro <- left_join(HOPB.macro, neon.mill.taxa2, by="acceptedTaxonID")
+CUPE.macro <- left_join(CUPE.macro, neon.mill.taxa2, by="acceptedTaxonID")
 
 
 # save macro data file for this site
-write.csv(HOPB.macro, "NEONdata/HOPB/HOPB.macro.csv", 
+write.csv(CUPE.macro, "NEONdata/CUPE/CUPE.macro.csv", 
           row.names = FALSE)
 
 
@@ -134,7 +134,7 @@ write.csv(HOPB.macro, "NEONdata/HOPB/HOPB.macro.csv",
 
 
 
-## Import NEON Macroinvertebrate Data for HOPB Site
+## Import NEON Macroinvertebrate Data for CUPE Site
 
 ```{r Import prepped neon.macro.csv file, include=FALSE}
 
@@ -142,7 +142,7 @@ write.csv(HOPB.macro, "NEONdata/HOPB/HOPB.macro.csv",
 # run the chuk above once to create this file
 # then after that, don't run the above chunk and only run this one 
 # this will import the NEON macro data for this one site
-HOPB.macro <- read_csv("NEONdata/HOPB/HOPB.macro.csv")
+CUPE.macro <- read_csv("NEONdata/CUPE/CUPE.macro.csv")
 
 ```
 
@@ -162,7 +162,6 @@ This webpage is helpful for downloading Aquatic Instrument System Data:
   PAR at water surface:  DP1.20042.001
   Precipitation: DP1.00006.001
   Gage height: DP1.20267.001  
-  periphyton, seston, and phytoplankton collection: DP1.20166.001
   
   
   
@@ -183,7 +182,7 @@ my_dpid <- 'DP1.20288.001'
 # Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
 waq <- neonUtilities::loadByProduct(
   dpID = my_dpid,
-  site = "HOPB",
+  site = "CUPE",
   package = 'expanded',
   check.size = FALSE,
   token=Sys.getenv("NEON_TOKEN"))
@@ -226,7 +225,7 @@ waq_sum <- waq_instantaneous %>%
                       median.fDOM = median(fDOM, na.rm = TRUE)
                                   )
 
-write.csv(waq_sum, "NEONdata/HOPB/HOPB.waq.csv", 
+write.csv(waq_sum, "NEONdata/CUPE/CUPE.waq.csv", 
           row.names = FALSE)
 
 ```
@@ -249,7 +248,7 @@ my_dpid <- 'DP1.20053.001'
 # Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
 wTemp <- neonUtilities::loadByProduct(
   dpID = my_dpid,
-  site = "HOPB",
+  site = "CUPE",
   package = 'expanded',
   check.size = FALSE,
   token=Sys.getenv("NEON_TOKEN"))
@@ -273,151 +272,13 @@ wTemp_sum <- TSW_5min %>%
                       median.wTemp = median(surfWaterTempMean, na.rm = TRUE),
                                   )
 
-write.csv(wTemp_sum, "NEONdata/HOPB/HOPB.wTemp.csv", 
+write.csv(wTemp_sum, "NEONdata/CUPE/CUPE.wTemp.csv", 
           row.names = FALSE)
 
 ```
 
 
-## Download the Precipitation Data Product  
 
-See the NEON website for more information on the [Precipitation Data Product](https://data.neonscience.org/data-products/DP1.00006.001)  
-
-
-```{r download NEON precipitation data, eval=FALSE, include=FALSE}
-
-###I ran this code once and saved the output, then I turned off running this chunk
-
-
-# Precipitation Data Product ID
-my_dpid <- 'DP1.00006.001'
-
-
-# download data from the NEON API 
-# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
-precip <- neonUtilities::loadByProduct(
-  dpID = my_dpid,
-  # many aquatic sites don't have precipitation sensors,
-  # pick the nearest terrestrial site
-  site = "HARV",
-  package = 'expanded',
-  check.size = FALSE,
-  token=Sys.getenv("NEON_TOKEN"))
-
-# extract items from list and put in R env. 
-precip %>% list2env(.GlobalEnv)
-
-
-write.csv(variables_00006, "NEONinfo/precip.vars.csv",
-row.names = FALSE)
-
-write.csv(readme_00006, "NEONinfo/precip.readme.csv",
-row.names = FALSE)
-
-
-
-#calculate the total precipitation for each date
-precip_daily <- PRIPRE_30min %>%
-                dplyr::select(1:6,
-                    priPrecipBulk) %>%
-                    dplyr::mutate(date = date(startDateTime),
-                    year = year(startDateTime),
-                    yday = yday(startDateTime)) %>%
-                    group_by(domainID, siteID, date, year, yday) %>%
-                    dplyr::summarize(
-                    daily.precip = sum(priPrecipBulk, na.rm = TRUE)
-                    )
-
-# calculate the total monthly precipitation 
-# by summing the daily precipitation for 30 days before each date
-# note that I relabeled the siteID from HARV to HOPB
-# the HARV site was the closest site where precipitation was measured
-precip <- precip_daily %>%
-                group_by(year) %>%
-                arrange(year, yday) %>%
-                mutate(mon.precip = rollapply(data = daily.precip,
-                width = 30,
-                FUN = sum,
-                align = "right",
-                fill = NA,
-                na.rm = TRUE)) %>% 
-          mutate(siteID = "HOPB")
-
-
-
-write.csv(precip, "NEONdata/HOPB/HOPB.precip.csv",
-row.names = FALSE)
-
-
-```
-
-
-
-## Download the Single Aspirated Air Temperature Data Product
-
-See the NEON website for more information on the [Single Aspirated Air Temperature Data Product](https://data.neonscience.org/data-products/DP1.00002.001)
-
-
-
-```{r download NEON air temperature data, eval=FALSE, include=FALSE}
-
-###I ran this code once and saved the output, then I turned off running this chunk
-
-
-# Air Temp Data Product ID
-my_dpid <- 'DP1.00002.001'
-
-# get all tables for these sites from the NEON API
-# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
-aTemp <- neonUtilities::loadByProduct(
-          dpID = my_dpid,
-          site = "HOPB",
-          package = 'expanded',
-          check.size = FALSE,
-          token=Sys.getenv("NEON_TOKEN"))
-
-
-# extract items from list and put in R env.
-aTemp %>% list2env(.GlobalEnv)
-
-
-write.csv(variables_00002, "NEONinfo/aTemp.vars.csv",
-row.names = FALSE)
-
-write.csv(readme_00002, "NEONinfo/aTemp.readme.csv",
-row.names = FALSE)
-
-
-
-#calculate the average air temp for each date
-aTemp_daily <- SAAT_1min %>%
-                dplyr::select(1:6,
-                    tempSingleMean) %>%
-                dplyr::mutate(date = date(startDateTime),
-                    year = year(startDateTime),
-                    yday = yday(startDateTime)) %>%
-                    group_by(domainID, siteID, date, year, yday) %>%
-                dplyr::summarize(mean.aTemp = mean(tempSingleMean, na.rm = TRUE)) %>% 
-                mutate(pos.aTemp = replace(mean.aTemp, which(mean.aTemp<0), 0))
-                
-
-# calculate the aggregated degree days (ADD)
-# by summing the ave temp for 30 days before each date
-ADD <- aTemp_daily %>%
-                group_by(year) %>%
-                arrange(year, yday) %>%
-                mutate(mon.ADD = rollapply(data = pos.aTemp,
-                width = 30,
-                FUN = sum,
-                align = "right",
-                fill = NA,
-                na.rm = FALSE))
-
-
-write.csv(ADD, "NEONdata/HOPB/HOPB.ADD.csv",
-row.names = FALSE)
-
-```
 
 
 
@@ -425,49 +286,31 @@ row.names = FALSE)
 
 After running the above chunks once to download all the environmental variables, then just import all the resulting data files running the code below  
 
+
 ```{r import and join environmental variables, include=FALSE}
 
 #import water quality data
-HOPB.waq <- read_csv("NEONdata/HOPB/HOPB.waq.csv")
+CUPE.waq <- read_csv("NEONdata/CUPE/CUPE.waq.csv")
 
 
 #import surface water temperature data
-HOPB.wTemp <- read_csv("NEONdata/HOPB/HOPB.wTemp.csv")
-
-
-#import precipitation data
-HOPB.precip<- read_csv("NEONdata/HOPB/HOPB.precip.csv")
-
-
-#import aggregated degree days (ADD) data
-HOPB.ADD<- read_csv("NEONdata/HOPB/HOPB.ADD.csv")
-
-
+CUPE.wTemp <- read_csv("NEONdata/CUPE/CUPE.wTemp.csv")
 
 ```
 
 
+
 ## Join NEON Macroinvertebrate Data and Environmental Variables
 
-```{r join NEON macros and environmental vars for HOPB}
-
-
-# select columns needed
-HOPB.ADD.r <- HOPB.ADD %>% dplyr::select(date, mon.ADD)
-
-HOPB.precip.r <- HOPB.precip %>% dplyr::select(date, mon.precip)
-
-# join precip and ADD to macro data
-HOPB.macro <- left_join(HOPB.macro, HOPB.ADD.r, by = "date") %>% 
-              left_join( ., HOPB.precip.r, by = "date")
+```{r join NEON macros and environmental vars for CUPE}
 
 
 
 #join water quality and water temperature data
-HOPB.waq2 <- left_join(HOPB.waq, HOPB.wTemp)
+CUPE.waq2 <- left_join(CUPE.waq, CUPE.wTemp)
 
 #filter for upstream sensor sets (note - no fDOM)
-HOPB.waq.up <- HOPB.waq2 %>% 
+CUPE.waq.up <- CUPE.waq2 %>% 
         dplyr::filter(horizontalPosition == 101 | horizontalPosition == 111) %>% 
         group_by(domainID, siteID, date) %>% 
         dplyr::summarize(
@@ -489,7 +332,7 @@ HOPB.waq.up <- HOPB.waq2 %>%
                       median.wTemp = mean(median.wTemp, na.rm = TRUE))
 
 #filter for downstream sensor sets 
-HOPB.waq.down <- HOPB.waq2 %>% 
+CUPE.waq.down <- CUPE.waq2 %>% 
         dplyr::filter(horizontalPosition == 102 | horizontalPosition == 112) %>% 
         group_by(domainID, siteID, date) %>% 
         dplyr::summarize(
@@ -513,23 +356,23 @@ HOPB.waq.down <- HOPB.waq2 %>%
 
 
 # join upstream sensor set data to macro data
-HOPB.macro.up <- left_join(HOPB.macro, HOPB.waq.up)
+CUPE.macro.up <- left_join(CUPE.macro, CUPE.waq.up)
 
 # save the fully merged and prepared data file
 # For the metadata describing everything in the file see _____ text file included in the Project folder 
 
-write.csv(HOPB.macro.up, "preppedData/HOPB.macro.up.csv", 
+write.csv(CUPE.macro.up, "preppedData/CUPE.macro.up.csv", 
           row.names = FALSE)
   
 
 # join downstream sensor set data to macro data
-HOPB.macro.down <- left_join(HOPB.macro, HOPB.waq.down) 
+CUPE.macro.down <- left_join(CUPE.macro, CUPE.waq.down) 
 
 
 # save the fully merged and prepared data file
 # For the metadata describing everything in the file see _____ text file included in the Project folder 
 
-write.csv(HOPB.macro.down, "preppedData/HOPB.macro.down.csv", 
+write.csv(CUPE.macro.down, "preppedData/CUPE.macro.down.csv", 
           row.names = FALSE)
 
 
