@@ -1,7 +1,7 @@
 ---
 title: "Macroinvertebrate Data Analysis"
 author: "Your Name Here"
-date: "10/21/2020"
+date: "10/__/2020"
 output: html_document
 ---
 
@@ -25,7 +25,7 @@ There are several files in the "preppedData" folder.  Below is the code to impor
 
 ## MILL Data only
 
-```{r MILL only, include=FALSE}
+```{r import MILL only, include=FALSE}
 
 # this chunk will import the data for the Mill River only
 # this file includes all the Mill River data including all water quality and weather data
@@ -51,7 +51,8 @@ mill.macro <- read_csv("preppedData/mill.macro.csv",
                                                                "UFR", 
                                                                "UM", 
                                                                "USH", 
-                                                               "USU"))))
+                                                               "USU")))) %>% 
+      mutate(siteID = "MILL")
 
 
 
@@ -60,7 +61,7 @@ mill.macro <- read_csv("preppedData/mill.macro.csv",
 
 ## All NEON Macroinvertebrate Data
 
-```{r all NEON macro data, include=FALSE}
+```{r import all NEON macro data, include=FALSE}
 
 # this chunk will import data for ALL NEON macroinvertebrate data for all wadeable streams
 # this dataset does not have any environmental variables added
@@ -76,45 +77,69 @@ neon.macro <- read_csv("NEONData/neon.macro.csv") %>%
 ```
 
 
+## Master Taxa List
+
+```{r import master taxa list, include=FALSE}
+
+#this will import the list of all taxa for the Mill River and NEON rivers
+
+master.taxa <- read_csv("data/neon.mill.taxa.csv")
+
+
+```
+
+
+
+## Notes about NEON Aquatic Instrument Data
+
+The Aquatic Instrument Data come from sensors placed upstream and downstream of the sampling reach. See the section on Placement of Sensors by Site Type for Wadeable Streams on the [Surface Water webpage](https://www.neonscience.org/data-collection/surface-water).  Please note that these are not equivalent to the Upstream and Downstream locations in the Mill River
+
+
 
 ## HOPB Data only
 
-```{r HOPB only, include=FALSE}
+```{r import HOPB only, include=FALSE}
 
 # this chunk will import the data for the HOPB River only
 # this file includes the macroinvertebrates and most of the environmental variables
 
+# this file has the data from the upstream sensor (no fDOM)
 HOPB.macro.up <- read_csv("preppedData/HOPB.macro.up.csv")
 
-
-
+# this file has the data from the downstream sensor (includes fDOM)
+HOPB.macro.down <- read_csv("preppedData/HOPB.macro.down.csv")
 
 ```
 
 
 
-```{r data wrangling for divesity measures}
+
+
+
+# Diversity
+
+```{r data wrangling for diversity measures}
 
 # remove missing values, and make sure each taxa is summarized within sampleID
-macro.long <- macro.f15 %>% 
-  filter(!is.na(Number)) %>% 
-  select(SampleID, Organism_aggr, Number) %>% 
-  group_by(SampleID, Organism_aggr) %>% 
-  summarise(num = sum(Number))
+macro.long <- mill.macro %>% 
+  dplyr::filter(!is.na(number)) %>% 
+  dplyr::select(sampleID, acceptedTaxonID, number) %>% 
+  group_by(sampleID, acceptedTaxonID) %>% 
+  dplyr::summarise(num = sum(number))
 
 
 # convert to wide format
 macro.wide <- macro.long %>% 
-    pivot_wider(names_from = Organism_aggr, 
+    pivot_wider(names_from = acceptedTaxonID, 
               values_from = num,
               values_fill = list(num = 0),
               values_fn = list(num = mean)) %>%
-    tibble::column_to_rownames("SampleID")
+    tibble::column_to_rownames("sampleID")
 
 
 ```
 
-```{r diversity measures}
+```{r calculate diversity measures}
 
 #Shannon
 H <- diversity(macro.wide)
@@ -141,55 +166,60 @@ macro.div <- data.frame(H, effective.sp, sp.rich, max.H, J)
 
 ```
 
-```{r tolerance}
+# Tolerance
+
+```{r calculate tolerance}
 
 # remove missing values, and make sure each taxa is summarized within sampleID
-macro.tol <- macro.f15 %>% 
-  filter(!is.na(Number)) %>% 
-  select(Location, Organism_aggr, Number, Tolerance) %>% 
-  group_by(Location, Organism_aggr) %>% 
-  summarise(num = sum(Number), tol = mean(Tolerance)) %>% 
+macro.tol <- mill.macro %>% 
+  dplyr::filter(!is.na(number), !is.na(tolerance)) %>% 
+  dplyr::select(location, sampleID, acceptedTaxonID, number, tolerance) %>% 
+  group_by(location, sampleID, acceptedTaxonID) %>% 
+  dplyr::summarise(num = sum(number), 
+                   tol = mean(tolerance)) %>% 
   mutate(x.t = num*tol)
 
 macro.HBI <- macro.tol %>% 
-  group_by(Location) %>% 
-  summarise(x.t.sum = sum(x.t),
-            total.n = sum(num)) %>% 
+  group_by(location, sampleID) %>% 
+  dplyr::summarise(x.t.sum = sum(x.t),
+                   total.n = sum(num)) %>% 
   mutate(HBI = x.t.sum/total.n)
 
 
 ```
 
-```{r  EPT}
+
+
+```{r  calculate EPT}
 
 # number of Es
-macro.E <- macro.f15 %>% 
-  filter(Order == "Ephemeroptera") %>% 
-  group_by(Location) %>% 
-  summarise(num.E = sum(Number)) 
+macro.E <- mill.macro %>% 
+  dplyr::filter(order == "Ephemeroptera") %>% 
+  group_by(location, sampleID) %>% 
+  dplyr::summarise(num.E = sum(number)) 
 
 # number of Ps
-macro.P <- macro.f15 %>% 
-  filter(Order == "Plecoptera") %>% 
-  group_by(Location) %>% 
-  summarise(num.P = sum(Number)) 
+macro.P <- mill.macro %>% 
+  dplyr::filter(order == "Plecoptera") %>% 
+  group_by(location, sampleID) %>% 
+  dplyr::summarise(num.P = sum(number)) 
 
 # number of Ts
-macro.T <- macro.f15 %>% 
-  filter(Order == "Trichoptera") %>% 
-  group_by(Location) %>% 
-  summarise(num.T = sum(Number)) 
+macro.T <- mill.macro %>% 
+  dplyr::filter(order == "Trichoptera") %>% 
+  group_by(location, sampleID) %>% 
+  dplyr::summarise(num.T = sum(number)) 
 
 # number of net-spinners
-macro.H <- macro.f15 %>% 
-  filter(Family == "Hydropsychidae") %>% 
-  group_by(Location) %>% 
-  summarise(num.H = sum(Number)) 
+macro.H <- mill.macro %>% 
+  dplyr::filter(family == "Hydropsychidae") %>% 
+  group_by(location, sampleID) %>% 
+  dplyr::summarise(num.H = sum(number)) 
 
 # number of all organisms
-macro.all <- macro.f15 %>% 
-  group_by(Location) %>% 
-  summarise(num.all = sum(Number)) 
+macro.all <- mill.macro %>% 
+  group_by(location, sampleID) %>% 
+  dplyr::summarise(num.all = sum(number)) 
 
 #join dataframes
 macro.EPT <- left_join(macro.E, macro.P) %>% 
@@ -208,47 +238,49 @@ macro.EPT <-  macro.EPT %>%
 ```
 
 
-```{r FFG's}
+# Functional Feeding Groups
+
+```{r relative abundance of FFG's}
 
 
 
 # number of scrapers
 macro.scr <- neon.macro %>% 
-  filter(FFG == "scr") %>% 
+  dplyr::filter(FFG == "scr") %>% 
   group_by(date, sampleID, domainID, siteID, habitatType) %>% 
-  summarise(num.scr = sum(estimatedTotalCount)) 
+  dplyr::summarise(num.scr = sum(estimatedTotalCount)) 
 
 
 # number of filtering collectors
 macro.cf <- neon.macro %>% 
-  filter(FFG == "cf") %>% 
+  dplyr::filter(FFG == "cf") %>% 
   group_by(date, sampleID, domainID, siteID, habitatType) %>% 
-  summarise(num.cf = sum(estimatedTotalCount)) 
+  dplyr::summarise(num.cf = sum(estimatedTotalCount)) 
 
 
 # number of gathering collectors
 macro.cg <- neon.macro %>% 
-  filter(FFG == "cg") %>% 
+  dplyr::filter(FFG == "cg") %>% 
   group_by(date, sampleID, domainID, siteID, habitatType) %>% 
-  summarise(num.cg = sum(estimatedTotalCount)) 
+  dplyr::summarise(num.cg = sum(estimatedTotalCount)) 
 
 # number of shredders
 macro.sh <- neon.macro %>% 
-  filter(FFG == "sh") %>% 
+  dplyr::filter(FFG == "sh") %>% 
   group_by(date, sampleID, domainID, siteID, habitatType) %>% 
-  summarise(num.sh = sum(estimatedTotalCount)) 
+  dplyr::summarise(num.sh = sum(estimatedTotalCount)) 
 
 # number of predators
 macro.prd <- neon.macro %>% 
-  filter(FFG == "prd") %>% 
+  dplyr::filter(FFG == "prd") %>% 
   group_by(date, sampleID, domainID, siteID, habitatType) %>% 
-  summarise(num.prd = sum(estimatedTotalCount)) 
+  dplyr::summarise(num.prd = sum(estimatedTotalCount)) 
 
 
 # number of all organisms
 macro.all <- neon.macro %>% 
   group_by(date, sampleID, domainID, siteID, habitatType) %>% 
-  summarise(num.all = sum(estimatedTotalCount)) 
+  dplyr::summarise(num.all = sum(estimatedTotalCount)) 
 
 #join dataframes
 macro.FFG <- left_join(macro.scr, macro.cf) %>% 
@@ -268,60 +300,62 @@ macro.FFG <-  macro.FFG %>%
          relab.prd = num.prd/num.all)
 
 
-g1 <- macro.FFG %>% 
-  filter(habitatType == "pool") %>% 
-  ggplot(., aes(x=habitatType, y=relab.scr, color=siteID))+ 
-  stat_boxplot(geom ='errorbar', color="black", width = 0.1,  na.rm = TRUE, 
-               lwd=0.75, show.legend = FALSE) +
-  geom_boxplot(width=0.5, color="black", na.rm=TRUE,
-               lwd=0.75, show.legend=FALSE, outlier.shape=NA ) +
-  geom_quasirandom(aes(x=habitatType, y=relab.scr, fill=siteID), 
-                   shape=21, size=1, 
-                   alpha=0.5, width=0.3, show.legend=TRUE) +
-    stat_summary(fun=mean, geom="point",  shape=4, size=2,  
-               na.rm = TRUE, show.legend = FALSE, color="black", stroke = 2) +
-  #ylab("Substrate Stability Ratio") +
-  xlab("Habitat") +
-  coord_cartesian(expand=TRUE) +
-  theme_classic(base_size=20) 
-g1
+```
+
+# Correlation
 
 
-g1 <- macro.FFG %>% 
-  filter(habitatType == "riffle", siteID == "HOPB") %>% 
-  ggplot(., aes(x=date, y=sub.stability, fill=siteID))+ 
-  geom_quasirandom(shape=21, size=2, 
-                   alpha=0.5, width=0.3, show.legend=TRUE) +
-  #ylab("Substrate Stability Ratio") +
-  xlab("Date") +
-  coord_cartesian(expand=TRUE) +
-  theme_classic(base_size=20) 
-g1
+```{r correlation}
 
-
-g1 <- macro.FFG %>% 
-  filter(siteID == "SYCA" | siteID == "MCRA") %>% 
-  ggplot(., aes(x=habitatType, y=sub.stability, color=habitatType))+ 
-  stat_boxplot(geom ='errorbar', color="black", width = 0.1,  na.rm = TRUE, 
-               lwd=0.75, show.legend = FALSE) +
-  geom_boxplot(width=0.5, color="black", na.rm=TRUE,
-               lwd=0.75, show.legend=FALSE, outlier.shape=NA ) +
-  geom_quasirandom(aes(x=habitatType, y=sub.stability, fill=habitatType), 
-                   shape=21, size=1, 
-                   alpha=0.5, width=0.3, show.legend=FALSE) +
-    stat_summary(fun=mean, geom="point",  shape=4, size=2,  
-               na.rm = TRUE, show.legend = FALSE, color="black", stroke = 2) +
-  #ylab("Substrate Stability Ratio") +
-  xlab("Habitat") +
-  coord_cartesian(expand=TRUE) +
-  theme_classic(base_size=20) +
-  facet_wrap(vars(siteID))
-g1
-
+#select just the two variables you want to compare
+mill.macro %>% 
+  dplyr::select(wTemp, DO) %>% 
+  
+  #remove missing values for each variable
+  dplyr::filter(!is.na(wTemp), !is.na(DO)) %>% 
+  
+  #perform parametric correlation
+  cor()
 
 
 ```
 
+
+# Join MILL and HOPB data
+
+```{r bind together Fall 2019 MILL and HOPB data }
+
+# select fall 2019 data and certain variables for MILL
+mill.macro2 <- mill.macro %>% 
+  dplyr::filter(season == "Fall", year == "2019") %>% 
+  dplyr::select(date, siteID, sampleID, microhabitat, 
+                acceptedTaxonID, number, tolerance, FFG) %>% 
+  
+  # join the sampleID and microhabitat names into one and replace sampleID
+  tidyr::unite(col = sampleID, sampleID, microhabitat, sep = ".", remove = TRUE) %>% 
+  
+  # calculate invertebrate density 
+  group_by(date, siteID, sampleID, acceptedTaxonID, FFG) %>% 
+  dplyr::mutate(inv_dens = sum(number)/0.5,
+                tolerance = mean(tolerance))
+  
+  
+  # select fall 2019 data and certain variables for HOPB
+HOPB.macro2 <- HOPB.macro.up %>% 
+  dplyr::filter(date == "2019-10-03", habitatType == "riffle") %>% 
+  
+  # rename column to match MILL column for number
+  dplyr::rename( ., number = estimatedTotalCount) %>% 
+  
+  # select variables of interest
+  dplyr::select(date, siteID, sampleID,       
+                acceptedTaxonID, number, tolerance, FFG, inv_dens) 
+  
+  
+# bind the MILL and HOPB data together
+mill.hopb <- bind_rows(mill.macro2, HOPB.macro2)
+ 
+```
 
 
 
