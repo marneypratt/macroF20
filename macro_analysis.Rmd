@@ -291,14 +291,21 @@ macro.FFG <-  macro.FFG %>%
 mydf <- HOPB.macro.up %>% 
   dplyr::mutate(month = lubridate::month(date)) %>% 
   
-  
   # create new column with months changed to season
-  mutate(season = case_when (month == 4 ~ "Spring",
-                                   month == 7 ~ "Summer",
-                                   month == 10 ~ "Fall")) %>% 
+  mutate(season = case_when(month == 4 ~ "Spring",
+                            month == 7 ~ "Summer",
+                            month == 10 ~ "Fall")) %>% 
 
   # rename estimatedTotalCount to number
   dplyr::rename( ., number = estimatedTotalCount) 
+
+
+#change season to a factor
+mydf$season=factor(mydf$season, levels=c("Spring","Summer","Fall"))
+
+#change year to a factor
+mydf$year=factor(mydf$year)
+
 
 
 # Sum FFG for each sampleID
