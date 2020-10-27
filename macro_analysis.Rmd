@@ -87,20 +87,10 @@ The Aquatic Instrument Data come from sensors placed upstream and downstream of 
 # this file includes the macroinvertebrates and most of the environmental variables
 
 # this file has the data from the upstream sensor (no fDOM)
-HOPB.macro.up <- read_csv("preppedData/HOPB.macro.up.csv",
-                     col_types = cols(.default = "d", 
-                                      date = "D",
-                                      domainID = "c",
-                                      siteID = "c")
-                                      )
+HOPB.macro.up <- read_csv("preppedData/HOPB.macro.up.csv", guess_max = 5000)
 
 # this file has the data from the downstream sensor (includes fDOM)
-HOPB.macro.down <- read_csv("preppedData/HOPB.macro.down.csv",
-                     col_types = cols(.default = "d", 
-                                      date = "D",
-                                      domainID = "c",
-                                      siteID = "c")
-                                      )
+HOPB.macro.down <- read_csv("preppedData/HOPB.macro.down.csv",guess_max = 5000)
 
 ```
 
@@ -298,48 +288,36 @@ macro.FFG <-  macro.FFG %>%
 
 
 # add month using mutate and lubridate
-
-# create new column with months changed to season
-
-# rename estimatedTotalCount to number
-  dplyr::rename( ., number = estimatedTotalCount) %>% 
-
+mydf <- HOPB.macro.up %>% 
+  dplyr::mutate(month = lubridate::month(date)) %>% 
   
   
-###Sum FFG for each sampleID
-macro.ffg<-macro.data %>% 
+  # create new column with months changed to season
+  mutate(season = case_when (month == 4 ~ "Spring",
+                                   month == 7 ~ "Summer",
+                                   month == 10 ~ "Fall")) %>% 
+
+  # rename estimatedTotalCount to number
+  dplyr::rename( ., number = estimatedTotalCount) 
+
+
+# Sum FFG for each sampleID
+macro.ffg <- mydf %>% 
   group_by(sampleID, season, FFG) %>% 
   dplyr::summarise (num.ffg = sum(number, na.rm = TRUE))
 
 
 ###sum the total number of all organisms for each sample
-macro.sample <- macro.data %>% 
+macro.sample <- mydf %>% 
   group_by(sampleID) %>% 
   dplyr::summarise (total.num = sum(number, na.rm = TRUE))
 
-q.area <- sampling.sum %>% select(SampleID, q.area)
-
-macro.sample <- left_join(macro.sample, q.area, by = "SampleID")
-
-macro.ffg <- left_join(macro.ffg, macro.sample, by = "SampleID")
+# join the number of each FFG with total number of all organisms
+macro.ffg <- left_join(macro.ffg, macro.sample, by = "sampleID")
 
 ###calculate the relative abundance 
 macro.ffg <-mutate(macro.ffg, relab=num.ffg/total.num)
 
-###calculate the ffg density 
-macro.ffg <-macro.ffg %>% 
-  mutate(ffg.den=num.ffg/q.area)
-
-
-ggplot(ID.ffg, aes(x=Year,y=relab, fill = FFG))+
-  geom_bar(position = "fill", stat="identity")+
-  ylab("Relative Abundance\n") +
-  scale_fill_discrete(name="Functional Feeding Groups",
-                        labels=c("collector filterers", "collector gatherers",
-                                 "predators", "scrapers", "shredders" ))+
-  coord_cartesian(ylim=c(0,1), expand=FALSE, clip='off') +
-  theme_classic(base_size=10) +
-  facet_grid(rows=vars(Season), cols=vars(Location))
 
 ```
 
