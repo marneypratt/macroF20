@@ -1,0 +1,139 @@
+---
+title: "Group1.2"
+author: "Your Name Here"
+date: "10/26/2020"
+output: html_document
+---
+## Load required packages
+
+```{r load packages, echo=TRUE, message=FALSE, warning=FALSE}
+
+library(tidyverse) ## for readr, dplyr, ggplot
+library(lubridate) ## for dealing with dates and times
+library(rnoaa) ## For downloading data from NOAA)
+library(dataRetrieval) ## download USGS data
+library(zoo) ## for dealing with time series
+
+
+```
+
+
+
+
+```{r import MILL water quality data}
+
+#import the water quality data file
+waterQ <- read_csv("data/waterQ.csv",
+  col_types = cols(date = col_date(format = "%m/%d/%Y"), 
+                   location = col_factor(levels = c("Downstream","Upstream")), 
+                   season = col_factor(levels = c("Summer","Fall")), 
+                   year = col_factor(),
+                   microhabitat = col_factor(levels = 
+                    c("DSR", "DFR", "DM", "DSH", "DSP", 
+                      "USR", "UFR", "UM", "USH", "USU"))))
+
+# DO data
+mill.DO.df <- waterQ %>% 
+  filter(season == "Fall", year == "2019") %>% 
+  dplyr::select(date, DO) %>% 
+  filter(!is.na(DO)) %>% 
+  mutate(siteID = "MILL")
+
+DO.dates <- mill.DO.df %>% 
+  select(date) %>% 
+  distinct()
+
+
+# turbidity data
+mill.turb.df <- waterQ %>% 
+  filter(season == "Fall", year == "2019") %>% 
+  dplyr::select(date, turb) %>% 
+  filter(!is.na(turb)) %>% 
+  mutate(siteID = "MILL")
+
+
+turb.dates <- mill.turb.df %>% 
+  select(date) %>% 
+  distinct()
+
+
+```
+
+
+
+
+## Download Water Quality Data Product  
+
+See the NEON website for more information on the [Water Quality Data Product](https://data.neonscience.org/data-products/DP1.20288.001)  
+
+
+```{r download NEON water quality data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Water quality Data Product ID
+my_dpid <- 'DP1.20288.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+waq <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = "HOPB",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+waq %>% list2env(.GlobalEnv)
+
+HOPB.waq <- waq_instantaneous %>%
+                dplyr::select(1:6,
+                              dissolvedOxygen,
+                              turbidity) %>%
+                dplyr::mutate(date = date(startDateTime),
+                              time = format(startDateTime, format="%H:%M:%S")) %>% 
+                filter(date > "2019-09-15", date<"2019-10-04", 
+                       time>"17:29:00", time<"18:31:00" ) %>% 
+                dplyr::rename( ., DO = dissolvedOxygen,
+                               turb = turbidity)
+
+
+HOPB.DO <- HOPB.waq %>% 
+  filter(date == "2019-09-16" |
+         date == "2019-09-17" |
+         date == "2019-09-23" |
+         date == "2019-09-24" |
+         date == "2019-09-30" |
+         date == "2019-10-01" ) %>% 
+  select(date, DO, siteID)
+
+# bind the MILL and HOPB data together
+mill.hopb.DO <- bind_rows(mill.DO.df, HOPB.DO)
+
+write.csv(mill.hopb.DO, "NEONdata/HOPB/mill.hopb.DO.csv", 
+          row.names = FALSE)
+
+
+HOPB.turb <- HOPB.waq %>% 
+  filter(date == "2019-09-16" |
+         date == "2019-09-17" |
+         date == "2019-09-23" |
+         date == "2019-09-24" |
+         date == "2019-09-26" |
+         date == "2019-09-30" |
+         date == "2019-10-01" |
+         date == "2019-10-03" ,
+         turb >= "0") %>% 
+  select(date, turb, siteID)
+
+# bind the MILL and HOPB data together
+mill.hopb.turb <- bind_rows(mill.turb.df, HOPB.turb)
+
+write.csv(mill.hopb.turb, "NEONdata/HOPB/mill.hopb.turb.csv", 
+          row.names = FALSE)
+
+
+
+```
+
