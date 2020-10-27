@@ -1,8 +1,4 @@
 "table","fieldName","description","dataType","units","downloadPkg","pubFormat","primaryKey","categoricalCodeName"
-"PRIPRE_30min","domainID","Unique identifier of the NEON domain","string",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_30min","siteID","NEON site code","string",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_30min","horizontalPosition","Index of horizontal location at a NEON site","string",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_30min","verticalPosition","Index of vertical location at a NEON site","string",NA,"appended by stackByTable",NA,"N",NA
 "PRIPRE_30min","startDateTime","Date and time at which a sampling is initiated","dateTime",NA,"basic","yyyy-MM-dd'T'HH:mm:ss'Z'(floor)",NA,NA
 "PRIPRE_30min","endDateTime","Date and time at which a sampling is completed","dateTime",NA,"basic","yyyy-MM-dd'T'HH:mm:ss'Z'(floor)",NA,NA
 "PRIPRE_30min","priPrecipBulk","Bulk primary precipitation","real","millimeter","basic","*.###(round)",NA,NA
@@ -15,11 +11,6 @@
 "PRIPRE_30min","priPrecipNullQF","Primary precipitation quality flag for the null test, which indicates a missing datum, detailed in NEON.DOC.011081 (1=fail, 0=pass, -1=NA (i.e., could not be run))","signed integer",NA,"expanded","integer",NA,NA
 "PRIPRE_30min","priPrecipFinalQF","Primary precipitation quality flag indicating whether a data product has passed or failed an overall assessment of its quality, detailed in NEON.DOC.000898 (0 = pass, 1 = fail)","unsigned integer",NA,"basic","integer",NA,NA
 "PRIPRE_30min","priPrecipFinalQFSciRvw","Primary precipitation quality flag indicating whether a data product has failed a science review of its quality, detailed in NEON.DOC.001113 (2=fail and data redacted, 1=fail but data retained and may be useful with additional corrections or filtering, 0=previous quality concern resolved and final quality flag correctly reflects data quality, Empty=pass/not reviewed)","unsigned integer",NA,"expanded","integer",NA,NA
-"PRIPRE_30min","publicationDate","Date of data publication on the NEON data portal","dateTime",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_5min","domainID","Unique identifier of the NEON domain","string",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_5min","siteID","NEON site code","string",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_5min","horizontalPosition","Index of horizontal location at a NEON site","string",NA,"appended by stackByTable",NA,"N",NA
-"PRIPRE_5min","verticalPosition","Index of vertical location at a NEON site","string",NA,"appended by stackByTable",NA,"N",NA
 "PRIPRE_5min","startDateTime","Date and time at which a sampling is initiated","dateTime",NA,"basic","yyyy-MM-dd'T'HH:mm:ss'Z'(floor)",NA,NA
 "PRIPRE_5min","endDateTime","Date and time at which a sampling is completed","dateTime",NA,"basic","yyyy-MM-dd'T'HH:mm:ss'Z'(floor)",NA,NA
 "PRIPRE_5min","priPrecipBulk","Bulk primary precipitation","real","millimeter","basic","*.###(round)",NA,NA
@@ -53,7 +44,6 @@
 "PRIPRE_5min","priPrecipValidCalQF","Primary precipitation quality flag for the valid calibration check detailed in NEON.DOC.011081 (1=fail, 0=pass, -1=NA (i.e., could not be run))","signed integer",NA,"expanded","integer",NA,NA
 "PRIPRE_5min","priPrecipFinalQF","Primary precipitation quality flag indicating whether a data product has passed or failed an overall assessment of its quality, detailed in NEON.DOC.000898 (0 = pass, 1 = fail)","unsigned integer",NA,"basic","integer",NA,NA
 "PRIPRE_5min","priPrecipFinalQFSciRvw","Primary precipitation quality flag indicating whether a data product has failed a science review of its quality, detailed in NEON.DOC.001113 (2=fail and data redacted, 1=fail but data retained and may be useful with additional corrections or filtering, 0=previous quality concern resolved and final quality flag correctly reflects data quality, Empty=pass/not reviewed)","unsigned integer",NA,"expanded","integer",NA,NA
-"PRIPRE_5min","publicationDate","Date of data publication on the NEON data portal","dateTime",NA,"appended by stackByTable",NA,"N",NA
 "SECPRE_1min","domainID","Unique identifier of the NEON domain","string",NA,"appended by stackByTable",NA,"N",NA
 "SECPRE_1min","siteID","NEON site code","string",NA,"appended by stackByTable",NA,"N",NA
 "SECPRE_1min","horizontalPosition","Index of horizontal location at a NEON site","string",NA,"appended by stackByTable",NA,"N",NA

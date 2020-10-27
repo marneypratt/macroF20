@@ -1,5 +1,5 @@
 ---
-title: "NEON POSE Data"
+title: "NEON BARC Data"
 author: "Marney Pratt"
 date: "10/25/2020"
 output: html_notebook
@@ -32,7 +32,7 @@ my_dpid <- 'DP1.20120.001'
 # Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
 all_tabs_inv <- neonUtilities::loadByProduct(
   dpID = my_dpid,
-  site = 'POSE',
+  site = 'BARC',
   package = 'expanded',
   check.size = FALSE,
   token=Sys.getenv("NEON_TOKEN"))
@@ -49,7 +49,7 @@ write.csv(categoricalCodes_20120, "NEONinfo/categoricalCodes.csv")
 
 
 # extract location data into a separate table
-POSE_fieldData <- inv_fieldData %>%
+BARC_fieldData <- inv_fieldData %>%
   
 # extract year and date from collectDate, add as new column
   mutate(
@@ -76,12 +76,12 @@ POSE_fieldData <- inv_fieldData %>%
   distinct()
 
 #Save this data file
-write.csv(POSE_fieldData, "NEONdata/POSE/POSE_fieldData.csv")
+write.csv(BARC_fieldData, "NEONdata/BARC/BARC_fieldData.csv")
 
 
 # Make the observation table.
 # start with inv_taxonomyProcessed
-POSE.macro <- inv_taxonomyProcessed %>% 
+BARC.macro <- inv_taxonomyProcessed %>% 
   
   # select a subset of columns from
   # inv_taxonomyProcessed
@@ -98,7 +98,7 @@ POSE.macro <- inv_taxonomyProcessed %>%
   # Join the columns selected above with two 
   # columns from inv_fieldData (the two columns 
   # are sampleID and benthicArea)
-  left_join(POSE_fieldData %>% 
+  left_join(BARC_fieldData %>% 
               select(sampleID, eventID, date, year, 
                      habitatType, samplerType,
                      benthicArea)) %>%
@@ -120,11 +120,11 @@ neon.mill.taxa2 <- neon.mill.taxa %>%
   dplyr::select(acceptedTaxonID, organism_aggr, tolerance, FFG, FFG2)
 
 #merge NEON macro data with master taxa data
-POSE.macro <- left_join(POSE.macro, neon.mill.taxa2, by="acceptedTaxonID")
+BARC.macro <- left_join(BARC.macro, neon.mill.taxa2, by="acceptedTaxonID")
 
 
 # save macro data file for this site
-write.csv(POSE.macro, "NEONdata/POSE/POSE.macro.csv", 
+write.csv(BARC.macro, "NEONdata/BARC/BARC.macro.csv", 
           row.names = FALSE)
 
 
@@ -134,7 +134,7 @@ write.csv(POSE.macro, "NEONdata/POSE/POSE.macro.csv",
 
 
 
-## Import NEON Macroinvertebrate Data for POSE Site
+## Import NEON Macroinvertebrate Data for BARC Site
 
 ```{r Import prepped neon.macro.csv file, include=FALSE}
 
@@ -142,7 +142,7 @@ write.csv(POSE.macro, "NEONdata/POSE/POSE.macro.csv",
 # run the chuk above once to create this file
 # then after that, don't run the above chunk and only run this one 
 # this will import the NEON macro data for this one site
-POSE.macro <- read_csv("NEONdata/POSE/POSE.macro.csv")
+BARC.macro <- read_csv("NEONdata/BARC/BARC.macro.csv")
 
 ```
 
@@ -184,7 +184,7 @@ precip <- neonUtilities::loadByProduct(
   dpID = my_dpid,
   # many aquatic sites don't have precipitation sensors,
   # pick the nearest terrestrial site
-  site = "BLAN",
+  site = "OSBS",
   package = 'expanded',
   check.size = FALSE,
   token=Sys.getenv("NEON_TOKEN"))
@@ -202,21 +202,20 @@ row.names = FALSE)
 
 
 #calculate the total precipitation for each date
-#calculate the total precipitation for each date
-precip_daily <- SECPRE_30min %>%
+precip_daily <- PRIPRE_30min %>%
                 dplyr::select(1:6,
-                    secPrecipBulk) %>%
+                    priPrecipBulk) %>%
                     dplyr::mutate(date = date(startDateTime),
                     year = year(startDateTime),
                     yday = yday(startDateTime)) %>%
                     group_by(domainID, siteID, date, year, yday) %>%
                     dplyr::summarize(
-                    daily.precip = sum(secPrecipBulk, na.rm = TRUE)
+                    daily.precip = sum(priPrecipBulk, na.rm = TRUE)
                     )
 
 # calculate the total monthly precipitation 
 # by summing the daily precipitation for 30 days before each date
-
+# note that I relabeled the siteID because this was the closest where precip was measured
 precip <- precip_daily %>%
                 group_by(year) %>%
                 arrange(year, yday) %>%
@@ -226,11 +225,11 @@ precip <- precip_daily %>%
                 align = "right",
                 fill = NA,
                 na.rm = TRUE)) %>% 
-          mutate(siteID = "BLAN")
+          mutate(siteID = "OSBS")
 
 
 
-write.csv(precip, "NEONdata/POSE/POSE.precip.csv",
+write.csv(precip, "NEONdata/BARC/BARC.precip.csv",
 row.names = FALSE)
 
 
@@ -247,7 +246,7 @@ After running the above chunks once to download all the environmental variables,
 
 
 #import precipitation data
-POSE.precip<- read_csv("NEONdata/POSE/POSE.precip.csv",
+BARC.precip<- read_csv("NEONdata/BARC/BARC.precip.csv",
                      col_types = cols(.default = "d", 
                                       date = "D",
                                       domainID = "c",
@@ -261,14 +260,14 @@ POSE.precip<- read_csv("NEONdata/POSE/POSE.precip.csv",
 
 ## Join NEON Macroinvertebrate Data and Environmental Variables
 
-```{r join NEON macros and environmental vars for POSE}
+```{r join NEON macros and environmental vars for BARC}
 
 
 # select columns needed
-POSE.precip.r <- POSE.precip %>% dplyr::select(date, mon.precip)
+BARC.precip.r <- BARC.precip %>% dplyr::select(date, mon.precip)
 
 # join precip to macro data
-POSE.macro.precip <- left_join(POSE.macro, POSE.precip.r, by = "date") %>% 
+BARC.macro.precip <- left_join(BARC.macro, BARC.precip.r, by = "date") %>% 
   filter(!is.na(mon.precip))
 
 
@@ -276,7 +275,7 @@ POSE.macro.precip <- left_join(POSE.macro, POSE.precip.r, by = "date") %>%
 # save the fully merged and prepared data file
 # For the metadata describing everything in the file see _____ text file included in the Project folder 
 
-write.csv(POSE.macro.precip, "preppedData/POSE.macro.precip.csv", 
+write.csv(BARC.macro.precip, "preppedData/BARC.macro.precip.csv", 
           row.names = FALSE)
 
 
