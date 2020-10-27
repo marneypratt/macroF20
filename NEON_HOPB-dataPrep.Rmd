@@ -599,6 +599,7 @@ After running the above chunks once to download all the data, then just import a
 
 # this will import the NEON macro data for this one site
 HOPB.macro <- read_csv("NEONdata/HOPB/HOPB.macro.csv")
+                                      
 
 ```
 
@@ -613,21 +614,51 @@ HOPB.alg <- read_csv("NEONdata/HOPB/HOPB.alg.csv")
 ```{r import and join environmental variables, include=FALSE}
 
 #import water quality data
-HOPB.waq <- read_csv("NEONdata/HOPB/HOPB.waq.csv")
+HOPB.waq <- read_csv("NEONdata/HOPB/HOPB.waq.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
 
 
 #import surface water temperature data
-HOPB.wTemp <- read_csv("NEONdata/HOPB/HOPB.wTemp.csv")
+HOPB.wTemp <- read_csv("NEONdata/HOPB/HOPB.wTemp.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
 
 #import precipitation data
-HOPB.precip<- read_csv("NEONdata/HOPB/HOPB.precip.csv")
+HOPB.precip<- read_csv("NEONdata/HOPB/HOPB.precip.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
 
 
 #import aggregated degree days (ADD) data
-HOPB.ADD<- read_csv("NEONdata/HOPB/HOPB.ADD.csv")
+HOPB.ADD<- read_csv("NEONdata/HOPB/HOPB.ADD.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
 
 #import PAR at water surface data
-HOPB.parws <- read_csv("NEONdata/HOPB/HOPB.parws.csv")
+HOPB.parws <- read_csv("NEONdata/HOPB/HOPB.parws.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
 
 
 

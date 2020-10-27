@@ -1,0 +1,374 @@
+---
+title: "NEON COMO Data"
+author: "Marney Pratt"
+date: "10/15/2020"
+output: html_notebook
+---
+
+# Load Packages  
+
+```{r setup, include=FALSE}
+
+# load libraries 
+library(tidyverse) # for readr (import data) and dplyr (manipulate data)
+library(lubridate) #for dealing with dates and times
+library(neonUtilities) #to download NEON data
+library(padr) # time-series data preparation functions
+library(zoo) ## for dealing with time series
+
+```
+
+# Downloading NEON Macroinvertebrate Data  
+
+See the NEON website for more information on the [Macroinvertebrate collection Data Product](https://data.neonscience.org/data-products/DP1.20120.001) 
+
+```{r download all NEON macroinvertebrate data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Macroinvert Data Product ID
+my_dpid <- 'DP1.20120.001'
+
+
+# get all tables for these sites from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+all_tabs_inv <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = 'COMO',
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+all_tabs_inv %>% list2env(.GlobalEnv)
+
+
+#save readme tibble as csv file
+write.csv(readme_20120, "NEONinfo/NEON_metadata.csv")
+
+#save file with code definitions
+write.csv(categoricalCodes_20120, "NEONinfo/categoricalCodes.csv")
+
+
+# extract location data into a separate table
+COMO_fieldData <- inv_fieldData %>%
+  
+# extract year and date from collectDate, add as new column
+  mutate(
+    year = year(collectDate), 
+    date = date(collectDate)) %>% 
+  
+  # keep only the columns listed below
+  select(siteID, 
+         domainID,
+         namedLocation, 
+         decimalLatitude, 
+         decimalLongitude, 
+         elevation,
+         sampleID, 
+         eventID, 
+         date,
+         year, 
+         habitatType, 
+         samplerType,
+         benthicArea) %>%
+  
+  # keep rows with unique combinations of values, 
+  # i.e., no duplicate records
+  distinct()
+
+#Save this data file
+write.csv(COMO_fieldData, "NEONdata/COMO/COMO_fieldData.csv")
+
+
+# Make the observation table.
+# start with inv_taxonomyProcessed
+COMO.macro <- inv_taxonomyProcessed %>% 
+  
+  # select a subset of columns from
+  # inv_taxonomyProcessed
+  select(sampleID,
+         domainID,
+         siteID,
+         collectDate,
+         estimatedTotalCount,
+         acceptedTaxonID,
+         phylum, subphylum, class, subclass, order, family, subfamily, tribe, genus, 
+         scientificName,
+         taxonRank) %>%
+  
+  # Join the columns selected above with two 
+  # columns from inv_fieldData (the two columns 
+  # are sampleID and benthicArea)
+  left_join(COMO_fieldData %>% 
+              select(sampleID, eventID, date, year, 
+                     habitatType, samplerType,
+                     benthicArea)) %>%
+
+  # some new columns called 'variable_name', 
+  # 'value', and 'unit', and assign values for 
+  # all rows in the table.
+  # variable_name and unit are both assigned the 
+  # same text string for all rows. 
+  mutate(inv_dens = estimatedTotalCount / benthicArea,
+         inv_dens_unit = 'count per square meter') 
+
+
+#import master taxa list with tolerance values and FFGs 
+neon.mill.taxa <- read_csv("data/neon.mill.taxa.csv")
+
+#select needed variables
+neon.mill.taxa2 <- neon.mill.taxa %>%  
+  dplyr::select(acceptedTaxonID, organism_aggr, tolerance, FFG, FFG2)
+
+#merge NEON macro data with master taxa data
+COMO.macro <- left_join(COMO.macro, neon.mill.taxa2, by="acceptedTaxonID")
+
+
+# save macro data file for this site
+write.csv(COMO.macro, "NEONdata/COMO/COMO.macro.csv", 
+          row.names = FALSE)
+
+
+
+```
+
+
+
+# Download Aquatic Instrument Data  
+
+This webpage is helpful for downloading Aquatic Instrument System Data:
+[Download and work with NEON Aquatic Instrument Data](https://www.neonscience.org/explore-neon-ais-data)
+
+
+### product IDs
+  water quality: DP1.20288.001
+  air temperature: DP1.00002.001
+  relative humidity: DP1.00098.001
+  PAR at water surface:  DP1.20042.001
+  Precipitation: DP1.00006.001
+  Gage height: DP1.20267.001  
+  
+  
+  
+  
+## Download Water Quality Data Product  
+
+See the NEON website for more information on the [Water Quality Data Product](https://data.neonscience.org/data-products/DP1.20288.001)  
+
+
+```{r download NEON water quality data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Water quality Data Product ID
+my_dpid <- 'DP1.20288.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+waq <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = "COMO",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+waq %>% list2env(.GlobalEnv)
+
+write.csv(variables_20288, "NEONinfo/waq.vars.csv", 
+          row.names = FALSE)
+
+write.csv(readme_20288, "NEONinfo/waq.readme.csv", 
+          row.names = FALSE)
+
+
+waq_sum <- waq_instantaneous %>%
+                dplyr::select(1:6,
+                              specificConductance,
+                              dissolvedOxygen,
+                              dissolvedOxygenSaturation,
+                              pH,
+                              chlorophyll,
+                              turbidity,
+                              fDOM) %>%
+                dplyr::mutate(date = date(startDateTime)) %>%
+                group_by(domainID, siteID, horizontalPosition, date) %>%
+                dplyr::summarize(
+                      mean.SpCond = mean(specificConductance, na.rm = TRUE),
+                      median.SpCond = median(specificConductance, na.rm = TRUE),
+                      mean.DO = mean(dissolvedOxygen, na.rm = TRUE),
+                      median.DO = median(dissolvedOxygen, na.rm = TRUE),
+                      mean.DOsat = mean(dissolvedOxygenSaturation, na.rm = TRUE),
+                      median.DOsat = median(dissolvedOxygenSaturation, na.rm = TRUE),
+                      mean.pH = mean(pH, na.rm = TRUE),
+                      median.pH = median(pH, na.rm = TRUE),
+                      mean.chl = mean(chlorophyll, na.rm = TRUE),
+                      median.chl = median(chlorophyll, na.rm = TRUE),
+                      mean.turb = mean(turbidity, na.rm = TRUE),
+                      median.turb = median(turbidity, na.rm = TRUE),
+                      mean.fDOM = mean(fDOM, na.rm = TRUE),
+                      median.fDOM = median(fDOM, na.rm = TRUE)
+                                  )
+
+write.csv(waq_sum, "NEONdata/COMO/COMO.waq.csv", 
+          row.names = FALSE)
+
+```
+
+
+## Download Temperature (PRT) in Surface Water Data Product  
+
+See the NEON website for more information on the [Temperature (PRT) in Surface Water Data Product](https://data.neonscience.org/data-products/DP1.20053.001)  
+
+
+```{r download NEON water temp data, eval=FALSE, include=FALSE}
+
+###I ran this code once and saved the output, then I turned off running this chunk
+
+# Water temperature Data Product ID
+my_dpid <- 'DP1.20053.001'
+
+
+# download data from the NEON API 
+# Remove token=Sys.getenv("NEON_TOKEN") line if you do not have your own API token for NEON
+wTemp <- neonUtilities::loadByProduct(
+  dpID = my_dpid,
+  site = "COMO",
+  package = 'expanded',
+  check.size = FALSE,
+  token=Sys.getenv("NEON_TOKEN"))
+
+# extract items from list and put in R env. 
+wTemp %>% list2env(.GlobalEnv)
+
+write.csv(variables_20053, "NEONinfo/wTemp.vars.csv", 
+          row.names = FALSE)
+
+write.csv(readme_20053, "NEONinfo/wTemp.readme.csv", 
+          row.names = FALSE)
+
+
+wTemp_sum <- TSW_5min %>%
+                dplyr::select(1:7) %>%
+                dplyr::mutate(date = date(startDateTime)) %>%
+                group_by(domainID, siteID, horizontalPosition, date) %>%
+                dplyr::summarize(
+                      mean.wTemp = mean(surfWaterTempMean, na.rm = TRUE),
+                      median.wTemp = median(surfWaterTempMean, na.rm = TRUE),
+                                  )
+
+write.csv(wTemp_sum, "NEONdata/COMO/COMO.wTemp.csv", 
+          row.names = FALSE)
+
+```
+
+
+# Import Data  
+
+After running the above chunks once to download all the data, then just import all the resulting data files running the code below  
+
+```{r Import prepped COMO.macro.csv file, include=FALSE}
+
+# this will import the NEON macro data for this one site
+COMO.macro <- read_csv("NEONdata/COMO/COMO.macro.csv")
+
+```
+
+
+```{r import and join environmental variables, include=FALSE}
+
+#import water quality data
+COMO.waq <- read_csv("NEONdata/COMO/COMO.waq.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
+
+#import surface water temperature data
+COMO.wTemp <- read_csv("NEONdata/COMO/COMO.wTemp.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
+
+
+```
+
+
+## Join NEON Macroinvertebrate Data and Environmental Variables
+
+```{r join NEON macros and environmental vars for COMO, include=FALSE}
+
+#join water quality, water temperature, and PAR data
+COMO.waq2 <- left_join(COMO.waq, COMO.wTemp, by=c("domainID", 
+                                                  "siteID",
+                                                  "horizontalPosition",
+                                                  "date")) 
+
+#filter for upstream sensor sets 
+COMO.waq.up <- COMO.waq2 %>% 
+        dplyr::filter(horizontalPosition == 101 | horizontalPosition == 111) %>% 
+        group_by(domainID, siteID, date) %>% 
+        dplyr::summarize(
+                      mean.DO = mean(mean.DO, na.rm = TRUE),
+                      median.DO = mean(median.DO, na.rm = TRUE),
+                      mean.DOsat = mean(mean.DOsat, na.rm = TRUE),
+                      median.DOsat = mean(median.DOsat, na.rm = TRUE),
+                      mean.pH = mean(mean.pH, na.rm = TRUE),
+                      median.pH = mean(median.pH, na.rm = TRUE),
+                      mean.turb = mean(mean.turb, na.rm = TRUE),
+                      median.turb = mean(median.turb, na.rm = TRUE),
+                      mean.wTemp = mean(mean.wTemp, na.rm = TRUE),
+                      median.wTemp = mean(median.wTemp, na.rm = TRUE)
+                      ) %>% 
+        filter(!is.na(mean.DO))
+
+#filter for downstream sensor sets 
+COMO.waq.down <- COMO.waq2 %>% 
+        dplyr::filter(horizontalPosition == 102 | horizontalPosition == 112) %>% 
+        group_by(domainID, siteID, date) %>% 
+        dplyr::summarize(
+                      mean.DO = mean(mean.DO, na.rm = TRUE),
+                      median.DO = mean(median.DO, na.rm = TRUE),
+                      mean.DOsat = mean(mean.DOsat, na.rm = TRUE),
+                      median.DOsat = mean(median.DOsat, na.rm = TRUE),
+                      mean.pH = mean(mean.pH, na.rm = TRUE),
+                      median.pH = mean(median.pH, na.rm = TRUE),
+                      mean.turb = mean(mean.turb, na.rm = TRUE),
+                      median.turb = mean(median.turb, na.rm = TRUE),
+                      mean.wTemp = mean(mean.wTemp, na.rm = TRUE),
+                      median.wTemp = mean(median.wTemp, na.rm = TRUE)
+                      ) %>% 
+        filter(!is.na(mean.DO))
+
+# join upstream sensor set data to macro data
+COMO.macro.up <- left_join(COMO.macro, COMO.waq.up) %>% 
+        filter(!is.na(mean.DO))
+
+# save the fully merged and prepared data file
+# For the metadata describing everything in the file see _____ text file included in the Project folder 
+
+write.csv(COMO.macro.up, "preppedData/COMO.macro.up.csv", 
+          row.names = FALSE)
+  
+
+# join downstream sensor set data to macro data
+COMO.macro.down <- left_join(COMO.macro, COMO.waq.down) %>% 
+        filter(!is.na(mean.DO))
+
+
+# save the fully merged and prepared data file
+# For the metadata describing everything in the file see _____ text file included in the Project folder 
+
+write.csv(COMO.macro.down, "preppedData/COMO.macro.down.csv", 
+          row.names = FALSE)
+
+
+```
+
+

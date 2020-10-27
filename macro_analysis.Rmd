@@ -59,23 +59,6 @@ mill.macro <- read_csv("preppedData/mill.macro.csv",
 
 ```
 
-## All NEON Macroinvertebrate Data
-
-```{r import all NEON macro data, include=FALSE}
-
-# this chunk will import data for ALL NEON macroinvertebrate data for all wadeable streams
-# this dataset does not have any environmental variables added
-
-neon.macro <- read_csv("NEONData/neon.macro.csv") %>% 
-
-        # add date and year to data
-          dplyr::mutate(date = date(collectDate),
-                        year = year(collectDate))
-
-
-
-```
-
 
 ## Master Taxa List
 
@@ -104,10 +87,20 @@ The Aquatic Instrument Data come from sensors placed upstream and downstream of 
 # this file includes the macroinvertebrates and most of the environmental variables
 
 # this file has the data from the upstream sensor (no fDOM)
-HOPB.macro.up <- read_csv("preppedData/HOPB.macro.up.csv")
+HOPB.macro.up <- read_csv("preppedData/HOPB.macro.up.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
 
 # this file has the data from the downstream sensor (includes fDOM)
-HOPB.macro.down <- read_csv("preppedData/HOPB.macro.down.csv")
+HOPB.macro.down <- read_csv("preppedData/HOPB.macro.down.csv",
+                     col_types = cols(.default = "d", 
+                                      date = "D",
+                                      domainID = "c",
+                                      siteID = "c")
+                                      )
 
 ```
 
@@ -240,9 +233,7 @@ macro.EPT <-  macro.EPT %>%
 
 # Functional Feeding Groups
 
-```{r relative abundance of FFG's}
-
-
+```{r relative abundance of each FFG}
 
 # number of scrapers
 macro.scr <- neon.macro %>% 
@@ -301,6 +292,58 @@ macro.FFG <-  macro.FFG %>%
 
 
 ```
+
+
+```{r calculate FFGs all in one column for NEON data}
+
+
+# add month using mutate and lubridate
+
+# create new column with months changed to season
+
+# rename estimatedTotalCount to number
+  dplyr::rename( ., number = estimatedTotalCount) %>% 
+
+  
+  
+###Sum FFG for each sampleID
+macro.ffg<-macro.data %>% 
+  group_by(sampleID, season, FFG) %>% 
+  dplyr::summarise (num.ffg = sum(number, na.rm = TRUE))
+
+
+###sum the total number of all organisms for each sample
+macro.sample <- macro.data %>% 
+  group_by(sampleID) %>% 
+  dplyr::summarise (total.num = sum(number, na.rm = TRUE))
+
+q.area <- sampling.sum %>% select(SampleID, q.area)
+
+macro.sample <- left_join(macro.sample, q.area, by = "SampleID")
+
+macro.ffg <- left_join(macro.ffg, macro.sample, by = "SampleID")
+
+###calculate the relative abundance 
+macro.ffg <-mutate(macro.ffg, relab=num.ffg/total.num)
+
+###calculate the ffg density 
+macro.ffg <-macro.ffg %>% 
+  mutate(ffg.den=num.ffg/q.area)
+
+
+ggplot(ID.ffg, aes(x=Year,y=relab, fill = FFG))+
+  geom_bar(position = "fill", stat="identity")+
+  ylab("Relative Abundance\n") +
+  scale_fill_discrete(name="Functional Feeding Groups",
+                        labels=c("collector filterers", "collector gatherers",
+                                 "predators", "scrapers", "shredders" ))+
+  coord_cartesian(ylim=c(0,1), expand=FALSE, clip='off') +
+  theme_classic(base_size=10) +
+  facet_grid(rows=vars(Season), cols=vars(Location))
+
+```
+
+
 
 # Correlation
 
