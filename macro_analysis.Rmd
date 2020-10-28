@@ -95,6 +95,18 @@ HOPB.macro.down <- read_csv("preppedData/HOPB.macro.down.csv",guess_max = 5000)
 ```
 
 
+## HOPB and MILL Environmental Data 
+
+```{r import MILL and HOPB env data, include=F}
+
+#this data is for Fall 2019 only 
+#includes all MILL data
+#includes HOPB data for the same days as MILL samples from 1:30-2:30pm EDT
+
+mill.hopb.waqF19 <- read_csv("NEONdata/HOPB/mill.hopb.waqF19.csv",guess_max = 1400)
+
+
+```
 
 
 
