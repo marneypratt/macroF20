@@ -228,6 +228,32 @@ waq_sum <- waq_instantaneous %>%
 write.csv(waq_sum, "NEONdata/CUPE/CUPE.waq.csv", 
           row.names = FALSE)
 
+
+waq.F19 <- waq_instantaneous %>%
+
+                dplyr::select(1:6,
+                              dissolvedOxygen,
+                              pH,
+                              turbidity) %>%
+                dplyr::mutate(date = date(startDateTime),
+                              time = format(startDateTime, format="%H:%M:%S")) %>% 
+
+                filter(time>"17:29:00", time<"18:31:00",
+                       date == "2019-09-16" |
+                       date == "2019-09-17" |
+                       date == "2019-09-23" |
+                       date == "2019-09-24" |
+                       date == "2019-09-26" |
+                       date == "2019-09-30" |
+                       date == "2019-10-01" |
+                       date == "2019-10-03") %>% 
+  dplyr::rename( ., DO = dissolvedOxygen,
+                    turb = turbidity)
+
+write.csv(waq.F19, "NEONdata/CUPE/CUPE.waq.F19.csv", 
+          row.names = FALSE)
+
+
 ```
 
 
@@ -274,6 +300,30 @@ wTemp_sum <- TSW_5min %>%
 
 write.csv(wTemp_sum, "NEONdata/CUPE/CUPE.wTemp.csv", 
           row.names = FALSE)
+
+
+wTemp.F19 <- TSW_5min %>%
+
+                dplyr::select(1:6,
+                              surfWaterTempMean) %>%
+                dplyr::mutate(date = date(startDateTime),
+                              time = format(startDateTime, format="%H:%M:%S")) %>% 
+
+                filter(time>"17:29:00", time<"18:31:00",
+                       date == "2019-09-16" |
+                       date == "2019-09-17" |
+                       date == "2019-09-23" |
+                       date == "2019-09-24" |
+                       date == "2019-09-26" |
+                       date == "2019-09-30" |
+                       date == "2019-10-01" |
+                       date == "2019-10-03") %>% 
+  
+                dplyr::rename( ., wTemp = surfWaterTempMean)
+
+write.csv(wTemp.F19, "NEONdata/CUPE/CUPE.wTemp.F19.csv", 
+          row.names = FALSE)
+
 
 ```
 
@@ -378,6 +428,50 @@ write.csv(CUPE.macro.down, "preppedData/CUPE.macro.down.csv",
 
 ```
 
+## Join HOBP and MILL Environmental Variables Only
+This code takes the values measured for the environmental variables from CUPE from the same days and time in the afternoon when we sampled in the Mill River for Fall 2019
 
+```{r join CUPE and MILL env variables, include=FALSE}
+
+#import the water quality data file for MILL
+waterQ <- read_csv("data/waterQ.csv",
+  col_types = cols(date = col_date(format = "%m/%d/%Y"), 
+                   location = col_factor(levels = c("Downstream","Upstream")), 
+                   season = col_factor(levels = c("Summer","Fall")), 
+                   year = col_factor(),
+                   microhabitat = col_factor(levels = 
+                    c("DSR", "DFR", "DM", "DSH", "DSP", 
+                      "USR", "UFR", "UM", "USH", "USU"))))
+
+mill.F19 <- waterQ %>% 
+  filter(season == "Fall", year == "2019") %>% 
+  dplyr::select(date, sampleID, DO, pH, turb, wTemp) %>% 
+  mutate(siteID = "MILL")
+
+#import CUPE water quality data for the same dates as sampled MILL in Fall 2019
+CUPE.waq.F19<- read_csv("NEONdata/CUPE/CUPE.waq.F19.csv") %>% 
+  select(-endDateTime)
+
+
+
+#import CUPE water quality data for the same dates as sampled MILL in Fall 2019
+CUPE.wTemp.F19<- read_csv("NEONdata/CUPE/CUPE.wTemp.F19.csv") %>% 
+  select(-endDateTime)
+
+
+CUPE.F19 <- left_join(CUPE.waq.F19, CUPE.wTemp.F19) %>% 
+  filter(DO > 0.61 , DO <100)
+
+
+# bind the MILL and CUPE data together
+mill.CUPE.waqF19 <- bind_rows(CUPE.F19, mill.F19) 
+
+write.csv(mill.CUPE.waqF19, "NEONdata/CUPE/mill.cupe.waqF19.csv", 
+          row.names = FALSE)
+
+
+
+
+```
 
 
