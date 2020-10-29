@@ -113,7 +113,7 @@ mill.hopb.waqF19 <- read_csv("NEONdata/HOPB/mill.hopb.waqF19.csv",guess_max = 14
 
 # Diversity
 
-```{r data wrangling for diversity measures}
+```{r data wrangling for diversity measures, include=F}
 
 # remove missing values, and make sure each taxa is summarized within sampleID
 macro.long <- mill.macro %>% 
