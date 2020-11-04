@@ -15,6 +15,7 @@ library(lubridate) #for dealing with dates and times
 library(neonUtilities) #to download NEON data
 library(padr) # time-series data preparation functions
 library(zoo) ## for dealing with time series
+library(stringr) ## for updates to strings
 
 ```
 
@@ -163,10 +164,10 @@ all_tabs_alg %>% list2env(.GlobalEnv)
 
 
 #save readme tibble as csv file
-write.csv(readme_20166, "NEONinfo/NEON_metadata.csv")
+write.csv(readme_20166, "NEONinfo/NEON_alg_metadata.csv")
 
 #save file with code definitions
-write.csv(categoricalCodes_20166, "NEONinfo/categoricalCodes.csv")
+write.csv(categoricalCodes_20166, "NEONinfo/alg_categoricalCodes.csv")
 
 
 # extract location data into a separate table
@@ -193,57 +194,47 @@ CARI_alg_fieldData <- alg_fieldData %>%
                 samplerType,
                 benthicArea,
                 substratumSizeClass) %>% 
-  dplyr::rename(., algSampleID = parentSampleID) %>% 
+
   
   # keep rows with unique combinations of values, 
   # i.e., no duplicate records
   distinct()
 
+
+#get certain variables from alg_biomass table
+CARI_alg_biomass <- alg_biomass %>% 
+  filter(!is.na(labSampleVolume)) %>% 
+  select(parentSampleID, sampleID, fieldSampleVolume, 
+         labSampleVolume, preservativeVolume) %>%
+   distinct()
+  
+
+
 #Save this data file
 write.csv(CARI_alg_fieldData, "NEONdata/CARI/CARI_alg_fieldData.csv")
-
 
 # Make the observation table.
 # start with alg_taxonomyProcessed
 CARI.alg <- alg_taxonomyProcessed %>% 
-  
-  dplyr::rename(., algSampleID = sampleID) 
 
-CARI.alg <- CARI.alg %>% 
-  
   # select a subset of columns from
   # alg_taxonomyProcessed
   dplyr::select(domainID,
          siteID,
          namedLocation,
          collectDate,
-         algSampleID,
+         sampleID,
          perBottleSampleVolume,
          algalParameter,
          algalParameterValue,
+         algalParameterUnit,
          acceptedTaxonID,
          division, class, order, family, genus, 
          specificEpithet, infraspecificEpithet,
          scientificName,
-         taxonRank) %>%
-  
-  # Join the columns selected above with  
-  # columns from alg_fieldData 
-  left_join(CARI_alg_fieldData %>% 
-              dplyr::select(algSampleID, eventID, date, year, 
-                     habitatType, algalSampleType,samplerType,
-                     benthicArea, substratumSizeClass)) %>%
-
-  # some new columns called 'variable_name', 
-  # 'value', and 'unit', and assign values for 
-  # all rows in the table.
-  # variable_name and unit are both assigned the 
-  # same text string for all rows. 
-  mutate(alg_dens = algalParameterValue / benthicArea,
-         alg_dens_unit = 'count or biovolume per square meter') 
-
-
-# make master algal taxa list
+         taxonRank)
+ 
+  # make master algal taxa list
 CARI.alg.taxa <- CARI.alg %>% 
   dplyr::select(9:18) %>% 
   distinct()
@@ -251,17 +242,75 @@ CARI.alg.taxa <- CARI.alg %>%
 # save master algal taxa list
 write.csv(CARI.alg.taxa, "NEONdata/CARI/CARI.alg.taxa.csv", 
           row.names = FALSE)
+ 
 
-# remove taxonomy to simplify data file
-CARI.alg <- CARI.alg %>% 
-  dplyr::select(-(9:18))
+CARI.alg.sum <- CARI.alg %>% 
+  # extract year and date from collectDate, add as new column
+  mutate(date = date(collectDate)) %>% 
+  
+  #add up all the algae per sample
+  group_by(date, sampleID, perBottleSampleVolume, algalParameter, 
+           algalParameterUnit) %>% 
+  summarize(total.alg = sum(algalParameterValue)) %>% 
+  
+  #filter for particular algalParameterUnit
+  filter(algalParameterUnit == "cellsPerBottle") 
+
+
+CARI.alg.sum <- left_join(CARI.alg.sum, CARI_alg_biomass)
+
+CARI.alg.sum <- left_join(CARI.alg.sum, CARI_alg_fieldData)
+
+
+CARI.alg.sum <- CARI.alg.sum %>% 
+
+  #correct for the sample and preservative volume in the sample bottle
+  mutate(labVol = labSampleVolume + preservativeVolume)  %>% 
+  mutate(algCountPerMl = total.alg/labVol) %>% 
+  
+  #correct for field sample volume and benthic area
+  mutate(algAbundPerArea = algCountPerMl * fieldSampleVolume / benthicArea)
+  
+
 
 # save algae data file for this site
-write.csv(CARI.alg, "NEONdata/CARI/CARI.alg.csv", 
+write.csv(CARI.alg.sum, "NEONdata/CARI/CARI.alg.sum.csv", 
           row.names = FALSE)
 
 
 
+ 
+CARI.epilithon.density <- CARI.alg.sum %>% 
+  #filter for just epilithon 
+  filter(algalSampleType == "epilithon") %>% 
+  
+  #extract month from date
+  mutate(month = month(date)) %>% 
+  
+  # create new column with months changed to season
+  mutate(season = case_when(month == 5 ~ "Spring",
+                            month == 7 ~ "Summer",
+                            month == 8 ~ "Fall")) 
+
+
+#change season to a factor
+CARI.epilithon.density$season <- factor(CARI.epilithon.density$season,
+                                           levels=c("Spring","Summer","Fall"))
+
+#change year to a factor
+CARI.epilithon.density$year <- factor(CARI.epilithon.density$year)
+
+
+# save algae data file for this site
+write.csv(CARI.epilithon.density, "NEONdata/CARI/CARI.epilithon.density.csv", 
+          row.names = FALSE)
+
+```
+
+
+```{r}
+ggplot(CARI.epilithon.density, aes(x=season, y=log(algAbundPerArea))) +
+  geom_quasirandom()
 ```
 
 

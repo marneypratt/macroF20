@@ -1,0 +1,188 @@
+"","name","pubCode","description","startDate","endDate"
+"1","alg.algalSampleType","epilithon","Periphyton colonizing rock surfaces",2012-01-01,NA
+"2","alg.algalSampleType","epixylon","Periphyton colonizing submerged wood surfaces",2012-01-01,NA
+"3","alg.algalSampleType","epipsammon","Periphyton colonizing sand surfaces",2012-01-01,NA
+"4","alg.algalSampleType","epipelon","Periphyton colonizing silt surfaces",2012-01-01,NA
+"5","alg.algalSampleType","epiphyton","Periphyton colonizing submerged plant surfaces",2012-01-01,NA
+"6","alg.algalSampleType","seston","Algae suspended in stream water column",2012-01-01,NA
+"7","alg.algalSampleType","phytoplankton","Algae suspended in lake or river water column",2012-01-01,NA
+"8","alg.algalSampleType","epilithon_largeSubstrate","Periphyton colonizing boulder or bedrock surfaces",2012-01-01,NA
+"9","alg.algalSampleType","epixylon_largeSubstrate","Periphyton colonizing large submerged wood surfaces",2012-01-01,NA
+"10","alg.analysisType","chlorophyll/pheophytin","Sample designated for chlorophyll a and pheophytin analysis",2012-01-01,NA
+"11","alg.analysisType","CN","Sample designated for carbon and nitrogen analysis",2012-01-01,NA
+"12","alg.analysisType","P","Sample designated for phosphorus analysis",2012-01-01,NA
+"13","alg.analysisType","CNS","Sample designated for carbon, nitrogen, and sulfur stable isotope analysis",2012-01-01,NA
+"14","alg.analysisType","AFDM","Sample designated for ash free dry mass analysis",2012-01-01,NA
+"15","alg.analysisType","taxonomy","Sample designated for taxonomic analysis",2012-01-01,NA
+"16","alg.analysisType","13C15N","Sample designated for carbon and nitrogen stable isotope analysis",2012-01-01,NA
+"17","alg.analysisType","34S","Sample designated for sulfur stable isotope analysis",2012-01-01,NA
+"18","alg.analysisType","CNSa","Sample a designated for carbon and nitrogen or carbon, nitrogen, and sulfur isotope analysis",2012-01-01,NA
+"19","alg.analysisType","CNSb","Sample b designated for carbon and nitrogen or carbon, nitrogen, and sulfur isotope analysis",2012-01-01,NA
+"20","alg.analysisType","POM","Surface water sample designated for carbon and nitrogen isotope analysis",2012-01-01,NA
+"21","alg.ashMassDataQF","belowDetection","Ash mass value is within 0.0005 g of dry mass",2012-01-01,NA
+"22","alg.ashMassDataQF","ashMassError","Ash mass value is >0.0005 g greater than dry mass",2012-01-01,NA
+"23","alg.ashMassDataQF","dryMassError","Weighing error occurred during dry mass measurement",2012-01-01,NA
+"24","alg.preservativeType","Lugol's iodine","Lugol's iodine",2012-01-01,NA
+"25","alg.preservativeType","glutaraldehyde","glutaraldehyde",2012-01-01,NA
+"26","alg.sampleCondition","OK","OK",2012-01-01,NA
+"27","alg.sampleCondition","filter missing","filter missing",2012-01-01,NA
+"28","alg.sampleCondition","undetermined","ash mass greater than dry mass",2012-01-01,NA
+"29","alg.sampleCondition","other (specify in remarks)","other (specify in remarks)",2012-01-01,NA
+"30","alg.samplerType","Kemmerer","Vertical Kemmerer sampler",2012-01-01,NA
+"31","alg.samplerType","Van Dorn","Horizontal Van Dorn sampler",2012-01-01,NA
+"32","alg.samplerType","grab","Water, sediment, or plant grab",2012-01-01,NA
+"33","alg.samplerType","scrub","Cobble or wood scrub",2012-01-01,NA
+"34","alg.samplingProtocolVersion","NEON.DOC.000691vA","NEON.DOC.000691vA",2012-01-01,NA
+"35","alg.samplingProtocolVersion","NEON.DOC.000691vB","NEON.DOC.000691vB",2012-01-01,NA
+"36","alg.samplingProtocolVersion","NEON.DOC.000691vC","NEON.DOC.000691vC",2012-01-01,NA
+"37","alg.samplingProtocolVersion","NEON.DOC.000691vD","NEON.DOC.000691vD",2012-01-01,NA
+"38","alg.samplingProtocolVersion","NEON.DOC.000691vE","NEON.DOC.000691vE",2012-01-01,NA
+"39","alg.samplingProtocolVersion","NEON.DOC.001203vA","NEON.DOC.001203vA",2012-01-01,NA
+"40","alg.samplingProtocolVersion","NEON.DOC.001203vB","NEON.DOC.001203vB",2012-01-01,NA
+"41","alg.samplingProtocolVersion","NEON.DOC.001203vC","NEON.DOC.001203vC",2012-01-01,NA
+"42","alg.samplingProtocolVersion","NEON.DOC.001203vD","NEON.DOC.001203vD",2012-01-01,NA
+"43","alg.samplingProtocolVersion","NEON.DOC.003045vA","NEON.DOC.003045vA",2012-01-01,NA
+"44","alg.samplingProtocolVersion","NEON.DOC.003045vB","NEON.DOC.003045vB",2012-01-01,NA
+"45","alg.samplingProtocolVersion","NEON.DOC.003045vC","NEON.DOC.003045vC",2012-01-01,NA
+"46","alg.samplingProtocolVersion","NEON.DOC.003045vD","NEON.DOC.003045vD",2018-11-01,NA
+"47","alg.samplingProtocolVersion","NEON.DOC.003045vE","NEON.DOC.003045vE",2018-11-01,NA
+"48","apl.algalParameter","number of valves","Number of diatom valves",2012-01-01,2016-09-02
+"49","apl.algalParameter","number of natural units","Number of natural algal units",2012-01-01,2016-09-02
+"50","apl.algalParameter","number of cells","Number of algal cells",2012-01-01,2016-09-02
+"51","apl.algalParameter","cell density","Density of algal cells",2012-01-01,NA
+"52","apl.algalParameter","biovolume density","Algal density by biovolume",2012-01-01,2019-10-01
+"53","apl.algalParameter","subjective rating","Relative contribution of a macroalgae taxon to the sample on a scale of 1 to 6. 1 indicates low density, 6 indicates that 100% of the sample is made up of the taxon. ",2012-01-01,NA
+"54","apl.algalParameter","plant","Vascular plant or bryophyte",2012-01-01,NA
+"55","apl.algalParameter","valves","Number of diatom valves",2016-07-02,NA
+"56","apl.algalParameter","natural units","Number of natural algal units",2016-07-02,NA
+"57","apl.algalParameter","cells","Number of algal cells",2016-07-02,NA
+"58","apl.algalParameter","macroalgae","Macroalgae",2012-01-01,NA
+"59","apl.algalType","Bacillariophyceae","Bacillariophyceae",2012-01-01,NA
+"60","apl.algalType","Chlorophyta and Charophyta","Chlorophyta and Charophyta",2012-01-01,NA
+"61","apl.algalType","Cyanobacteria","Cyanobacteria",2012-01-01,NA
+"62","apl.algalType","Xanthophyceae","Xanthophyceae",2012-01-01,NA
+"63","apl.algalType","Euglenophyta","Euglenophyta",2012-01-01,NA
+"64","apl.algalType","Dinoflagellata","Dinoflagellata",2012-01-01,NA
+"65","apl.algalType","Rhodophyta","Rhodophyta",2012-01-01,NA
+"66","apl.algalType","Unclassified","Unclassified",2012-01-01,NA
+"67","apl.algalType","Cryptophyta ","Cryptophyta ",2012-01-01,NA
+"68","apl.algalType","Ochrophyta ","Ochrophyta ",2012-01-01,NA
+"69","apl.algalType","Bacillariophyceae","Bacillariophyceae",2012-01-01,NA
+"70","apl.IDQualifiersAllRanks","cf. division","Roughly equals but 'not sure' about the division",2012-01-01,NA
+"71","apl.IDQualifiersAllRanks","aff. division","Similar to but is not the division",2012-01-01,NA
+"72","apl.IDQualifiersAllRanks","cf. subdivision","Roughly equals but 'not sure' about the subdivision",2012-01-01,NA
+"73","apl.IDQualifiersAllRanks","aff. subdivision","Similar to but is not the subdivision",2012-01-01,NA
+"74","apl.IDQualifiersAllRanks","cf. infradivision","Roughly equals but 'not sure' about the infradivision",2012-01-01,NA
+"75","apl.IDQualifiersAllRanks","aff. infradivision","Similar to but is not the infradivision",2012-01-01,NA
+"76","apl.IDQualifiersAllRanks","cf. parvdivision","Roughly equals but 'not sure' about the parvdivision",2012-01-01,NA
+"77","apl.IDQualifiersAllRanks","aff. parvdivision","Similar to but is not the parvdivision",2012-01-01,NA
+"78","apl.IDQualifiersAllRanks","cf. superclass","Roughly equals but 'not sure' about the superclass",2012-01-01,NA
+"79","apl.IDQualifiersAllRanks","aff. superclass","Similar to but is not the superclass",2012-01-01,NA
+"80","apl.IDQualifiersAllRanks","cf. class","Roughly equals but 'not sure' about the class",2012-01-01,NA
+"81","apl.IDQualifiersAllRanks","aff. class","Similar to but is not the class",2012-01-01,NA
+"82","apl.IDQualifiersAllRanks","cf. subclass","Roughly equals but 'not sure' about the subclass",2012-01-01,NA
+"83","apl.IDQualifiersAllRanks","aff. subclass","Similar to but is not the subclass",2012-01-01,NA
+"84","apl.IDQualifiersAllRanks","cf. infraclass","Roughly equals but 'not sure' about the infraclass",2012-01-01,NA
+"85","apl.IDQualifiersAllRanks","aff. infraclass","Similar to but is not the infraclass",2012-01-01,NA
+"86","apl.IDQualifiersAllRanks","cf. superorder","Roughly equals but 'not sure' about the superorder",2012-01-01,NA
+"87","apl.IDQualifiersAllRanks","aff. superorder","Similar to but is not the superorder",2012-01-01,NA
+"88","apl.IDQualifiersAllRanks","cf. order","Roughly equals but 'not sure' about the order",2012-01-01,NA
+"89","apl.IDQualifiersAllRanks","aff. order","Similar to but is not the order",2012-01-01,NA
+"90","apl.IDQualifiersAllRanks","cf. suborder","Roughly equals but 'not sure' about the suborder",2012-01-01,NA
+"91","apl.IDQualifiersAllRanks","aff. suborder","Similar to but is not the suborder",2012-01-01,NA
+"92","apl.IDQualifiersAllRanks","cf. family","Roughly equals but 'not sure' about the family",2012-01-01,NA
+"93","apl.IDQualifiersAllRanks","aff. family","Similar to but is not the family",2012-01-01,NA
+"94","apl.IDQualifiersAllRanks","cf. subfamily","Roughly equals but 'not sure' about the subfamily",2012-01-01,NA
+"95","apl.IDQualifiersAllRanks","aff. subfamily","Similar to but is not the subfamily",2012-01-01,NA
+"96","apl.IDQualifiersAllRanks","cf. tribe","Roughly equals but 'not sure' about the tribe",2012-01-01,NA
+"97","apl.IDQualifiersAllRanks","aff. tribe","Similar to but is not the tribe",2012-01-01,NA
+"98","apl.IDQualifiersAllRanks","cf. subtribe","Roughly equals but 'not sure' about the subtribe",2012-01-01,NA
+"99","apl.IDQualifiersAllRanks","aff. subtribe","Similar to but is not the subtribe",2012-01-01,NA
+"100","apl.IDQualifiersAllRanks","cf. genus","Roughly equals but 'not sure' about the genus",2012-01-01,NA
+"101","apl.IDQualifiersAllRanks","aff. genus","Similar to but is not the genus",2012-01-01,NA
+"102","apl.IDQualifiersAllRanks","cf. subgenus","Roughly equals but 'not sure' about the subgenus",2012-01-01,NA
+"103","apl.IDQualifiersAllRanks","aff. subgenus","Similar to but is not the subgenus",2012-01-01,NA
+"104","apl.IDQualifiersAllRanks","cf. section","Roughly equals but 'not sure' about the section",2012-01-01,NA
+"105","apl.IDQualifiersAllRanks","aff. section","Similar to but is not the section",2012-01-01,NA
+"106","apl.IDQualifiersAllRanks","cf. subsection","Roughly equals but 'not sure' about the subsection",2012-01-01,NA
+"107","apl.IDQualifiersAllRanks","aff. subsection","Similar to but is not the subsection",2012-01-01,NA
+"108","apl.IDQualifiersAllRanks","cf. species","Roughly equals but 'not sure' about the species",2012-01-01,NA
+"109","apl.IDQualifiersAllRanks","aff. species","Similar to but is not the species",2012-01-01,NA
+"110","apl.IDQualifiersAllRanks","cf. subspecies","Roughly equals but 'not sure' about the subspecies",2012-01-01,NA
+"111","apl.IDQualifiersAllRanks","aff. subspecies","Similar to but is not the subspecies",2012-01-01,NA
+"112","apl.IDQualifiersAllRanks","cf. variety","Roughly equals but 'not sure' about the variety",2012-01-01,NA
+"113","apl.IDQualifiersAllRanks","aff. variety","Similar to but is not the variety",2012-01-01,NA
+"114","apl.IDQualifiersAllRanks","cf. subvariety","Roughly equals but 'not sure' about the subvariety",2012-01-01,NA
+"115","apl.IDQualifiersAllRanks","aff. subvariety","Similar to but is not the subvariety",2012-01-01,NA
+"116","apl.IDQualifiersAllRanks","cf. form","Roughly equals but 'not sure' about the form",2012-01-01,NA
+"117","apl.IDQualifiersAllRanks","aff. form","Similar to but is not the form",2012-01-01,NA
+"118","apl.IDQualifiersAllRanks","sp. nov.","Represents a species new to science that has been verified by a recognized authority or one that appears in the literature as such? ",2012-01-01,NA
+"119","apl.IDQualifiersAllRanks","spp. nr.","Refers to multiple potentially undescribed species nearest to the species indicated",2012-01-01,NA
+"120","apl.IDQualifiersAllRanks","sp. nr.","Refers to a potentially undescribed species nearest to the species indicated",2012-01-01,NA
+"121","apl.qcTaxonomyStatus","original","Original identification",2012-01-01,NA
+"122","apl.qcTaxonomyStatus","QC","Identification confirmed during QAQC",2012-01-01,NA
+"123","apl.sampleCondition","Condition OK","Condition OK",2012-01-01,NA
+"124","apl.sampleCondition","damaged, affecting analysis","Damaged, affecting analysis",2012-01-01,2018-03-30
+"125","apl.sampleCondition","Sample Damaged or Lost","Sample Damaged or Lost",2012-01-01,NA
+"126","apl.sampleCondition","sample leakage","Sample leakage",2012-01-01,2018-03-30
+"127","apl.sampleCondition","Sample Leakage","Sample Leakage",2012-01-01,NA
+"128","apl.sampleCondition","Sample Damaged or Lost","Sample Damaged or Lost",2012-01-01,NA
+"129","apl.sampleCondition","Sample Leakage","Sample Leakage",2012-01-01,NA
+"130","apl.sampleCondition","other (explain in remarks)","other (explain in remarks)",2012-01-01,NA
+"131","apl.sampleCondition","not analyzed","not analyzed",2012-01-01,NA
+"132","apl.sampleCondition","Diatom slide not created","Diatom slide not created",2012-01-01,NA
+"133","apl.taxonDatabaseName","NADED","North American Diatom Ecological Database (NADED)",2012-01-01,NA
+"134","apl.unit","cubicMicrometerPerBottle","Cubic micrometers per bottle",2012-01-01,NA
+"135","apl.unit","cellsPerBottle","Cells per bottle",2012-01-01,NA
+"136","apl.unit","count","Count",2012-01-01,NA
+"137","apl.unit","none","None",2012-01-01,NA
+"138","aquaticSiteType","lake","lake",2012-01-01,NA
+"139","aquaticSiteType","stream","stream",2012-01-01,NA
+"140","aquaticSiteType","river","river",2012-01-01,NA
+"141","biophysicalCriteria","OK - no known exceptions","Sampling occurred on schedule, no known issues",2012-01-01,NA
+"142","biophysicalCriteria","OK - schedule change but conditions met","Sampling occurred not within defined sampling window but reflects the target biophysical conditions",2012-01-01,NA
+"143","biophysicalCriteria","conditions not met","Sampling does not reflect the target biophysical conditions",2012-01-01,NA
+"144","biophysicalCriteria","other","Other potential sample timing inconsistencies described in the remarks",2012-01-01,NA
+"145","biophysicalCriteria","conditions not met: most plants senesced","Sampling does not reflect the target biophysical conditions, most plants senesced",2012-01-01,NA
+"146","biophysicalCriteria","conditions not met: most plants not yet flowering","Sampling does not reflect the target biophysical conditions, most plants not yet in flower",2012-01-01,NA
+"147","biophysicalCriteria","unknown - logistical","Sampling not possible due to logistical considerations",2012-01-01,NA
+"148","inv.habitatType","riffle","Shallow, swift stream habitat with high turbulence, typically with relatively coarse sediment size",2012-01-01,NA
+"149","inv.habitatType","run","Shallow to deep stream habitat with swift to moderate flow, characterized by low turbulence (i.e., smooth water surface)",2012-01-01,NA
+"150","inv.habitatType","pool","Typically the deepest habitats in a stream, pools are characterized by smaller substrate size and relatively slow moving water",2012-01-01,NA
+"151","inv.habitatType","stepPool","In high-gradient streams, a series of pools separated by boulder or cobble steps, causing fast flow over the steps and slow flow in the pools",2012-01-01,NA
+"152","inv.habitatType","littoral","The shallow zone along the shore of a lake or river where light penetration reaches the bottom",2012-01-01,NA
+"153","inv.habitatType","pelagic","The part of the lake or river that is not near shore or close to the bottom",2012-01-01,NA
+"154","inv.habitatType","other","A habitat type other than those listed as options; see remarks",2012-01-01,NA
+"155","inv.substratumSizeClass","clay","Grain size 0.001 - 0.004 mm",2012-01-01,NA
+"156","inv.substratumSizeClass","silt","Grain size 0.004 - 0.062 mm",2012-01-01,NA
+"157","inv.substratumSizeClass","sand","Grain size 0.062 - 2.0 mm",2012-01-01,NA
+"158","inv.substratumSizeClass","pebble","Grain size 2.0 - 64.0 mm",2012-01-01,NA
+"159","inv.substratumSizeClass","cobble","Grain size 64.0 - 256.0 mm",2012-01-01,NA
+"160","inv.substratumSizeClass","boulder","Grain size > 256.0 mm",2012-01-01,NA
+"161","inv.substratumSizeClass","bedrock","bedrock",2012-01-01,NA
+"162","inv.substratumSizeClass","large woody debris","large woody debris",2018-07-01,NA
+"163","inv.substratumSizeClass","other","other",2012-01-01,NA
+"164","samplingImpractical","location dry","location dry",2012-01-01,NA
+"165","samplingImpractical","location frozen","location frozen",2012-01-01,NA
+"166","samplingImpractical","location snow covered","location snow covered",2012-01-01,NA
+"167","samplingImpractical","other","Sampling location inaccessible due to other ecological reason described in the remarks",2012-01-01,NA
+"168","samplingImpractical","shallow groundwater","shallow groundwater; depth of groundwater column less than 0.5 m",2012-01-01,NA
+"169","samplingImpractical","low yield groundwater","low yield groundwater well",2012-01-01,NA
+"170","samplingImpractical","high water velocity","high water velocity",2012-01-01,NA
+"171","samplingImpractical","staff gauge disturbed","staff gauge disturbed",2012-01-01,NA
+"172","samplingImpractical","staff gauge not installed","staff gauge not installed",2012-01-01,NA
+"173","samplingImpractical","OK","OK",2012-01-01,NA
+"174","samplingImpractical","coordinates not suitable","Maximum number of attempts made to sample within a subplot were unsuccessful",2012-01-01,NA
+"175","samplingImpractical","location flooded","location flooded",2012-01-01,NA
+"176","samplingImpractical","logistical","logistical",2012-01-01,NA
+"177","samplingImpractical","management","management",2012-01-01,NA
+"178","samplingImpractical","extreme weather","extreme weather",2012-01-01,NA
+"179","samplingImpractical","location burned","location burned",2012-01-01,NA
+"180","samplingImpractical","temperature low","temperature low",2012-01-01,NA
+"181","samplingImpractical","temperature high","temperature high",2012-01-01,NA
+"182","samplingImpractical","disturbance","samples not collected due to disturbance",2012-01-01,NA
+"183","samplingImpractical","too windy","too windy",2012-01-01,NA
+"184","samplingImpractical","horizon not present","horizon not present in the incubated soil sample",2012-01-01,NA
+"185","samplingImpractical","location wet","location too wet due to rain or dew",2012-01-01,NA
+"186","Yes or No choice","Y","Yes",2012-01-01,NA
+"187","Yes or No choice","N","No",2012-01-01,NA
