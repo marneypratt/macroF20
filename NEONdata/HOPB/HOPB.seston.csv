@@ -1,0 +1,12 @@
+"year","date","month","parentSampleID","fieldSampleVolume","domainFilterVolume","total.AFDM","season","siteID","habitatType","algalSampleType","benthicArea","substratumSizeClass","AFDM.g.ml"
+2016,2016-10-05,10,"HOPB.20161005.SESTON.1",5000,250,1e-04,"Fall","HOPB","pool","seston",NA,"cobble",4e-07
+2017,2017-04-19,4,"HOPB.20170419.SESTON.1",5000,250,1e-04,"Spring","HOPB","pool","seston",NA,"cobble",4e-07
+2017,2017-07-19,7,"HOPB.20170719.SESTON.1",5000,400,0.001,"Summer","HOPB","pool","seston",NA,"sand",2.5e-06
+2017,2017-10-12,10,"HOPB.20171012.SESTON.1",5000,250,2e-04,"Fall","HOPB","pool","seston",NA,"cobble",8e-07
+2018,2018-04-17,4,"HOPB.20180417.SESTON.1",1000,350,3e-04,"Spring","HOPB","pool","seston",NA,"sand",8.57142857142857e-07
+2018,2018-07-23,7,"HOPB.20180723.SESTON.1",1000,350,1e-04,"Summer","HOPB","pool","seston",NA,"sand",2.85714285714286e-07
+2018,2018-10-10,10,"HOPB.20181010.SESTON.1",1000,250,5e-04,"Fall","HOPB","pool","seston",NA,"sand",2e-06
+2019,2019-04-17,4,"HOPB.20190417.SESTON.1",1000,252,1e-04,"Spring","HOPB","pool","seston",NA,"sand",3.96825396825397e-07
+2019,2019-07-15,7,"HOPB.20190715.SESTON.1",1000,300,2e-04,"Summer","HOPB","pool","seston",NA,"sand",6.66666666666667e-07
+2019,2019-10-07,10,"HOPB.20191007.SESTON.1",1000,400,3e-04,"Fall","HOPB","pool","seston",NA,"pebble",7.5e-07
+2020,2020-07-19,7,"HOPB.20200719.SESTON.1",1000,250,3e-04,"Summer","HOPB","pool","seston",NA,"sand",1.2e-06

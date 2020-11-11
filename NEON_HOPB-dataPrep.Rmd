@@ -262,6 +262,62 @@ write.csv(HOPB.alg, "NEONdata/HOPB/HOPB.alg.csv",
           row.names = FALSE)
 
 
+#extract ash free dry mass data for algae
+HOPB.afdm <- alg_biomass %>% 
+  mutate(
+    year = year(collectDate), 
+    date = date(collectDate),
+    month = month(date)) %>% 
+  filter(analysisType == "AFDM") %>% 
+  group_by(year, date, month, parentSampleID, 
+           fieldSampleVolume, domainFilterVolume) %>% 
+  summarize(total.AFDM = sum(adjAshFreeDryMass)) %>% 
+
+
+  # create new column with months changed to season
+  mutate(season = case_when(month == 4 ~ "Spring",
+                            month == 7 ~ "Summer",
+                            month == 10 ~ "Fall"))
+
+#change season to a factor
+HOPB.afdm$season=factor(HOPB.afdm$season, levels=c("Spring","Summer","Fall"))
+
+HOPB.field <- HOPB_alg_fieldData %>% 
+  dplyr::rename(., parentSampleID = algSampleID) %>% 
+  dplyr::select(year, date, siteID, parentSampleID, 
+                habitatType, algalSampleType,
+                benthicArea, substratumSizeClass)
+  
+
+HOPB.afdm <- left_join(HOPB.afdm, HOPB.field)
+
+# save algae AFDM data file for this site
+write.csv(HOPB.afdm, "NEONdata/HOPB/HOPB.afdm.csv", 
+          row.names = FALSE)
+
+# filter for seston and calculate AFDM concentration in grams per mL
+HOPB.seston <- HOPB.afdm %>% 
+  filter(algalSampleType == "seston") %>% 
+  mutate(AFDM.g.ml = total.AFDM/domainFilterVolume)
+  
+
+# save seston AFDM data file for this site
+write.csv(HOPB.seston, "NEONdata/HOPB/HOPB.seston.csv", 
+          row.names = FALSE)
+
+
+# filter for benthic samples and calculate AFDM density in grams per square meter
+HOPB.benthic <- HOPB.afdm %>% 
+  filter(algalSampleType == "epilithon" | algalSampleType == "epipsammon") %>% 
+  mutate(AFDM.g.m2 = (total.AFDM/domainFilterVolume)*
+           (fieldSampleVolume/benthicArea))
+  
+
+# save seston AFDM data file for this site
+write.csv(HOPB.benthic, "NEONdata/HOPB/HOPB.benthic.csv", 
+          row.names = FALSE)
+
+
 
 ```
 
