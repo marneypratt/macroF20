@@ -152,7 +152,9 @@ abiotic.S18 <- left_join (quad.S18, waterQ.S18)
 ##Join macro data and waterQ
 macro.abio.S18 <- macro.data %>% 
   filter(year == "2018", season == "Summer") %>% 
-  left_join(., abiotic.S18) 
+  left_join(., abiotic.S18) %>% 
+  mutate(benthicArea = num_quads*0.25) %>% 
+  mutate(inv.dens = number/benthicArea)
   
 ```
 
@@ -192,7 +194,9 @@ abiotic.F18 <- left_join (quad.F18, waterQ.F18)
 ##Join macro data and waterQ
 macro.abio.F18 <- macro.data %>% 
   filter(year == "2018", season == "Fall") %>% 
-  left_join(., abiotic.F18) 
+  left_join(., abiotic.F18) %>% 
+  mutate(benthicArea = num_quads*0.25) %>% 
+  mutate(inv.dens = number/benthicArea)
   
 ```
 
@@ -208,7 +212,15 @@ waterQ.S19 <- waterQ %>%
 quad.S19 <- quadrats %>% 
   filter(year == "2019", season == "Summer") %>% 
   dplyr::select(date, sampleID, microhabitat, time, quadrat, depth, 
-         per_sediment, per_rock, per_organic) 
+         per_sediment, per_rock, per_organic) %>% 
+  
+  group_by(sampleID, microhabitat) %>% 
+  dplyr::summarise(num_quads = n(), 
+            depth = mean(depth, na.rm = TRUE), 
+            per_sediment = mean(per_sediment, na.rm = TRUE),
+            per_rock = mean(per_rock, na.rm = TRUE), 
+            per_organic = mean(per_organic, na.rm = TRUE)) 
+
 
 abiotic.S19 <- left_join (quad.S19, waterQ.S19) %>% 
   dplyr::select(-notes)
@@ -217,16 +229,18 @@ abiotic.S19 <- left_join (quad.S19, waterQ.S19) %>%
 ##Join macro data and waterQ
 macro.abio.S19 <- macro.data %>% 
   filter(year == "2019", season == "Summer") %>% 
-  left_join(., abiotic.S19) 
+  left_join(., abiotic.S19) %>% 
+  mutate(benthicArea = num_quads*0.25) %>% 
+  mutate(inv.dens = number/benthicArea)
   
 ```
 
 
-```{r join macro waterQ and quadrat fall 2019}
+```{r join macro waterQ and quadrat summer and fall 2019}
 
 #filter waterQ
-waterQ.F19 <- waterQ %>% 
-  filter(year == "2019", sampling == "macros", season == "Fall") %>% 
+waterQ.19 <- waterQ %>% 
+  filter(year == "2019", sampling == "macros") %>% 
   dplyr::select(-depth, -light, -flow, -notes) %>% 
   group_by(date, sampleID, sampling, sky, startTime, endTime, microhabitat) %>% 
   dplyr::summarise(num_w = n(), 
@@ -243,8 +257,8 @@ waterQ.F19 <- waterQ %>%
 
 
 #select certain columns of quadrat data
-quad.F19 <- quadrats %>% 
-  filter(year == "2019", season == "Fall") %>% 
+quad.19 <- quadrats %>% 
+  filter(year == "2019") %>% 
   dplyr::select(date, sampleID, microhabitat, time, quadrat, depth, 
          per_sediment, per_rock, per_organic) %>% 
   
@@ -255,13 +269,15 @@ quad.F19 <- quadrats %>%
             per_rock = mean(per_rock, na.rm = TRUE), 
             per_organic = mean(per_organic, na.rm = TRUE)) 
 
-abiotic.F19 <- left_join (quad.F19, waterQ.F19)
+abiotic.19 <- left_join (quad.19, waterQ.19)
   
 
 ##Join macro data and waterQ
-macro.abio.F19 <- macro.data %>% 
-  filter(year == "2019", season == "Fall") %>% 
-  left_join(., abiotic.F19) 
+macro.abio.19 <- macro.data %>% 
+  filter(year == "2019") %>% 
+  left_join(., abiotic.19) %>% 
+  mutate(benthicArea = num_quads*0.25) %>% 
+  mutate(inv.dens = number/benthicArea)
   
 ```
 
@@ -270,9 +286,9 @@ macro.abio.F19 <- macro.data %>%
 ```{r bind all data together}
 
 
-macro.abio <- bind_rows(macro.abio.S19, macro.abio.F19,
+macro.abio <- bind_rows(macro.abio.19,
                         macro.abio.F18, macro.abio.S18) %>% 
-  dplyr::select(-BvA, -sampling, -aTemp, -num_quads, -num_w)
+  dplyr::select(-BvA, -sampling, -quadrat, -vial, -aTemp, -num_w)
 
 
 ```
@@ -530,6 +546,14 @@ write.csv(usgs.df, "preppedData/mill.usgs.csv",
 
 
 ```
+
+```{r import daily Amherst weather data made above}
+
+usgs.df <- read_csv("preppedData/mill.usgs.csv",
+                  col_types = cols(date = col_date(format = "%Y-%m-%d"))) 
+
+```
+
 
 ```{r join macro and USGS data}
 
