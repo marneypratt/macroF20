@@ -300,6 +300,7 @@ COMO.wTemp <- read_csv("NEONdata/COMO/COMO.wTemp.csv",
 ```
 
 
+
 ## Join NEON Macroinvertebrate Data and Environmental Variables
 
 ```{r join NEON macros and environmental vars for COMO, include=FALSE}
@@ -368,6 +369,80 @@ COMO.macro.down <- left_join(COMO.macro, COMO.waq.down) %>%
 write.csv(COMO.macro.down, "preppedData/COMO.macro.down.csv", 
           row.names = FALSE)
 
+
+```
+
+
+```{r}
+
+waq.all <- waq_instantaneous %>%
+                dplyr::select(1:6,
+                              specificConductance,
+                              dissolvedOxygen,
+                              dissolvedOxygenSaturation,
+                              pH,
+                              chlorophyll,
+                              turbidity,
+                              fDOM) %>%
+                dplyr::mutate(date = date(startDateTime))
+
+wTemp.all <- TSW_5min %>%
+                dplyr::select(startDateTime, horizontalPosition, 
+                              surfWaterTempMean) 
+
+waq.wTemp.all <- left_join(waq.all, wTemp.all) %>% 
+  mutate(month = month(date),
+         year = as.factor(year(date)))
+
+
+write.csv(waq.wTemp.all, "preppedData/COMO.waq.wTemp.all.csv", 
+          row.names = FALSE)
+```
+
+
+```{r}
+
+#import water quality data
+waq.wTemp.all <- read_csv("preppedData/COMO.waq.wTemp.all.csv", guess_max = 100000)
+
+waq.wTemp.all$year <- as.factor(waq.wTemp.all$year)
+
+waq.sum <- waq.wTemp.all %>% 
+  filter(!is.na(pH), !is.na(surfWaterTempMean), 
+         !is.na(dissolvedOxygen), !is.na(turbidity), 
+         !is.na(chlorophyll)) %>% 
+  group_by(date, month, year) %>% 
+  summarize(mean.pH = mean(pH),
+            mean.wTemp = mean(surfWaterTempMean),
+            mean.DO = mean(dissolvedOxygen),
+            max.turb = max(turbidity),
+            mean.chl = mean(chlorophyll)) 
+
+ggplot(waq.sum, aes(x=month, y=mean.pH, color = year)) +
+  geom_quasirandom() 
+
+ggplot(waq.sum, aes(x=month, y=mean.wTemp, color = year)) +
+  geom_quasirandom()
+
+ggplot(waq.sum, aes(x=month, y=mean.DO, color = year)) +
+  geom_quasirandom()
+
+ggplot(waq.sum, aes(x=month, y=max.turb, color = year)) +
+  geom_quasirandom()
+
+ggplot(waq.sum, aes(x=month, y=mean.chl, color = year)) +
+  geom_quasirandom()
+
+
+waq.sum %>% 
+  filter(mean.wTemp >0) %>% 
+ggplot(., aes(x=mean.wTemp, y=mean.DO, color = year)) +
+  geom_point()
+
+
+waq.sum %>% 
+ggplot(., aes(x=mean.pH)) +
+  geom_histogram()
 
 ```
 

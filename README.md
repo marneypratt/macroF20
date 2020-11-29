@@ -23,7 +23,7 @@ This series of instructions will copy all the files you need from here on GitHub
 
 3. To download the repository, use this code:
 
-`use_course("https://github.com/marneypratt/macroF20/archive/master.zip")`
+`use_course("https://github.com/marneypratt/macroF20/archive/main.zip")`
 
 
 4. When told "Downloading into..." "OK to proceed?" select the number for the option next to "I agree" and note what directory it is putting the zipped file into. (Note that you can move the files later if needed)

@@ -32,7 +32,7 @@ There are several files in the "preppedData" folder.  Below is the code to impor
 # see the file called mill_macro_metadata.txt for details about all these variables and methods
 
 mill.macro <- read_csv("preppedData/mill.macro.csv",
-          col_types = cols(date = col_date(format = "%m/%d/%Y"),
+          col_types = cols(date = col_date(format = "%Y-%m-%d"),
                            sampleTime = col_factor(levels=c("Summer 2018", 
                                                             "Fall 2018",
                                                             "Summer 2019", 
